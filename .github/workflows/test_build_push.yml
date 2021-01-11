@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Extract branch name
-        shell: ash
+        shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - name: Checkout
@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Generate image tag id
-        shell: ash
+        shell: bash
         run: echo "::set-output name=tag_id::$(git rev-parse --short "$GITHUB_SHA")"
         id: generate_tag_id
       - name: Build and push
