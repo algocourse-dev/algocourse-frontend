@@ -5,20 +5,25 @@ on: [push]
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-    container:
-      image: algocourse/frontend:node14.15
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install
     - name: Lint test
       run: npm run lint
-    - run: npm run build --if-present
-    - name: Unit test
-      run: npm test
-      env:
-        CI: true
+    # - run: npm run build --if-present
+    # - name: Unit test
+    #   run: npm test
+    #   env:
+    #     CI: true
 
   docker-test:
     needs: unit-test
