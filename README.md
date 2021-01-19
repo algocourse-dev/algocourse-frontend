@@ -7,7 +7,7 @@
 
 - Install `npm`.
 - Run `npm install` to install dependencies.
-- Run `npm run dev` to start the development server at `http://localhost:3000`.
+- Run `npm run dev` to start the development server at `http://localhost:3001`.
 
 ## Production (WIP)
 
