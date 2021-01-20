@@ -1,0 +1,37 @@
+@import 'constants'
+@import 'utils'
+
+.container
+    padding: 0 $edge-margin
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    .menuBar
+        width: $main-content-container-size
+        align-self: center
+        color: #ffffff
+        display: flex
+        justify-content: space-between
+        margin: $edge-margin 0
+
+        @media (max-width: $main-content-container-size)
+            width: 100%
+
+        .rightButton
+            display: inline-block
+            background-color: unset
+            border: unset
+            padding: 0
+            color: $text-color
+            font-size: $small-font-size
+
+
+    .logoContainer
+        display: flex
+
+        .logoText
+            color: $text-emphasis-color
+            display: flex
+            align-items: center
+            margin-left: 10px

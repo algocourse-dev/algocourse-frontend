@@ -1,0 +1,20 @@
+@import 'utils'
+
+.container
+    display: flex
+
+    .flatMenu
+        display: flex
+
+        @include screen-respond($breakpoint: extra-small)
+            display: none
+
+        > *:not(:last-child)
+            margin-right: 28px
+
+    .hamburgerMenu
+        display: none
+        align-items: center
+
+        @include screen-respond($breakpoint: extra-small)
+            display: flex

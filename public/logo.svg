@@ -1,0 +1,7 @@
+<svg id="Logo" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+  <rect id="Rectangle_140" data-name="Rectangle 140" width="42" height="42" rx="10" fill="#615ae7"/>
+  <g id="Logo-2" data-name="Logo" transform="translate(9.106 12.142)">
+    <path id="Intersection_1" data-name="Intersection 1" d="M0,18.23,9.969,0h5.257L5.258,18.23Z" transform="translate(0)" fill="#fff"/>
+    <path id="Union_1" data-name="Union 1" d="M13.659,18.275H0l2.629-4.807h0L10,0h5.258L7.888,13.468h8.4L13.66,18.275Z" transform="translate(8.477)" fill="#fff"/>
+  </g>
+</svg>

@@ -25,6 +25,12 @@ module.exports = {
         "react",
         "jest"
     ],
+    "overrides": [{
+        "files": ["**/*.tsx"],
+        "rules": {
+            "react/prop-types": "off"
+        }
+    }],
     "rules": {
         // suppress errors for missing 'import React' in files
         "react/react-in-jsx-scope": "off",

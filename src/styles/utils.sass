@@ -1,0 +1,48 @@
+// This file includes reused style components, such as mixins and inheritance property classes.
+
+@import 'constants'
+
+// Typical Device Breakpoints
+// Source: https://www.w3schools.com/howto/howto_css_media_query_breakpoints.asp
+@mixin screen-respond($breakpoint)
+    // Extra large desktops and laptops, 1200px and up
+    @if ($breakpoint == extra-large)
+        @media (min-width: $extra-large-breakpoint)
+            @content
+
+    // Large desktops and laptops, 992px and up
+    @if ($breakpoint == large)
+        @media (min-width: $large-breakpoint)
+            @content
+
+    // Medium landscape tablets, 768px and up
+    @if ($breakpoint == medium)
+        @media (min-width: $medium-breakpoint)
+            @content
+
+    // Small portrait tablets and large phones, 600px and up
+    @if ($breakpoint == small)
+        @media (min-width: $small-breakpoint)
+            @content
+
+    // Extra small phones, 600px and down
+    @if ($breakpoint == extra-small)
+        @media (max-width: $extra-small-breakpoint)
+            @content
+
+%button
+    display: inline-block
+    border-radius: 5px
+    cursor: pointer
+
+%primary-button  // The ones with filled background
+    @extend %button
+    border: none
+    background-color: $royal-blue-color
+    color: $text-emphasis-color
+
+%secondary-button  // The ones with no background-color
+    @extend %button
+    border: 1px solid $melrose-color
+    background-color: unset
+    color: $melrose-color
