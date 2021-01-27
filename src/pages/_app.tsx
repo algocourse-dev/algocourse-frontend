@@ -1,6 +1,6 @@
 import 'styles/globals.sass'
 import { AppProps } from 'next/app'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 
 function MyApp({ Component, pageProps }: AppProps): ReactNode {

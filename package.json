@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint '*/**/*.{js,ts,tsx}' src/",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json --passWithNoTests"
   },
   "eslintConfig": {
     "extends": [
