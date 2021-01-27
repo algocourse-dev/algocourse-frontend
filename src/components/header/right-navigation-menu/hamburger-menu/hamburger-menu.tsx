@@ -1,7 +1,7 @@
 import { Burger } from 'components/burger';
 import React, { FC, ReactNode, Dispatch, SetStateAction } from 'react'
 import styles from 'styles/HamburgerMenu.module.sass'
-import * as cx from 'classnames'
+import classnames from 'classnames'
 
 type HamburgerMenuProps = {
     items?: Array<ReactNode>
@@ -12,7 +12,7 @@ type HamburgerMenuProps = {
 }
 
 export const HamburgerMenu: FC<HamburgerMenuProps> = ({items, open, setOpen, className, mainComponent}) => {
-    const pane = cx({
+    const pane = classnames({
         [styles.container]: true,
         [styles.isOpened]: open,
         [styles.isClosed]: !open,
