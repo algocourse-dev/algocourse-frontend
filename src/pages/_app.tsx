@@ -1,8 +1,9 @@
-import '../styles/globals.css'
+import 'styles/globals.sass'
 import { AppProps } from 'next/app'
+import React, { ReactNode } from 'react'
 
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): ReactNode {
   return <Component {...pageProps} />
 }
 

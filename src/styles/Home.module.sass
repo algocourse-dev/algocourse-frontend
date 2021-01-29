@@ -1,0 +1,79 @@
+@import 'constants'
+@import 'utils'
+
+.mainContainer
+    display: flex
+    width: 100%
+    padding: 0 $edge-margin
+    flex-direction: column
+
+    .main
+        display: flex
+        flex-direction: column
+        align-self: center
+        width: $main-content-container-size
+
+        @media (max-width: $main-content-container-size)
+            width: 100%
+
+        .landingBlockContainer
+            display: flex
+            flex-direction: row
+            padding-top: 70px
+            justify-content: space-between
+            align-items: center
+
+            @include screen-respond($breakpoint: extra-small)
+                flex-direction: column-reverse
+
+            .landingLogo
+                margin: 0 15px
+
+                @include screen-respond($breakpoint: extra-small)
+                    margin: 0
+
+            .landingDescription
+                width: 488px  // $medium-breakpoint - $landing-logo-width - 2*$landing-logo-margin = 268 - 250 - 2*15
+
+                @include screen-respond($breakpoint: extra-small)
+                    width: 100%
+                    margin-top: 50px
+
+                .smallDecorBar
+                    background-color: $white-color
+                    height: 9px
+                    width: 55px
+
+                .newline
+                    display: none
+
+                    @include screen-respond($breakpoint: medium)
+                        display: inherit
+
+                .siteTitle, h1
+                    color: $text-emphasis-color
+
+                h1
+                    font-size: $extra-large-font-size
+
+                p
+                    margin-top: 20px
+                    color: $text-color
+
+                .landingButtons
+                    margin-top: 30px
+
+                .getStartedButton
+                    @extend %primary-button
+                    height: 42px
+                    font-size: $large-font-size
+                    padding: 0 22px
+                    margin-right: 28px
+
+                .readMissionButton
+                    @extend %secondary-button
+                    height: 42px
+                    font-size: $large-font-size
+                    border: 1px solid 
+                    padding: 0 22px
+                    margin-top: 15px
