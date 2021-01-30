@@ -1,0 +1,16 @@
+@import 'constants'
+
+.mainContainer
+    display: flex
+    width: 100%
+    padding: 0 $edge-margin
+    flex-direction: column
+
+    .main
+        display: flex
+        flex-direction: column
+        align-self: center
+        width: $main-content-container-size
+
+        @media (max-width: $main-content-container-size)
+            width: 100%

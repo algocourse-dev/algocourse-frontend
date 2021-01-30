@@ -5,6 +5,7 @@ import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
 import { SEO } from 'components/seo'
 import { Layout } from 'components/layout'
+import { useRouter } from 'next/router'
 
 export const Home: FC = () => {
     return (
@@ -12,12 +13,6 @@ export const Home: FC = () => {
             <SEO title="Home page" />
 
             <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
-                    {/* <button className={styles.navigationHeaderButton}>Home</button>,
-                    <button className={styles.navigationHeaderButton}>Features</button>,
-                    <button className={styles.navigationHeaderButton}>Pricing</button>,
-                    <button className={styles.navigationHeaderButton}>FAQs</button>,
-                    <button className={styles.navigationHeaderButton}>Contact us</button>
-            ]}/> */}
 
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
@@ -31,6 +26,8 @@ export const Home: FC = () => {
 }
 
 const LandingBlock: FC = () => {
+    const router = useRouter()
+
     return (
         <div className={styles.landingBlockContainer}>
             <div className={styles.landingDescription}>
@@ -43,7 +40,10 @@ const LandingBlock: FC = () => {
                     through instructive and interactive lessons
                 </p>
                 <div className={styles.landingButtons}>
-                    <button className={styles.getStartedButton}>Go to course</button>
+                    <button className={styles.getStartedButton}
+                            onClick={() => router.push('/dashboard')}>
+                        Go to course
+                    </button>
                     <button className={styles.readMissionButton}>Read our mission letter</button>
                 </div>
             </div>
