@@ -63,3 +63,7 @@
             display: flex
             align-items: center
             margin-left: 10px
+
+.noCollapseOnExtraSmall
+    @include screen-respond($breakpoint: extra-small)
+        display: flex !important

@@ -9,7 +9,9 @@ export const Dashboard: FC = () => {
         <Layout>
             <SEO title="Dashboard" />
 
-            <Header />
+            <Header enableHamburgerMenu={false}
+                    showLogoText={false}
+                    leftButtonsLabel={['Dashboard', 'Problems', 'Practice', 'Leaderboard']}/>
 
             <main className={styles.mainContainer}>
                 <div className={styles.main}>

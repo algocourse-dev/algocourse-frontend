@@ -2,13 +2,20 @@ import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import styles from 'styles/Header.module.sass'
 import { Login } from './login';
-import { HamburgerMenu } from './hamburger-menu';
+import { HamburgerMenu } from './hamburger-menu'
+import classnames from 'classnames'
 
 type HeaderProps = {
     leftButtonsLabel?: Array<string>
+    enableHamburgerMenu?: boolean
+    showLogoText?: boolean
 }
 
-export const Header: FC<HeaderProps> = ({leftButtonsLabel}) => {
+export const Header: FC<HeaderProps> = ({
+    leftButtonsLabel,
+    enableHamburgerMenu = true,
+    showLogoText = true
+}) => {
     const [open, setOpen] = useState(false);
     const leftButtons = buildLeftButtons(leftButtonsLabel)
 
@@ -23,24 +30,31 @@ export const Header: FC<HeaderProps> = ({leftButtonsLabel}) => {
                             width={22}
                             height={22}
                             layout='fixed'/>
-                        <div className={styles.logoText}>algocourse</div>
+                        {showLogoText && <div className={styles.logoText}>algocourse</div>}
                     </div>
-                    <div className={styles.leftButtons}>
+                    <div className={classnames(
+                            styles.leftButtons,
+                            {[styles.noCollapseOnExtraSmall]: !enableHamburgerMenu})}>
                         {leftButtons}
                     </div>
                 </div>
 
                 <div className={styles.rightNavigationBar}>
-                    <div className={styles.rightFlatMenu}>
+                    <div className={classnames(
+                            styles.rightFlatMenu,
+                            {[styles.noCollapseOnExtraSmall]: !enableHamburgerMenu})}>
                         <Login />
                     </div>
-                    <HamburgerMenu
-                        className={styles.hamburgerMenu}
-                        items={leftButtons}
-                        mainComponent={(<Login />)}
-                        open={open}
-                        setOpen={setOpen}
-                    />
+                    {
+                        enableHamburgerMenu &&
+                        <HamburgerMenu
+                            className={styles.hamburgerMenu}
+                            items={leftButtons}
+                            mainComponent={(<Login />)}
+                            open={open}
+                            setOpen={setOpen}
+                        />
+                    }
                 </div>
             </div>
         </header>
