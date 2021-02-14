@@ -11,7 +11,7 @@ export const Home: FC = () => {
         <Layout>
             <SEO title="Home page" />
 
-            <Header rightButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
+            <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
                     {/* <button className={styles.navigationHeaderButton}>Home</button>,
                     <button className={styles.navigationHeaderButton}>Features</button>,
                     <button className={styles.navigationHeaderButton}>Pricing</button>,
@@ -34,18 +34,16 @@ const LandingBlock: FC = () => {
     return (
         <div className={styles.landingBlockContainer}>
             <div className={styles.landingDescription}>
-                <div className={styles.smallDecorBar} />
                 <h1>
-                    The most definitive <br className={styles.newline}/>
-                    Algorithm and Data Structures <br className={styles.newline}/>
-                    course for your coding interview
+                    <span className='boldText'>The Ultimate Course</span> <br className={styles.newline}/>
+                    for your coding interview<br className={styles.newline}/>
                 </h1>
                 <p>
                     <span className={styles.siteTitle}>algocourse</span> is specifically designed to get you fully prepared <br className={styles.newline}/>
                     through instructive and interactive lessons
                 </p>
                 <div className={styles.landingButtons}>
-                    <button className={styles.getStartedButton}>Get Started</button>
+                    <button className={styles.getStartedButton}>Go to course</button>
                     <button className={styles.readMissionButton}>Read our mission letter</button>
                 </div>
             </div>

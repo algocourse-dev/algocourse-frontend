@@ -20,9 +20,12 @@ export const HamburgerMenu: FC<HamburgerMenuProps> = ({items, open, setOpen, cla
 
     return (<div className={className}>
         <div className={pane}>
-            {mainComponent}
-            <div className={styles.hamburgerMenuSeparator}/>
-            {items}
+            <div className={styles.headerContainer}>
+                {mainComponent}
+            </div>
+            <div className={styles.itemsContainer}>
+                {items}
+            </div>
         </div>
         <Burger open={open} setOpen={setOpen}/>
     </div>)

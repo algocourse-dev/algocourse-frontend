@@ -2,9 +2,7 @@
 @import 'utils'
 
 .container
-    padding: 0 $edge-margin
-    width: 100%
-    display: flex
+    @extend %header-container
     flex-direction: column
 
     .menuBar
@@ -13,12 +11,12 @@
         color: #ffffff
         display: flex
         justify-content: space-between
-        margin: $edge-margin 0
+        height: $header-height
 
         @media (max-width: $main-content-container-size)
-            width: 100%
+            width: 100%        
 
-        .rightButton
+        .leftButton
             display: inline-block
             background-color: unset
             border: unset
@@ -26,12 +24,42 @@
             color: $text-color
             font-size: $small-font-size
 
+        .leftNavigationBar
+            display: flex
+            align-items: center
+            
+            .leftButtons
+                display: flex
+
+                @include screen-respond($breakpoint: extra-small)
+                    display: none
+
+                > *
+                    margin-left: 26px
+
+        .rightNavigationBar
+            display: flex
+            align-items: center
+
+            .rightFlatMenu
+                display: flex
+
+                @include screen-respond($breakpoint: extra-small)
+                    display: none
+
+            .hamburgerMenu
+                display: none
+                align-items: center
+
+                @include screen-respond($breakpoint: extra-small)
+                    display: flex
 
     .logoContainer
         display: flex
+        align-items: center
 
         .logoText
-            color: $text-emphasis-color
+            color: $logo-text-color
             display: flex
             align-items: center
             margin-left: 10px

@@ -38,11 +38,18 @@
 %primary-button  // The ones with filled background
     @extend %button
     border: none
-    background-color: $royal-blue-color
-    color: $text-emphasis-color
+    background-color: $primary-button-color
+    color: $primary-button-text-color
 
 %secondary-button  // The ones with no background-color
     @extend %button
-    border: 1px solid $melrose-color
+    border: 1px solid $secondary-button-border-color
     background-color: unset
-    color: $melrose-color
+    color: $secondary-button-text-color
+
+%header-container
+    width: 100%
+    display: flex
+    padding: 0 $edge-margin
+    background-color: $header-color
+    box-shadow: $box-shadow-style

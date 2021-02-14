@@ -1,33 +1,52 @@
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import styles from 'styles/Header.module.sass'
-import { RightNavigationMenu } from './right-navigation-menu';
+import { Login } from './login';
+import { HamburgerMenu } from './hamburger-menu';
 
 type HeaderProps = {
-    rightButtonsLabel?: Array<string>
+    leftButtonsLabel?: Array<string>
 }
 
-export const Header: FC<HeaderProps> = ({rightButtonsLabel}) => {
+export const Header: FC<HeaderProps> = ({leftButtonsLabel}) => {
     const [open, setOpen] = useState(false);
-    const rightButtons = buildRightButtons(rightButtonsLabel)
+    const leftButtons = buildLeftButtons(leftButtonsLabel)
 
     return (
         <header className={styles.container}>
             <div className={styles.menuBar}>
-                <div className={styles.logoContainer}>
-                    <Image src='/logo.svg'
-                           alt='Logo'
-                           width={30}
-                           height={30}
-                           layout='fixed'/>
-                    <div className={styles.logoText}>algocourse</div>
+
+                <div className={styles.leftNavigationBar}>
+                    <div className={styles.logoContainer}>
+                        <Image src='/logo.svg'
+                            alt='Logo'
+                            width={22}
+                            height={22}
+                            layout='fixed'/>
+                        <div className={styles.logoText}>algocourse</div>
+                    </div>
+                    <div className={styles.leftButtons}>
+                        {leftButtons}
+                    </div>
                 </div>
-                <RightNavigationMenu open={open} setOpen={setOpen} items={rightButtons} />
+
+                <div className={styles.rightNavigationBar}>
+                    <div className={styles.rightFlatMenu}>
+                        <Login />
+                    </div>
+                    <HamburgerMenu
+                        className={styles.hamburgerMenu}
+                        items={leftButtons}
+                        mainComponent={(<Login />)}
+                        open={open}
+                        setOpen={setOpen}
+                    />
+                </div>
             </div>
         </header>
     );
 }
 
-const buildRightButtons = (rightButtonsLabel: Array<string>) => (
-    !rightButtonsLabel ? [] : rightButtonsLabel.map((label, index) => <button key={index} className={styles.rightButton}>{label}</button>)
+const buildLeftButtons = (leftButtonsLabel: Array<string>) => (
+    !leftButtonsLabel ? [] : leftButtonsLabel.map((label, index) => <button key={index} className={styles.leftButton}>{label}</button>)
 )
