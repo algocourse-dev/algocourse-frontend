@@ -3,15 +3,12 @@ import Image from 'next/image'
 import { Footer } from 'components/footer'
 import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
-import { SEO } from 'components/seo'
 import { Layout } from 'components/layout'
 import { useRouter } from 'next/router'
 
 export const Home: FC = () => {
     return (
-        <Layout>
-            <SEO title="Home page" />
-
+        <Layout pageTitle='Home page'>
             <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
 
             <main className={styles.mainContainer}>

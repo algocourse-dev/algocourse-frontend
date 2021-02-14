@@ -1,6 +1,7 @@
-import { Dashboard } from 'components/pages'
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
+import { Dashboard } from 'components'
 
 export default function DashboardPage(): ReactNode {
-  return <Dashboard />;
+
+    return <Dashboard />
 }

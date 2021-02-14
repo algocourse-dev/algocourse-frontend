@@ -1,18 +1,18 @@
 import React, { FC } from 'react'
+import { SITE_DESCRIPTION, SITE_TITLE } from 'constants/strings'
 import Head from 'next/head'
-import { SITE_DESCRIPTION, SITE_TITLE } from 'constants/constants'
 
 type SEOProps = {
-    title: string
+    pageTitle: string
     description?: string
 }
 
-export const SEO: FC<SEOProps> = ({title, description}) => {
+export const SEO: FC<SEOProps> = ({pageTitle, description}) => {
     const metaDescription = description || SITE_DESCRIPTION
 
     return (
         <Head>
-            <title>{`${title} | ${SITE_TITLE}`}</title>
+            <title>{`${pageTitle} | ${SITE_TITLE}`}</title>
             <link rel='icon' href='/favicon.ico' />
             <meta name='robots' content='follow, index' />
             <meta content={metaDescription} name='description' />
