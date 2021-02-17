@@ -12,6 +12,7 @@ $melrose-color: #A29BFE
 $whisper-color: #F4F5F9
 $stratos-color: #03015B
 $cadet-blue-color: #A3ADC6
+$froly-color: #EF7E88
 
 $box-shadow-color: $black-color
 $header-color: $white-color
@@ -25,24 +26,32 @@ $primary-button-text-color: $white-color
 $secondary-button-border-color: $royal-blue-color
 $secondary-button-text-color: $royal-blue-color
 $logo-text-color: $stratos-color
+$card-background-color: $white-color
+$card-title-color: $stratos-color
+$streak-days-off-color: $text-color
+$streak-days-on-color: $froly-color
 
 // STYLES
 $box-shadow-style: 0 1px 8px -6px $box-shadow-color
 
 // SCREEN SIZES
 
-// Screen-related sizes
 $main-content-container-size: 1140px
 $edge-margin: 12px
 $header-height: calc(30px + #{2 * $edge-margin})
+$panel-components-margin: 20px
+$left-panel-width: 290px
+$right-panel-width: calc(#{$main-content-container-size - $left-panel-width - $panel-components-margin}) 
 
 // FONT SIZES
 $small-font-size: 14px
+$medium-font-size: 16px
 $large-font-size: 17px
 $extra-large-font-size: 26px
 
 $regular-font-weight: 400
 $semi-bold-font-weight: 600
+$bold-font-weight: 700
 
 // BREAKPOINTS
 // Refer to styles/utils.sass

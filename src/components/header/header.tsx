@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import styles from 'styles/Header.module.sass'
-import { Login } from './login';
+import { Login } from './login'
 import { HamburgerMenu } from './hamburger-menu'
 import classnames from 'classnames'
+import { Images } from 'common'
 
 type HeaderProps = {
     leftButtonsLabel?: Array<string>
@@ -25,8 +26,7 @@ export const Header: FC<HeaderProps> = ({
 
                 <div className={styles.leftNavigationBar}>
                     <div className={styles.logoContainer}>
-                        <Image src='/logo.svg'
-                            alt='Logo'
+                        <Image src={Images.LOGO}
                             width={22}
                             height={22}
                             layout='fixed'/>

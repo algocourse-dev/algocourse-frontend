@@ -5,11 +5,17 @@ import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
 import { Layout } from 'components/layout'
 import { useRouter } from 'next/router'
+import { Strings, Images } from 'common'
 
 export const Home: FC = () => {
     return (
-        <Layout pageTitle='Home page'>
-            <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
+        <Layout pageTitle={Strings.HOME_PAGE}>
+            <Header leftButtonsLabel={[
+                Strings.HOME,
+                Strings.FEATURES,
+                Strings.PRICING,
+                Strings.FAQs,
+                Strings.CONTACT_US]} />
 
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
@@ -46,8 +52,7 @@ const LandingBlock: FC = () => {
             </div>
             <div className={styles.landingLogo}>
                 <Image
-                    src='/landing-logo.svg'
-                    alt='Landing Logo'
+                    src={Images.LANDING_LOGO}
                     width='250'
                     height='235.9'
                     layout='intrinsic' />

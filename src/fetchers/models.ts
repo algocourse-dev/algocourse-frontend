@@ -63,3 +63,8 @@ export class Module {
     readonly topics: ReadonlyArray<Topic>
     readonly practices: ReadonlyArray<Practice>
 }
+
+export type TStreakData = {
+    streak: number
+    timeLeft?: number
+}

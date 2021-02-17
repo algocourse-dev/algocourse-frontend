@@ -5,12 +5,24 @@
     width: 100%
     padding: 0 $edge-margin
     flex-direction: column
-    margin-top: 15px
+    margin-top: $panel-components-margin
 
     .main
         display: flex
         align-self: center
         width: $main-content-container-size
 
-        @media (max-width: $main-content-container-size)
-            width: 100%
+        // @media (max-width: $main-content-container-size)
+        //     width: 100%
+
+        .courseContainer
+            width: $right-panel-width
+            height: 1000px
+            margin-right: $panel-components-margin
+            border-radius: 5px
+            background-color: $text-color
+
+        .widgetsContainer
+            width: $left-panel-width
+            height: 1000px
+            border-radius: 5px

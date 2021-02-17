@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { SITE_DESCRIPTION, SITE_TITLE } from 'constants/strings'
+import { Strings } from 'common/strings'
 import Head from 'next/head'
 
 type SEOProps = {
@@ -8,11 +8,11 @@ type SEOProps = {
 }
 
 export const SEO: FC<SEOProps> = ({pageTitle, description}) => {
-    const metaDescription = description || SITE_DESCRIPTION
+    const metaDescription = description || Strings.SITE_DESCRIPTION
 
     return (
         <Head>
-            <title>{`${pageTitle} | ${SITE_TITLE}`}</title>
+            <title>{`${pageTitle} | ${Strings.SITE_TITLE}`}</title>
             <link rel='icon' href='/favicon.ico' />
             <meta name='robots' content='follow, index' />
             <meta content={metaDescription} name='description' />

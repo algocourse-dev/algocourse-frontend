@@ -6,6 +6,12 @@ export const FontList: FC = () => {
         <Head>
             <link
                 rel="preload"
+                href="/fonts/Gilroy/Gilroy-Bold.ttf"
+                as="font"
+                crossOrigin=""
+            />
+            <link
+                rel="preload"
                 href="/fonts/Gilroy/Gilroy-SemiBold.ttf"
                 as="font"
                 crossOrigin=""
@@ -15,7 +21,7 @@ export const FontList: FC = () => {
                 href="/fonts/Gilroy/Gilroy-Regular.ttf"
                 as="font"
                 crossOrigin=""
-            />            
+            />
         </Head>
     )
 }
