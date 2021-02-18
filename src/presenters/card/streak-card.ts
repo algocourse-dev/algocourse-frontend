@@ -27,7 +27,7 @@ function convertStreakData(data: TStreakData): TStreakCardPresenterData {
     }
 
     return {
-        streakStatus: data.streak === 0 ? StreakStatus.STREAK_OFF : StreakStatus.STREAK_ON,
+        streakStatus: (data.streak === 0 || !!data.timeLeft) ? StreakStatus.STREAK_OFF : StreakStatus.STREAK_ON,
         streakDays: data.streak + ' ' + Strings.DAYS,
         streakNote: (data.streak === 0 || !!data.timeLeft) ?
             Strings.STREAK_NOTE_TODO : Strings.STREAK_NOTE_DONE

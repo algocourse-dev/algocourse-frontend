@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { memo } from 'react'
 import { BaseCard } from '../base-card'
 import styles from 'styles/StreakCard.module.sass'
 import Image from 'next/image'
@@ -48,5 +48,3 @@ export const StreakCard = memo<StreakCardProps>(({streakCardPresenter}) => {
         </BaseCard>
     )
 })
-
-// export const StreakCard = React.memo(StreakCard2)
