@@ -1,8 +1,12 @@
-import { TStreakData } from "./models"
+import { MockData } from "common"
+import {
+    TStreakFetcherData,
+    TModulesFetcherData
+} from "./types"
 
 export const STREAK_DATA_QUERY_KEY = 'streak'
-export const streakDataFetcher: () => Promise<TStreakData> = async () => {
-    const response = { streak: 5 }  // TODO: replace with actual API call.
+export const streakDataFetcher: () => Promise<TStreakFetcherData> = async () => {
+    const response = MockData.streakData
 
     if (response['streak'] !== 0 && !response['streak']) {
         throw Error('No streak field in streak data!')  // TODO: templating error.
@@ -20,4 +24,10 @@ export const streakDataFetcher: () => Promise<TStreakData> = async () => {
         streak: response['streak'],
         timeLeft: response['time_left']
     }
+}
+
+export const MODULES_QUERY_KEY = 'course'
+export const modulesFetcher: () => Promise<TModulesFetcherData> = async () => {
+    const response = MockData.courseContent
+    return response
 }

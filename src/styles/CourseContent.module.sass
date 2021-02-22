@@ -1,0 +1,30 @@
+@import 'constants'
+
+.modulesContainer
+    width: 100%
+
+    .moduleContainer
+        width: 100%
+        background-color: $module-background-color
+        height: 54px
+        border-radius: $card-border-radius
+        margin-top: 10px
+        margin-bottom: $panel-components-margin
+        cursor: pointer
+        
+        .moduleTitle
+            width: 100%
+
+        .collapsible
+            background-color: red
+            height: 0
+            overflow: auto
+
+        .expanded
+            background-color: red
+            height: auto
+            overflow: initial
+            transition: max-height 1s ease
+
+    .highlightedModule
+        background-color: $module-highlighted-background-color

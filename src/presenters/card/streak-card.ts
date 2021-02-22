@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { STREAK_DATA_QUERY_KEY, streakDataFetcher, TStreakData } from 'fetchers'
+import { STREAK_DATA_QUERY_KEY, streakDataFetcher, TStreakFetcherData } from 'fetchers'
 import { TPresenter } from 'presenters/types'
 import { StreakStatus, Strings } from 'common'
 
@@ -14,14 +14,14 @@ export type TStreakCardPresenter = TPresenter<TStreakCardPresenterData>
 export const useStreakCardPresenter: () => TStreakCardPresenter = () => {
     const { data, error, isLoading, isError } = useQuery(STREAK_DATA_QUERY_KEY, streakDataFetcher)
     return {
-        data: convertStreakData(data),
+        data: converTStreakFetcherData(data),
         error,
         isLoading,
         isError,
     }
 }
 
-function convertStreakData(data: TStreakData): TStreakCardPresenterData {
+function converTStreakFetcherData(data: TStreakFetcherData): TStreakCardPresenterData {
     if (!data) {
         return undefined
     }

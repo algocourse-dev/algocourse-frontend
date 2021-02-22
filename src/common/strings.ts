@@ -15,4 +15,5 @@ export const Strings = {
     PROBLEMS: 'Problems',
     PRACTICE: 'Practice',
     LEADERBOARD: 'Leaderboard',
+    COURSE_CONTENT: 'Course Content'
 }
