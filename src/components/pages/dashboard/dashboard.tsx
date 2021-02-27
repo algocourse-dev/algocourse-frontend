@@ -4,7 +4,7 @@ import { Layout } from 'components/layout'
 import React, { FC } from 'react'
 import styles from 'styles/Dashboard.module.sass'
 import { Strings } from 'common'
-import { CourseContent } from 'containers'
+import { CourseContent, ProgressCard } from 'containers'
 
 export const Dashboard: FC = () => {
     return (
@@ -24,6 +24,7 @@ export const Dashboard: FC = () => {
                     </div>
                     <div className={styles.widgetsContainer}>
                         <StreakCard />
+                        <ProgressCard />
                     </div>
                 </div>
             </main>

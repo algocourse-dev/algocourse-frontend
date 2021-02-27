@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styles from 'styles/BaseCard.module.sass'
 import Image from 'next/image'
+import classnames from 'classnames'
 
 type UtilButtonProps = {
     imgSrc?: string
@@ -11,12 +12,13 @@ type BaseCardProps = {
     title: string
     utilButton: UtilButtonProps
     mainContentStyle?: string
+    className?: string
 }
 
 export const BaseCard: FC<BaseCardProps> = ({
-    title, utilButton, mainContentStyle, children}) => {
+    title, utilButton, mainContentStyle, className, children}) => {
     return (
-        <div className={styles.container}>
+        <div className={classnames(styles.container, className)}>
             <div className={styles.topRow}>
                 <div className={styles.title}>{title}</div>
                 <div className={styles.utilButtonContainer}>

@@ -13,8 +13,15 @@ $whisper-color: #F4F5F9
 $stratos-color: #03015B
 $cadet-blue-color: #A3ADC6
 $froly-color: #EF7E88
+$link-water-color: #E6E7F8
+$silver-tree-color: #6ABE8E
+$texas-rose-color: #FFB74D
+$selago-color: #F7F9Fe
+$link-water-color: #E6E7F8
+$prim-color: #F6ECF5
+$mulberry-color: #B2489E
 
-$box-shadow-color: $black-color
+$box-shadow-color: rgba($black-color, 0.1)
 $header-color: $white-color
 $background-color: $whisper-color
 $text-emphasis-color: $royal-blue-color
@@ -31,27 +38,45 @@ $card-title-color: $stratos-color
 $streak-days-off-color: $text-color
 $streak-days-on-color: $froly-color
 $module-background-color: $white-color
-$module-highlighted-background-color: $royal-blue-color
+$module-highlighted-color: $royal-blue-color
+$module-hover-color: rgba($royal-blue-color, 0.4)
+$module-title-color: $text-color
+$topic-background-color: $white-color
+$difficulty-easy-color: $silver-tree-color
+$difficulty-medium-color: $texas-rose-color
+$difficulty-hard-color: $froly-color
+$topic-circular-progress-bar-path-color: $royal-blue-color
+$topic-circular-progress-bar-trail-color: rgba($topic-circular-progress-bar-path-color, 0.2)
+$practice-table-background-color: $white-color
 
 // STYLES
-$box-shadow-style: 0 1px 8px -6px $box-shadow-color
+$box-shadow-style: 0 3px 3px 1px $box-shadow-color
 
 // SCREEN SIZES, COMPONENT SIZES
-$main-content-container-size: 1140px
+$main-content-container-size: 1250px
 $edge-margin: 12px
 $header-height: calc(30px + #{2 * $edge-margin})
 $panel-components-margin: 26px
 $left-panel-width: 290px
-$right-panel-width: calc(#{$main-content-container-size - $left-panel-width - $panel-components-margin})
+$right-panel-width: $main-content-container-size - $left-panel-width - $panel-components-margin
 $card-border-radius: 5px
+$module-padding: 30px
+$topic-card-width: ($right-panel-width - 4 * $module-padding) / 3
+$topic-padding: 10px
+$practice-padding: $topic-padding
+$practice-header-height: 38px
+$practice-row-height: 42px
 
 // FONT SIZES
+$extra-small-font-size: 13px
 $small-font-size: 14px
+$small-medium-font-size: 15px
 $medium-font-size: 16px
 $large-font-size: 17px
 $extra-large-font-size: 26px
 
 $regular-font-weight: 400
+$medium-font-weight: 500
 $semi-bold-font-weight: 600
 $bold-font-weight: 700
 

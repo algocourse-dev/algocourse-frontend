@@ -18,6 +18,12 @@ export const FontList: FC = () => {
             />
             <link
                 rel="preload"
+                href="/fonts/Gilroy/Gilroy-Medium.ttf"
+                as="font"
+                crossOrigin=""
+            />
+            <link
+                rel="preload"
                 href="/fonts/Gilroy/Gilroy-Regular.ttf"
                 as="font"
                 crossOrigin=""

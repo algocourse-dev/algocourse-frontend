@@ -1,30 +1,90 @@
-@import 'constants'
+@import 'variables'
+
+.title
+    font-weight: bold
+    color: $text-bold-color
+    font-size: $large-font-size
 
 .modulesContainer
     width: 100%
 
     .moduleContainer
+        display: flex
+        flex-direction: column
         width: 100%
-        background-color: $module-background-color
-        height: 54px
-        border-radius: $card-border-radius
         margin-top: 10px
         margin-bottom: $panel-components-margin
-        cursor: pointer
+
+        .collapseContainer
+            position: relative
+            border-bottom-left-radius: $card-border-radius
+            border-bottom-right-radius: $card-border-radius
+            border-top: unset !important
+
+            .seeMoreButton
+                position: absolute
+                background-color: $module-highlighted-color
+                width: 76px
+                border-radius: 38px
+                left: calc(100%/2 - 38px)
+                height: 18px
+                bottom: -9px
+                text-align: center
+                cursor: pointer
+                font-size: $extra-small-font-size
+                color: $white-color
+                padding-top: 2px
+                font-weight: $semi-bold-font-weight
+
+        .selectedCollapseContainer
+            border: 2px solid $module-highlighted-color
+
+        .unselecteCollapseContainer
+            border: 2px solid transparent
         
         .moduleTitle
+            display: flex
+            align-items: center
+            padding: 0 $module-padding  
             width: 100%
+            height: 54px
+            background-color: $module-background-color
+            border-radius: $card-border-radius
+            cursor: pointer
+            color: $module-title-color
 
-        .collapsible
+            &:hover
+                background-color: $module-hover-color
+                color: $white-color
+
+            > h2
+                font-size: $large-font-size
+                font-weight: $semi-bold-font-weight
+
+        .highlightedModule
+            color: $white-color !important
+            background-color: $module-highlighted-color !important
+            border-bottom-left-radius: 0px
+            border-bottom-right-radius: 0px
+
+        .topics
+            width: 100%
             background-color: red
-            height: 0
-            overflow: auto
 
-        .expanded
-            background-color: red
-            height: auto
-            overflow: initial
-            transition: max-height 1s ease
+        .topicCollapse, .practiceCollapse
+            max-width: 100%
+            transition: height $animation-fast-time
 
-    .highlightedModule
-        background-color: $module-highlighted-background-color
+        .unselectedCollapseContent
+            opacity: 0
+            transition: opacity $animation-medium-time
+
+        .selectedCollapseContent
+            opacity: 1
+            transition: opacity $animation-medium-time
+
+        .topicContent
+            padding: $module-padding/2 $module-padding $module-padding $module-padding
+
+        .practiceContent
+            padding: 0px $module-padding $module-padding $module-padding

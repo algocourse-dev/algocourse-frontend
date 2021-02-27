@@ -1,0 +1,68 @@
+@import 'variables'
+
+.overrideBaseCard
+    margin-top: $panel-components-margin
+
+.container
+    display: flex
+    flex-direction: column
+
+    .lessonsProgress
+        span:nth-child(1)
+            color: $royal-blue-color
+            font-weight: $semi-bold-font-weight
+            font-size: $medium-font-size
+            margin-top: 5px
+
+        span:nth-child(2)
+            color: $text-color
+            font-size: $small-font-size
+
+    .practicesProgress
+        span:nth-child(1)
+            color: $mulberry-color
+            font-weight: $semi-bold-font-weight
+            font-size: $medium-font-size
+            margin-top: 5px
+
+        span:nth-child(2)
+            color: $text-color
+            font-size: $small-font-size
+
+    .progressContent
+        display: inline-block
+
+    span
+        display: block
+    
+    > div:first-child
+        margin: 20px 0
+
+    > div
+        display: flex
+        flex-direction: row
+        position: relative
+
+        .circularProgressContainer
+            margin-right: 20px
+
+            .circularProgress
+                width: 50px
+                height: 50px
+
+            .innerCircle
+                width: 38px
+                height: 38px
+                border-radius: 19px
+                position: absolute
+                top: 6px
+                left: 6px
+                display: flex
+                align-items: center
+                justify-content: center
+
+            .lessonsInnerCircle
+                background-color: $link-water-color
+
+            .practiceProblemsInnerCircle
+                background-color: $prim-color

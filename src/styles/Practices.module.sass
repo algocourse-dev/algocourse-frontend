@@ -1,0 +1,89 @@
+@import 'variables'
+
+.container
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    > span:first-child
+        color: $text-color
+        font-size: $medium-font-size
+        font-weight: $bold-font-weight
+        margin-bottom: 10px
+
+    .practices
+
+        .tableContainer
+            display: flex
+            flex-direction: column
+            background-color: $practice-table-background-color
+            padding: $practice-padding
+            box-shadow: $box-shadow-style
+            border-radius: $card-border-radius
+            margin-top: $module-padding/1.5
+
+            .tableName
+                font-weight: $bold-font-weight
+                font-size: $medium-font-size !important
+                color: $text-bold-color
+                margin-bottom: 8px
+
+            table
+                background-color: $practice-table-background-color
+                color: $text-color
+                border-collapse: collapse
+
+                tr
+                    > th:first-child, > td:first-child
+                        padding-left: 10px
+
+                    > th:last-child, > td:last-child
+                        padding-right: 10px
+                    
+                    > th:first-child
+                        border-top-left-radius: $card-border-radius
+                        border-bottom-left-radius: $card-border-radius
+                    
+                    > th:last-child
+                        border-top-right-radius: $card-border-radius
+                        border-bottom-right-radius: $card-border-radius
+
+                thead tr
+                    height: $practice-header-height
+
+                th
+                    font-size: $small-font-size
+                    font-weight: $bold-font-weight
+                    background-color: $selago-color
+
+                tbody
+                    font-size: $small-medium-font-size
+                    font-weight: $medium-font-weight
+
+                    tr 
+                        height: $practice-row-height
+
+                .problemTitle
+                    color: $text-bold-color
+
+                .problemDifficulty
+                    color: $white-color !important
+                    text-align: center
+                    height: 18px
+                    border-radius: 9px
+                    font-size: $extra-small-font-size
+                    font-weight: $semi-bold-font-weight
+                    display: inline-block
+                    padding: 2px 8px 0 8px
+
+                .difficultyEasy
+                    background-color: $difficulty-easy-color
+
+                .difficultyMedium
+                    background-color: $difficulty-medium-color
+
+                .difficultyHard                
+                    background-color: $difficulty-hard-color
+
+        > .tableContainer:first-child
+            margin-top: 0 !important

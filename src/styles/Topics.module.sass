@@ -1,0 +1,108 @@
+@import 'variables'
+    
+.container
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    > span:first-child
+        color: $text-color
+        font-size: $medium-font-size
+        font-weight: $bold-font-weight
+        margin-bottom: 10px
+
+    .topics
+        width: 100%
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        flex-wrap: wrap
+
+        .topic
+            position: relative
+            display: flex
+            flex-direction: column
+            width: $topic-card-width
+            cursor: pointer
+            background-color: $topic-background-color
+            border-radius: $card-border-radius
+            padding: $topic-padding
+            box-shadow: $box-shadow-style
+            margin-top: $module-padding/1.5
+
+            &:nth-child(1)
+                margin-top: 0
+            
+            &:nth-child(2)
+                margin-top: 0
+
+            &:nth-child(3)
+                margin-top: 0
+
+            span
+                display: block
+
+            > *:nth-child(1)
+                font-weight: $bold-font-weight
+                color: $text-bold-color
+                font-size: $medium-font-size
+
+            > *:nth-child(2)
+                font-weight: $medium-font-weight
+                color: $text-color
+                font-size: $small-font-size
+                margin-top: 4px
+                word-break: break-word
+                overflow: hidden
+                text-overflow: ellipsis
+                display: -webkit-box
+                -webkit-line-clamp: 2
+                -webkit-box-orient: vertical
+                line-height: 17px
+                max-height: 34px
+
+            > div
+                display: flex
+                flex-direction: row
+                font-size: $extra-small-font-size
+                color: $text-color
+                align-items: center
+
+                span
+                    margin-left: 5px
+                    line-height: 50%
+                    margin-top: 3px
+            
+            > *:nth-child(3)
+                margin-top: 10px
+
+            > *:nth-child(4)
+                margin-top: 5px
+
+            .difficulty
+                position: absolute
+                height: 18px
+                border-radius: 9px
+                font-size: $extra-small-font-size - 1
+                padding: 0 8px
+                right: $topic-padding
+                bottom: $topic-padding
+
+            .difficultyBeginner
+                color: $difficulty-easy-color
+                background-color: rgba($difficulty-easy-color, 0.2)
+
+            .difficultyIntermediate
+                color: $difficulty-medium-color
+                background-color: rgba($difficulty-medium-color, 0.2)
+
+            .difficultyAdvanced
+                color: $difficulty-hard-color
+                background-color: rgba($difficulty-hard-color, 0.2)
+
+            .progressComponent
+                position: absolute
+                right: $topic-padding
+                top: $topic-padding
+                width: 16px
+                height: 16px

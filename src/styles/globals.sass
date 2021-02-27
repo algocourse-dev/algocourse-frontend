@@ -1,4 +1,4 @@
-@import 'constants'
+@import 'variables'
 
 html, body
     max-width: 100%
@@ -16,12 +16,24 @@ body
 .boldText
     color: $text-bold-color
 
+.textAlign_left
+    text-align: left
+
+.textAlign_right
+    text-align: right
+
 // FONTS
 
 @font-face
     font-family: "Gilroy"
     src: url("/fonts/Gilroy/Gilroy-Regular.ttf")
     font-weight: $regular-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "Gilroy"
+    src: url("/fonts/Gilroy/Gilroy-Medium.ttf")
+    font-weight: $medium-font-weight
     font-display: swap
 
 @font-face
@@ -35,3 +47,24 @@ body
     src: url("/fonts/Gilroy/Gilroy-Bold.ttf")
     font-weight: $bold-font-weight
     font-display: swap
+
+.topicCircularProgressbar
+    .CircularProgressbar-path
+        stroke: $topic-circular-progress-bar-path-color
+
+    .CircularProgressbar-trail
+        stroke: $topic-circular-progress-bar-trail-color
+
+.lessonsCircularProgressbar
+    .CircularProgressbar-path
+        stroke: $royal-blue-color
+
+    .CircularProgressbar-trail
+        stroke: transparent
+
+.practiceProblemsCircularProgressbar
+    .CircularProgressbar-path
+        stroke: $mulberry-color
+
+    .CircularProgressbar-trail
+        stroke: transparent

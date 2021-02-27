@@ -5,7 +5,32 @@ import {
     ProblemResult,
 } from "./constants"
 
-export class TTopic {
+export type TCompany = {
+    readonly id: string
+    readonly name: string
+}
+
+export type TProblemStatus = {
+    readonly result: ProblemResult
+    readonly rejectedReason?: string
+}
+
+export type TProblem = {
+    readonly id: string
+    readonly title: string
+    readonly difficulty: ProblemDifficulty
+    readonly companies: ReadonlyArray<TCompany>
+    readonly totalAccepted: number
+    readonly status: TProblemStatus
+}
+
+export type TPractice = {
+    readonly id: string
+    readonly title: string
+    readonly problems: ReadonlyArray<TProblem>
+}
+
+export type TTopic = {
     readonly id: string
     readonly title: string
     readonly description: string
@@ -15,34 +40,13 @@ export class TTopic {
     readonly completedLessons: number
 }
 
-export class TCompany {
-    readonly id: string
-    readonly name: string
-}
-
-export class TProblemStatus {
-    readonly result: ProblemResult
-    readonly rejectedReason?: string
-}
-
-export class TProblem {
-    readonly id: string
-    readonly title: string
-    readonly difficulty: ProblemDifficulty
-    readonly companies: ReadonlyArray<TCompany>
-    readonly totalAccepted: number
-    readonly status: TProblemStatus
-}
-
-export class TPractice {
-    readonly id: string
-    readonly title: string
-    readonly problems: ReadonlyArray<TProblem>
-}
-
 export type TModule = {
     readonly id: string
     readonly title: string
     readonly topics: ReadonlyArray<TTopic>
-    readonly practices: ReadonlyArray<TPractice>
+}
+
+export type TStreak = {
+    streak: number
+    timeLeft?: number
 }
