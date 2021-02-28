@@ -50,3 +50,9 @@ export type TStreak = {
     streak: number
     timeLeft?: number
 }
+
+export type TCourseLeaderboardUserInfo = {
+    avatarSrc: string
+    name: string
+    progress: number
+}

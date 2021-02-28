@@ -5,6 +5,7 @@ import React, { FC } from 'react'
 import styles from 'styles/Dashboard.module.sass'
 import { Strings } from 'common'
 import { CourseContent, ProgressCard } from 'containers'
+import { TipCard } from 'containers/card/tip-card'
 
 export const Dashboard: FC = () => {
     return (
@@ -25,6 +26,7 @@ export const Dashboard: FC = () => {
                     <div className={styles.widgetsContainer}>
                         <StreakCard />
                         <ProgressCard />
+                        <TipCard />
                     </div>
                 </div>
             </main>

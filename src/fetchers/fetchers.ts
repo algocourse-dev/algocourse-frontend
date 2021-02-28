@@ -4,7 +4,9 @@ import {
     TModulesFetcherData,
     TModuleFetcherData,
     TTopicsProgressFetcherData,
-    TPracticesFetcherData
+    TPracticesFetcherData,
+    TTipData,
+    TCourseLeaderBoardData
 } from "./types"
 
 export const STREAK_DATA_QUERY_KEY = 'streak'
@@ -102,4 +104,16 @@ export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () =
         }, {})
 
     return clientPractices
+}
+
+export const TIP_QUERY_KEY = 'tip'
+export const tipFetcher: () => Promise<TTipData> = async () => {
+    const response = MockData.tip
+    return response
+}
+
+export const COURSE_LEADERBOARD_QUERY_KEY = 'course-leaderboard'
+export const courseLeaderBoardDataFetcher: () => Promise<TCourseLeaderBoardData> = async () => {
+    const response = MockData.courseLeaderboard
+    return response
 }

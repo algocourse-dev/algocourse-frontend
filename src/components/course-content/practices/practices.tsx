@@ -1,7 +1,8 @@
 import React, { memo } from 'react'
 import styles from 'styles/Practices.module.sass'
-import { Strings, TCompany, TPractice } from 'common'
+import { Images, ProblemResult, Strings, TCompany, TPractice } from 'common'
 import classnames from 'classnames'
+import Image from 'next/image'
 
 type PracticesProps = {
     practices: ReadonlyArray<TPractice>
@@ -14,6 +15,19 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
 
     const generateCompaniesNames = (companies: ReadonlyArray<TCompany>) => {
         return companies.map(company => company.name).join(', ')
+    }
+
+    function getStatusIconSrc(result: ProblemResult): string {
+        switch (result) {
+            case ProblemResult.Accepted:
+                return Images.ACCEPTED_CHECK_MARK
+            case ProblemResult.Rejected:
+                return Images.REJECTED_CHECK_MARK
+            case ProblemResult.Unsolved:
+                return Images.UNSOLVED_CHECK_MARK
+            default:
+                return ''
+        }
     }
 
     return (
@@ -49,7 +63,10 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
                                         </td>
                                         <td className='textAlign_right'>{generateCompaniesNames(problem.companies)}</td>
                                         <td className='textAlign_right'>{problem.totalAccepted}</td>
-                                        <td className='textAlign_right'>{problem.status.result}</td>
+                                        <td className='textAlign_right'>
+                                            <Image src={getStatusIconSrc(problem.status.result)}
+                                                width={15.3} height={15.3} layout='fixed' />
+                                        </td>
                                     </tr>
                                     ))}
                                 </tbody>

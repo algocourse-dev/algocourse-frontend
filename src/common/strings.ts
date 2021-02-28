@@ -28,4 +28,5 @@ export const Strings = {
     YOUR_PREGRESS: 'Your Progress',
     LESSONS_LEARNED: 'Lessons learned',
     PRACTICE_PROBLEMS_SOLVED: 'Practice problems solved',
+    RANDOM_TIP: 'Random Tip',
 }

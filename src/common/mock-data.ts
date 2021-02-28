@@ -271,5 +271,38 @@ export const MockData = {
                 ]
             },
         ]
+    },
+    tip: {
+        id: 'tip-id',
+        content: 'Fusce ut placerat orci nulla. Diam volutpat commodo sed egestas egestas. Enim blandit volutpat maecenas volutpat. Nam aliquam sem et tortor. Viverra ipsum nunc aliquet bibendum. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Vel turpis nunc eget lorem dolor sed viverra ipsum. Fames ac turpis egestas sed tempus urna et.',
+    },
+    courseLeaderboard: {
+        topUsers: [
+            {
+                avatarSrc: '',
+                name: 'Jolie Lorem Ipsum',
+                progress: 100,
+            },
+            {
+                avatarSrc: '',
+                name: 'Nhan Nguyen',
+                progress: 89,
+            },
+            {
+                avatarSrc: '',
+                name: 'Adannaya Sigrid',
+                progress: 65,
+            },
+            {
+                avatarSrc: '',
+                name: 'Tarik Emmy',
+                progress: 60,
+            },
+            {
+                avatarSrc: '',
+                name: 'Volker Ursula',
+                progress: 55,
+            },
+        ],
     }
 }
