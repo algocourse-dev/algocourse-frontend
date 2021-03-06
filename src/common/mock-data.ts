@@ -1,6 +1,6 @@
 export const MockData = {
     streakData: {
-        streak: 0
+        streak: 1
     },
     courseContent: {
         modules: [
