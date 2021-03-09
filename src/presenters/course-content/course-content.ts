@@ -4,7 +4,7 @@ import { TModuleFetcherData, TPracticesFetcherData } from 'fetchers/types'
 import { modulesFetcher, MODULES_QUERY_KEY, practicesFetcher, PRACTICES_QUERY_KEY } from "fetchers"
 import { usePresenterCreator } from 'presenters/use-presenter-creator';
 
-export type TModulePresenterData = TModuleFetcherData
+export type TModulePresenterData = TModuleFetcherData & { index: string }
 export type TModulesPresenterData = {
     readonly modules: ReadonlyArray<TModulePresenterData>
 }
@@ -13,10 +13,11 @@ export function useModulesPresenter(): TModulesPresenter {
     return usePresenterCreator(
         () => useQuery(MODULES_QUERY_KEY, modulesFetcher),
         (modulesData) => {
-            return !modulesData ? modulesData : {
+            return !modulesData ? undefined : {
                 modules: modulesData.modules.map((module, index) => ({
                     ...module,
-                    title: `Module ${index}: ${module.title}`,
+                    title: `${module.title}`,
+                    index: '0'.repeat((modulesData.modules.length - 1).toString().length- index.toString().length) + index.toString()
                 }))
             }
         }

@@ -1,0 +1,22 @@
+@import 'variables'
+
+.container
+    width: 100vw
+    height: 100vh
+    background-color: $black-65-color
+    left: 0
+    top: 0
+    position: absolute
+    z-index: 1000
+    display: flex
+    justify-content: center
+    opacity: 0
+
+.containerShow
+    opacity: 1
+    transition: opacity $animation-fast-time
+
+.containerHide
+    left: 100vw
+    opacity: 0
+    transition: opacity $animation-fast-time, left 0ms $animation-fast-time

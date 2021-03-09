@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Images, Strings } from 'common'
 import classnames from 'classnames'
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { useRouter } from 'next/router'
 
 type TopicsProps = {
     topics: TModulePresenterData['topics']
@@ -12,6 +13,7 @@ type TopicsProps = {
 
 export const Topics = memo<TopicsProps>(({topics}) => {
     const { data: progress, isLoading: isProgressLoading, isError: isProgressError } = useTopicsProgressPresenter()
+    const router = useRouter()
 
     function getProgressComponentForTopic(topicId: string) {
         if (isProgressLoading || isProgressError) {
@@ -39,7 +41,7 @@ export const Topics = memo<TopicsProps>(({topics}) => {
                     const difficultyClassName = classnames(styles.difficulty, styles[`difficulty${topic.difficulty}`])
                     const progressComponent = getProgressComponentForTopic(topic.id)
                     return (
-                        <div className={styles.topic} key={topic.id}>
+                        <div className={styles.topic} key={topic.id} onClick={() => router.push(`/topic/${topic.id}`)}>
                             <span>{topic.title}</span>
                             <span>{topic.description}</span>
                             <div>

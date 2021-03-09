@@ -11,4 +11,7 @@ export const Images = {
     STREAK_FIRE: '/images/streak-fire.svg',
     TERMINAL_MULBERRY: '/images/terminal-mulberry.svg',
     UNSOLVED_CHECK_MARK: '/images/unsolved-checkmark.svg',
+    GOOGLE_ICON: '/images/google-icon.svg',
+    FACEBOOK_ICON: '/images/facebook-icon.svg',
+    GITHUB_ICON: '/images/github-icon.svg',
 }

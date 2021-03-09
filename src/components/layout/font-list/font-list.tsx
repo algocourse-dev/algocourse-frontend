@@ -28,6 +28,24 @@ export const FontList: FC = () => {
                 as="font"
                 crossOrigin=""
             />
+            <link
+                rel="preload"
+                href="/fonts/AvertaStd/AvertaStd-Bold.ttf"
+                as="font"
+                crossOrigin=""
+            />
+            <link
+                rel="preload"
+                href="/fonts/AvertaStd/AvertaStd-SemiBold.ttf"
+                as="font"
+                crossOrigin=""
+            />
+            <link
+                rel="preload"
+                href="/fonts/AvertaStd/AvertaStd-Regular.ttf"
+                as="font"
+                crossOrigin=""
+            />
         </Head>
     )
 }

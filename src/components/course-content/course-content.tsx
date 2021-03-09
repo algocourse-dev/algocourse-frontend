@@ -89,7 +89,6 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
     
     return (
         <Fragment>
-            <div className={styles.title}>{Strings.COURSE_CONTENT}</div>
             <div className={styles.modulesContainer}>
                 {modulesPresenter.data.modules.map(module => {
                     const isSelected = isModuleSelected(module.id)
@@ -98,6 +97,7 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
                         <div key={module.id} className={classnames(styles.moduleContainer, {[styles.highlightedContainer]: isSelected})}>
                             <div className={classnames(styles.moduleTitle, {[styles.highlightedModule]: isSelected})}
                                 onClick={() => onModuleClick(module.id)}>
+                                <div className={styles.moduleIndex}>{module.index}</div>
                                 <h2>{module.title}</h2>
                             </div>
 

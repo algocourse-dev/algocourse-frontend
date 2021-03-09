@@ -7,7 +7,9 @@ import { useQuery } from "react-query"
 
 type TProgressCardPresenterData = {
     lessonsPercentage: number
+    lessonsRatio: string
     practiceProblemsPercentage: number
+    practiceProblemsRatio: string
 }
 export type TProgressCardPresenter = TPresenter<TProgressCardPresenterData>
 export function useProgressCardPresenter(): TProgressCardPresenter {
@@ -28,7 +30,9 @@ export function useProgressCardPresenter(): TProgressCardPresenter {
 
             return {
                 lessonsPercentage: Math.round(totalCompletedLessons / totalLessons * 100),
-                practiceProblemsPercentage: Math.round(totalCompletedPracticeLessons / totalPracticeProblems * 100)
+                lessonsRatio: `${totalCompletedLessons}/${totalLessons}`,
+                practiceProblemsPercentage: Math.round(totalCompletedPracticeLessons / totalPracticeProblems * 100),
+                practiceProblemsRatio: `${totalCompletedPracticeLessons}/${totalPracticeProblems}`,
             }
         }
     )()

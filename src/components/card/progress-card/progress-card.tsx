@@ -7,11 +7,11 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import classnames from 'classnames'
 import Image from 'next/image'
 
-type ProgressCard = {
+type ProgressCardProps = {
     progressCardPresenter: TProgressCardPresenter
 }
 
-export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
+export const ProgressCard = memo<ProgressCardProps>(({progressCardPresenter}) => {
     if (progressCardPresenter.isLoading) {
         return null  // TODO: handle isLoading
     }
@@ -22,6 +22,7 @@ export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
 
     const renderProgressItem = (containerClassName: string,
                                 percentage: number,
+                                ratio: string,
                                 annotation: string,
                                 circularProgressClassName: string,
                                 innerCircleClassName: string,
@@ -35,6 +36,7 @@ export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
                 <div className={styles.circularProgressContainer}>
                     <div className={styles.circularProgress}>
                         <CircularProgressbar
+                            strokeWidth={6}
                             className={circularProgressClassName}
                             value={percentage} />
                     </div>
@@ -47,7 +49,7 @@ export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
                     </div>
                 </div>
                 <div className={styles.progressContent}>
-                    <span>{`${percentage} %`}</span>
+                    <span>{ratio}</span>
                     <span>{annotation}</span>
                 </div>
             </div>
@@ -63,6 +65,7 @@ export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
                 {renderProgressItem(
                     styles.lessonsProgress,
                     progressCardPresenter.data.lessonsPercentage,
+                    progressCardPresenter.data.lessonsRatio,
                     Strings.LESSONS_LEARNED,
                     'lessonsCircularProgressbar',
                     styles.lessonsInnerCircle,
@@ -75,6 +78,7 @@ export const ProgressCard = memo<ProgressCard>(({progressCardPresenter}) => {
                 {renderProgressItem(
                     styles.practicesProgress,
                     progressCardPresenter.data.practiceProblemsPercentage,
+                    progressCardPresenter.data.practiceProblemsRatio,
                     Strings.PRACTICE_PROBLEMS_SOLVED,
                     'practiceProblemsCircularProgressbar',
                     styles.practiceProblemsInnerCircle,

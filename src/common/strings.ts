@@ -29,4 +29,10 @@ export const Strings = {
     LESSONS_LEARNED: 'Lessons learned',
     PRACTICE_PROBLEMS_SOLVED: 'Practice problems solved',
     RANDOM_TIP: 'Random Tip',
+    LOGIN: 'Login',
+    LOGIN_WITH_FACEBOOK: 'Login with Facebook',
+    LOGIN_WITH_GITHUB: 'Login with Github',
+    LOGIN_WITH_GOOGLE: 'Login with Google',
+    LOGIN_WITH_YOUR_SOCIAL_ACCOUNTS: 'Login with your social accounts',
+    COURSE_NOTICE: "The course's topics are built on top of each other, from left to right and top to bottom. We recommend you to learn in that order for the best experience and result.",
 }

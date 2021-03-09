@@ -21,6 +21,10 @@ export const Dashboard: FC = () => {
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
                     <div className={styles.courseContainer}>
+                        <div className={styles.courseNotice}>
+                            <h2>Welcome back, Lena!</h2>
+                            <p>{Strings.COURSE_NOTICE}</p>
+                        </div>
                         <CourseContent />
                     </div>
                     <div className={styles.widgetsContainer}>
