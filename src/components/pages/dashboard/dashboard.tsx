@@ -3,13 +3,14 @@ import { Header } from 'components/header'
 import { Layout } from 'components/layout'
 import React, { FC } from 'react'
 import styles from 'styles/Dashboard.module.sass'
-import { Strings } from 'common'
+import { Strings } from 'constants/strings'
 import { CourseContent, ProgressCard } from 'containers'
 import { TipCard } from 'containers/card/tip-card'
+import { CourseLeaderboardCard } from 'containers/card/course-leaderboard-card'
 
 export const Dashboard: FC = () => {
     return (
-        <Layout pageTitle={Strings.DASHBOARD}>
+        <Layout pageTitle={Strings.DASHBOARD} className={styles.layout}>
             <Header enableHamburgerMenu={false}
                     showLogoText={false}
                     leftButtonsLabel={[
@@ -31,6 +32,7 @@ export const Dashboard: FC = () => {
                         <StreakCard />
                         <ProgressCard />
                         <TipCard />
+                        <CourseLeaderboardCard />
                     </div>
                 </div>
             </main>

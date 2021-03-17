@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Strings } from 'common/strings'
+import { Strings } from 'constants/strings'
 import Head from 'next/head'
 
 type SEOProps = {

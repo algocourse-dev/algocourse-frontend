@@ -1,11 +1,11 @@
-@import 'variables'
+@import 'common'
 
 .container
     display: flex
     flex-direction: column
     width: 100%
-    padding: 15px
-    background-color: $card-background-color
+    padding: $base-card-padding
+    background-color: $base-card-background-color
     border-radius: $card-border-radius
 
     .topRow
@@ -15,6 +15,6 @@
         justify-content: space-between
 
         .title
-            color: $card-title-color
+            color: $base-card-title-color
             font-weight: $bold-font-weight
             font-size: $medium-font-size

@@ -1,0 +1,206 @@
+@import 'common'
+
+$header-burger-height: 18px
+$header-burger-bar-height: 1px
+$navigation-bar-height: $header-height
+
+.topicLayout
+    background-color: #21304d
+
+    .header
+        z-index: $no-z-index !important
+
+.menuBar
+    width: 100% !important
+
+.mainContainer
+    display: flex
+    width: 100%
+    padding: 0 $edge-margin
+    flex-direction: row
+    margin-top: $dashboard-components-margin
+    color: $text-secondary-color
+
+    .navigationBar
+        position: fixed
+        left: 0
+        bottom: 0
+        height: 58px
+        width: 100%
+        display: flex
+        flex-direction: row
+        align-items: center
+        background-color: #152238
+        padding: 0 $edge-margin 0 $edge-margin
+            
+        .navigationLeft
+            display: flex
+            align-items: center
+            flex: 1 1
+
+            .lessonsListOverlay
+                bottom: $navigation-bar-height
+
+                .lessonsListContainer
+                    width: 450px
+                    height: 100%
+                    background-color: $background-color
+                    transform: translateX(-450px)
+                    transition: transform $animation-medium-time ease
+
+                    .lessonsListBack
+                        color: $text-annotation-primary-color
+                        display: flex
+                        align-items: center
+                        width: 100%
+                        height: $header-height
+                        background-color: $header-background-color
+                        cursor: pointer
+                        font-size: $medium-font-size
+                        padding: 0 $edge-margin 0 $edge-margin
+
+                        &:hover
+                            color: $text-primary-color
+
+                    .lessonsListTopicInfo
+                        padding: 0 $edge-margin 0 $edge-margin
+                        padding-top: 20px
+                        padding-bottom: 5px
+                        border-bottom: 1px solid $black-65-color
+
+                        h1
+                            margin: 0
+                            font-size: $extra-large-font-size
+                            color: $text-primary-color
+
+                        p
+                            color: $text-secondary-color
+
+                    .lessonsList
+                        padding-top: 15px
+
+                        > div:first-child
+                            color: $primary-button-color
+                            font-size: $extra-small-font-size
+                            padding: 0 $edge-margin 0 $edge-margin
+
+                        > ul
+                            list-style-type: none
+                            padding-left: 0
+                            margin: 10px 0 0 0
+
+                            > li
+                                width: 100%
+                                height: 50px
+                                display: flex
+                                align-items: center
+                                justify-content: space-between
+                                padding: 0 $edge-margin 0 $edge-margin
+
+                                .lessonsProgress
+                                    width: 16px
+                                    height: 16px
+
+                            .lessonInProgress
+                                color: $text-primary-color
+                                background-color: $genesys-blue-color
+                                cursor: pointer
+                            
+                            .lessonCompleted
+                                color: $text-annotation-primary-color
+                                cursor: pointer
+
+                                &:hover
+                                    background-color: $genesys-blue-color
+                                    color: $text-primary-color
+
+                            .lessonNotStarted
+                                color: $text-annotation-secondary-color
+                                cursor: not-allowed
+
+                .isLessonsListShow
+                    transform: translateX(0) !important
+
+            .burgerContainer
+                transform: scaleX(-1)
+                margin-right: $edge-margin
+                height: $header-burger-height
+
+                .burgerBarsClassName
+                    height: $header-burger-bar-height
+                    border-radius: $header-burger-bar-height / 2
+
+            .burgerBar1
+                width: 100%
+
+            .burgerBar3
+                width: 100%
+
+        .navigationMiddle
+            flex: 2 1
+            display: flex
+            align-items: center
+            text-align: center
+            justify-content: center
+
+            .navigationMiddleContent
+                display: flex
+                align-items: center
+                max-width: 500px
+                width: 100%
+
+                div
+                    flex: 1
+
+            button
+                width: 90px
+                height: 35px
+                font-size: 15px
+                font-weight: $semi-bold-font-weight
+                border-radius: $card-border-radius
+                cursor: pointer
+            
+            button:first-child
+                background-color: transparent
+                border: 1px solid $white-color
+                color: $white-color
+            
+            button:last-child
+                background-color: #69F0AE
+                border-color: transparent
+                color: #152238
+
+        .navigationRight
+            flex: 1 1
+            display: flex
+            flex-direction: row-reverse
+
+    .lessonContent
+        line-height: 1.5
+        font-size: $large-font-size
+        font-weight: normal
+        padding-left: 0
+        padding-right: 0
+        margin-left: auto
+        margin-right: auto
+
+        @media (min-width: 750px)
+            padding-left: 1.5rem
+            padding-right: 1.5rem
+
+        @media (min-width: 1300px)
+            padding-left: 3rem
+            padding-right: 3rem
+
+        .lessonHeader
+            display: flex
+            max-width: calc(42rem + 18rem + 3rem)
+
+            h1
+                margin: 0
+
+        .lessonContentContainer
+
+            .lessonContent
+                order: 1
+                max-width: 42rem

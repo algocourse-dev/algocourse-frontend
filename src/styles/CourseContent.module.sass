@@ -1,4 +1,4 @@
-@import 'variables'
+@import 'common'
 
 .modulesContainer
     width: 100%
@@ -7,7 +7,7 @@
         display: flex
         flex-direction: column
         width: 100%
-        margin-bottom: $panel-components-margin
+        margin-bottom: $dashboard-components-margin
 
         .collapseContainer
             position: relative
@@ -26,7 +26,7 @@
                 text-align: center
                 cursor: pointer
                 font-size: $extra-small-font-size
-                color: $white-color
+                color: $background-color
                 padding-top: 2px
                 font-weight: $semi-bold-font-weight
 
@@ -45,7 +45,7 @@
             background-color: $module-background-color
             border-radius: $card-border-radius
             cursor: pointer
-            color: $module-title-color
+            color: $text-secondary-color
 
             .moduleIndex
                 font-size: $extra-large-font-size
@@ -55,7 +55,7 @@
 
             &:hover
                 background-color: $module-hover-color
-                color: $white-color
+                color: $text-primary-color
 
                 .moduleIndex
                     opacity: 1 !important
@@ -66,17 +66,13 @@
                 margin: 15px 0 15px 0
 
         .highlightedModule
-            color: $white-color !important
+            color: $background-color !important
             background-color: $module-highlighted-color !important
             border-bottom-left-radius: 0px
             border-bottom-right-radius: 0px
 
             .moduleIndex
                 opacity: 1 !important
-
-        .topics
-            width: 100%
-            background-color: red
 
         .topicCollapse, .practiceCollapse
             max-width: 100%

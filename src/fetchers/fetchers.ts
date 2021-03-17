@@ -1,4 +1,7 @@
-import { MockData, ProblemDifficulty, ProblemResult, TCompany, TopicDifficulty, TopicNecesssity, TPractice, TProblem, TProblemStatus } from "common"
+import { MockData } from 'constants/mock-data'
+import { ProblemDifficulty, ProblemResult, TopicDifficulty, TopicNecesssity } from 'constants/constants'
+import { TCompany, TPractice, TProblem, TProblemStatus } from "constants/types"
+import { QueryFunctionContext } from "react-query"
 import {
     TStreakFetcherData,
     TModulesFetcherData,
@@ -6,7 +9,8 @@ import {
     TTopicsProgressFetcherData,
     TPracticesFetcherData,
     TTipData,
-    TCourseLeaderBoardData
+    TCourseLeaderBoardData,
+    TTopicFetcherData
 } from "./types"
 
 export const STREAK_DATA_QUERY_KEY = 'streak'
@@ -116,4 +120,26 @@ export const COURSE_LEADERBOARD_QUERY_KEY = 'course-leaderboard'
 export const courseLeaderBoardDataFetcher: () => Promise<TCourseLeaderBoardData> = async () => {
     const response = MockData.courseLeaderboard
     return response
+}
+
+export const TOPIC_QUERY_KEY = (topicId: string) => ['topic', topicId]
+export async function topicFetcher(context: QueryFunctionContext<any>): Promise<TTopicFetcherData> {
+    const [_key, topicId] = context.queryKey
+    if (!topicId) {
+        return undefined
+    }
+    const serverTopic = MockData.topic[topicId]
+
+    const clientTopic = {
+        id: serverTopic['id'],
+        title: serverTopic['title'],
+        description: serverTopic['description'],
+        difficulty: serverTopic['difficulty'] as TopicDifficulty,  // TODO: need further validation here
+        necesssity: serverTopic['necesssity'] as TopicNecesssity,  // TODO: need further validation here
+        totalLessons: serverTopic['total_lessons'],
+        lessons: serverTopic['lessons'],
+        completedLessons: serverTopic['completed_lessons'],
+    }
+
+    return clientTopic
 }

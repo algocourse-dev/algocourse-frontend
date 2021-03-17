@@ -1,7 +1,8 @@
 import { useQuery } from 'react-query'
 import { STREAK_DATA_QUERY_KEY, streakDataFetcher, TStreakFetcherData } from 'fetchers'
 import { TPresenter } from 'presenters/types'
-import { StreakStatus, Strings } from 'common'
+import { Strings } from 'constants/strings'
+import { StreakStatus } from 'constants/constants'
 
 type TStreakCardPresenterData = {
     streakStatus: any

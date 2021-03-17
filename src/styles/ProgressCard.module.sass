@@ -1,7 +1,17 @@
-@import 'variables'
+@import 'common'
+
+@mixin progress-percentage($primary-color)
+    color: $primary-color
+    font-weight: $semi-bold-font-weight
+    font-size: $medium-font-size
+    margin-top: 5px
+
+%progress-annotation
+    color: $text-annotation-primary-color
+    font-size: $small-font-size
 
 .overrideBaseCard
-    margin-top: $panel-components-margin
+    margin-top: $dashboard-components-margin
 
 .container
     display: flex
@@ -9,25 +19,17 @@
 
     .lessonsProgress
         span:nth-child(1)
-            color: $royal-blue-color
-            font-weight: $semi-bold-font-weight
-            font-size: $medium-font-size
-            margin-top: 5px
+            @include progress-percentage($lessons-progress-primary-color)
 
         span:nth-child(2)
-            color: $text-color
-            font-size: $small-font-size
+            @extend %progress-annotation
 
     .practicesProgress
         span:nth-child(1)
-            color: $mulberry-color
-            font-weight: $semi-bold-font-weight
-            font-size: $medium-font-size
-            margin-top: 5px
+            @include progress-percentage($practice-problems-progress-primary-color)
 
         span:nth-child(2)
-            color: $text-color
-            font-size: $small-font-size
+            @extend %progress-annotation
 
     .progressContent
         display: inline-block
@@ -63,7 +65,7 @@
                 justify-content: center
 
             .lessonsInnerCircle
-                background-color: $link-water-color
+                background-color: $lessons-progress-inner-circle-color
 
             .practiceProblemsInnerCircle
-                background-color: $prim-color
+                background-color: $practice-problems-inner-cirle-color

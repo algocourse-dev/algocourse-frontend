@@ -1,4 +1,4 @@
-@import 'variables'
+@import 'common'
 @import 'utils'
 
 .mainContainer
@@ -46,30 +46,27 @@
                         display: inherit
 
                 .siteTitle, h1
-                    color: $text-emphasis-color
+                    color: $text-secondary-color
 
                 h1
                     font-size: $extra-large-font-size
 
                 p
                     margin-top: 25px
-                    color: $text-color
+                    color: $text-annotation-secondary-color
                     font-size: $medium-font-size
 
                 .landingButtons
                     margin-top: 30px
 
                 .getStartedButton
-                    @extend %primary-button
-                    height: 42px
+                    @include primary-button(auto, 42px, $primary-button-color, $text-primary-color)
                     font-size: $large-font-size
                     padding: 0 22px
                     margin-right: 28px
 
                 .readMissionButton
-                    @extend %secondary-button
-                    height: 42px
+                    @include secondary-button(auto, 42px, $text-primary-color, $primary-button-color)
                     font-size: $large-font-size
-                    border: 1px solid 
                     padding: 0 22px
                     margin-top: 15px

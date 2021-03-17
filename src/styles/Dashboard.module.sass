@@ -1,32 +1,29 @@
-@import 'variables'
+@import 'common'
+
+.layout
+    background-color: $background-color
 
 .mainContainer
     display: flex
     width: 100%
     padding: 0 $edge-margin
     flex-direction: column
-    margin-top: $panel-components-margin
+    margin-top: $dashboard-components-margin
 
     .main
         display: flex
         align-self: center
         width: $main-content-container-size
 
-        // @media (max-width: $main-content-container-size)
-        //     width: 100%
-
         .courseContainer
             display: flex
             flex-direction: column
             width: $right-panel-width
-            margin-right: $panel-components-margin
+            margin-right: $dashboard-components-margin
 
             .courseNotice
                 width: 100%
-                background-color: $primary-button-color
                 margin-bottom: 26px
-                border-radius: $card-border-radius
-                padding: 15px $module-padding 15px $module-padding
 
                 h2, p
                     margin: 0
@@ -35,13 +32,12 @@
                     font-size: $large-font-size
                     margin-bottom: 10px
                     font-weight: $bold-font-weight
-                    color: $white-color
+                    color: $text-primary-color
 
                 p
                     font-size: $small-medium-font-size
                     font-weight: $regular-font-weight
-                    color: rgba($white-color, 0.6)
-
+                    color: $text-annotation-primary-color
 
         .widgetsContainer
             width: $left-panel-width

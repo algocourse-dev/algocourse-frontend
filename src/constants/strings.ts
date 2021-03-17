@@ -35,4 +35,8 @@ export const Strings = {
     LOGIN_WITH_GOOGLE: 'Login with Google',
     LOGIN_WITH_YOUR_SOCIAL_ACCOUNTS: 'Login with your social accounts',
     COURSE_NOTICE: "The course's topics are built on top of each other, from left to right and top to bottom. We recommend you to learn in that order for the best experience and result.",
+    BACK_TO_ALL_TOPICS: 'Back to all topics',
+    LESSONS: 'LESSONS',
+    BACK: 'Back',
+    NEXT: 'Next',
 }

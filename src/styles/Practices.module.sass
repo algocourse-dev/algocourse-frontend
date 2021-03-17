@@ -1,4 +1,4 @@
-@import 'variables'
+@import 'common'
 
 .container
     width: 100%
@@ -6,7 +6,7 @@
     flex-direction: column
 
     > span:first-child
-        color: $text-color
+        color: $text-annotation-secondary-color
         font-size: $medium-font-size
         font-weight: $bold-font-weight
         margin-bottom: 10px
@@ -18,19 +18,18 @@
             flex-direction: column
             background-color: $practice-table-background-color
             padding: $practice-padding
-            box-shadow: $box-shadow-style
             border-radius: $card-border-radius
-            margin-top: $module-padding/1.5
+            margin-top: $module-padding / 1.5
 
             .tableName
                 font-weight: $bold-font-weight
                 font-size: $medium-font-size !important
-                color: $text-bold-color
+                color: $text-primary-color
                 margin-bottom: 8px
 
             table
                 background-color: $practice-table-background-color
-                color: $text-color
+                color: $text-annotation-secondary-color
                 border-collapse: collapse
 
                 tr
@@ -50,11 +49,18 @@
 
                 thead tr
                     height: $practice-header-height
+                    color: $text-annotation-secondary-color
+
+                    th:nth-child(n+1):nth-child(-n+3)
+                        text-align: left
+
+                    th:nth-child(n+4)
+                        text-align: right
 
                 th
                     font-size: $small-font-size
                     font-weight: $bold-font-weight
-                    background-color: $selago-color
+                    background-color: $genesys-blue-color
 
                 tbody
                     font-size: $small-font-size
@@ -63,11 +69,17 @@
                     tr 
                         height: $practice-row-height
 
+                        td:nth-child(n+1):nth-child(-n+3)
+                            text-align: left
+
+                        td:nth-child(n+4)
+                            text-align: right
+
                 .problemTitle
-                    color: $text-bold-color
+                    color: $text-secondary-color
 
                 .problemDifficulty
-                    color: $white-color !important
+                    color: $text-primary-color !important
                     text-align: center
                     height: 18px
                     border-radius: 9px

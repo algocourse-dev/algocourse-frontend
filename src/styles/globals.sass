@@ -1,4 +1,4 @@
-@import 'variables'
+@import 'common'
 
 html, body
     max-width: 100%
@@ -8,21 +8,10 @@ html, body
     font-family: AvertaStd, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
 
 body
-    background-color: $background-color
+    position: relative
 
 *
     box-sizing: border-box
-
-.boldText
-    color: $text-bold-color
-
-.textAlign_left
-    text-align: left
-
-.textAlign_right
-    text-align: right
-
-// FONTS
 
 @font-face
     font-family: "Gilroy"
@@ -75,14 +64,14 @@ body
 
 .lessonsCircularProgressbar
     .CircularProgressbar-path
-        stroke: $royal-blue-color
+        stroke: $lessons-progress-primary-color
 
     .CircularProgressbar-trail
         stroke: transparent
 
 .practiceProblemsCircularProgressbar
     .CircularProgressbar-path
-        stroke: $mulberry-color
+        stroke: $practice-problems-progress-primary-color
 
     .CircularProgressbar-trail
         stroke: transparent

@@ -279,30 +279,95 @@ export const MockData = {
     courseLeaderboard: {
         topUsers: [
             {
+                ranking: 1,
                 avatarSrc: '',
                 name: 'Jolie Lorem Ipsum',
                 progress: 100,
             },
             {
+                ranking: 2,
                 avatarSrc: '',
                 name: 'Nhan Nguyen',
                 progress: 89,
             },
             {
+                ranking: 3,
                 avatarSrc: '',
-                name: 'Adannaya Sigrid',
+                name: 'Adannaya Lena',
                 progress: 65,
             },
             {
+                ranking: 4,
                 avatarSrc: '',
                 name: 'Tarik Emmy',
                 progress: 60,
             },
             {
+                ranking: 5,
                 avatarSrc: '',
                 name: 'Volker Ursula',
                 progress: 55,
             },
         ],
+        currentUser: {
+            ranking: 3,
+            avatarSrc: '',
+            name: 'Adannaya Lena',
+            progress: 65,
+        },
+    },
+    topic: {
+        'course-intro': {
+            id: 'course-intro',
+            title: 'Course Introduction',
+            description: 'Neque porro quisquam est qui Dolores Ipsum quia dolor sit amet. Neque porro quisquam est qui Dolores Ipsum quia dolor sit amet',
+            total_lessons: 3,
+            difficulty: 'Beginner',
+            necesssity: 'Must learn',
+            lessons: [
+                {
+                    id: 'introduction-0',
+                    title: 'Ac tincidunt vitae semper',
+                },
+                {
+                    id: 'introduction-1',
+                    title: 'Magna fringilla urna porttitor rhoncus dolor',
+                },
+                {
+                    id: 'introduction-2',
+                    title: 'Placerat in egestas',
+                },
+                {
+                    id: 'introduction-3',
+                    title: 'Mi bibendum neque egestas congue',
+                }
+            ],
+            completed_lessons: 2
+        }
+    },
+    lesson_content: {
+        'introduction-0': {
+            id: 'introduction-0',
+            blocks: [
+                {
+                    type: 'MARKDOWN',
+                    content: `
+                        
+                    `,
+                },
+                // {
+                //     type: 'PROBLEM',
+                //     content: '',
+                // },
+                {
+                    type: 'QUIZ',
+                    content: ''
+                },
+                // {
+                //     type: 'IMAGES_PLAYER',
+                //     content: ''
+                // },
+            ],
+        }
     }
 }

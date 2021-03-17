@@ -1,6 +1,6 @@
-import { TModulesPresenter, TPracticesPresenter } from 'presenters'
+import { TModulePresenterData, TModulesPresenter, TPracticesPresenter, TTopicsProgressPresenter } from 'presenters'
 import React, { Fragment, memo, useState } from 'react'
-import { Strings } from 'common'
+import { Strings } from 'constants/strings'
 import styles from 'styles/CourseContent.module.sass'
 import classnames from 'classnames'
 import { Collapse } from 'react-collapse'
@@ -10,6 +10,7 @@ import { Practices } from 'components'
 type CourseContentProps = {
     modulesPresenter: TModulesPresenter
     practicesPresenter: TPracticesPresenter
+    topicsProgress: TTopicsProgressPresenter
 }
 
 type SelectedModuleState = {
@@ -17,17 +18,47 @@ type SelectedModuleState = {
     isPracticeExpanded: boolean
 }
 
-export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practicesPresenter}) => {
+export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practicesPresenter, topicsProgress}) => {
     const [selectedModule, setSelectedModule] = useState<SelectedModuleState>({id: undefined, isPracticeExpanded: false})
 
-    if (modulesPresenter.isLoading) {
-        // TODO: handle isLoading
-        return null
+    const renderModuleTitle = (module: TModulePresenterData): JSX.Element => {
+        const isSelected = isModuleSelected(module.id)
+        return (
+            <div className={classnames(styles.moduleTitle, {[styles.highlightedModule]: isSelected})}
+                onClick={() => onModuleClick(module.id)}>
+                <div className={styles.moduleIndex}>{module.index}</div>
+                <h2>{module.title}</h2>
+            </div>
+        )
     }
 
-    if (modulesPresenter.isError) {
-        // TODO: handle isError
-        return null
+    const renderCollapsibleTopics = (module: TModulePresenterData): JSX.Element => {
+        const isSelected = isModuleSelected(module.id)
+        return (                        
+            <Collapse isOpened={isSelected}
+                theme={{collapse: styles.topicCollapse, content:
+                        classnames(styles.topicContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
+                <Topics topics={module.topics} topicsProgress={topicsProgress} />
+            </Collapse>
+        )
+    }
+
+    const renderCollapsiblePractices = (module: TModulePresenterData): JSX.Element => {
+        const isSelected = isModuleSelected(module.id)
+        const isPracticeExpanded = isSelected && selectedModule.isPracticeExpanded
+        return (
+            <Collapse isOpened={isPracticeExpanded}
+                theme={{collapse: styles.practiceCollapse, content:
+                    classnames(styles.practiceContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
+                {
+                    practicesPresenter.isLoading ?
+                        null :  // TODO: handle isLoading
+                    practicesPresenter.isError ?
+                        null :
+                    <Practices practices={practicesPresenter.data[module.id]} />            
+                }
+            </Collapse>
+        )
     }
 
     const isModuleSelected = (moduleId: string) => {
@@ -50,19 +81,7 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
         setSelectedModule({...selectedModule, isPracticeExpanded: false})
     }
 
-    const renderPracticeSection = (moduleId: string) => {
-        if (practicesPresenter.isLoading) {
-            return null  // TODO: handle isLoading
-        }
-
-        if (practicesPresenter.isError) {
-            return null  // TODO: handle isError
-        }
-
-        return (<Practices practices={practicesPresenter.data[moduleId]} />)
-    }
-
-    const renderSeeMoreButton = (moduleId: string) => {
+    const renderSeeMoreButton = (moduleId: string): JSX.Element => {
         if (!isModuleSelected(moduleId)) {
             return null
         }
@@ -86,34 +105,28 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
 
         return null
     }
+
+    if (modulesPresenter.isLoading) {
+        // TODO: handle isLoading
+        return null
+    }
+
+    if (modulesPresenter.isError) {
+        // TODO: handle isError
+        return null
+    }
     
     return (
         <Fragment>
             <div className={styles.modulesContainer}>
                 {modulesPresenter.data.modules.map(module => {
                     const isSelected = isModuleSelected(module.id)
-                    const isPracticeExpanded = isSelected && selectedModule.isPracticeExpanded
                     return (
                         <div key={module.id} className={classnames(styles.moduleContainer, {[styles.highlightedContainer]: isSelected})}>
-                            <div className={classnames(styles.moduleTitle, {[styles.highlightedModule]: isSelected})}
-                                onClick={() => onModuleClick(module.id)}>
-                                <div className={styles.moduleIndex}>{module.index}</div>
-                                <h2>{module.title}</h2>
-                            </div>
-
+                            {renderModuleTitle(module)}
                             <div className={classnames(styles.collapseContainer, {[styles.selectedCollapseContainer]: isSelected, [styles.unselecteCollapseContainer]: !isSelected})}>
-                                <Collapse isOpened={isSelected}
-                                    theme={{collapse: styles.topicCollapse, content:
-                                            classnames(styles.topicContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
-                                    <Topics topics={module.topics} />
-                                </Collapse>
-
-                                <Collapse isOpened={isPracticeExpanded}
-                                    theme={{collapse: styles.practiceCollapse, content:
-                                        classnames(styles.practiceContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
-                                    {renderPracticeSection(module.id)}
-                                </Collapse>
-
+                                {renderCollapsibleTopics(module)}
+                                {renderCollapsiblePractices(module)}
                                 {renderSeeMoreButton(module.id)}
                             </div>
                         </div>

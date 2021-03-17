@@ -1,6 +1,9 @@
 import React, { memo } from 'react'
 import styles from 'styles/Practices.module.sass'
-import { Images, ProblemResult, Strings, TCompany, TPractice } from 'common'
+import { TCompany, TPractice } from 'constants/types'
+import { Images } from 'constants/images'
+import { Strings } from 'constants/strings'
+import { ProblemResult } from 'constants/constants'
 import classnames from 'classnames'
 import Image from 'next/image'
 
@@ -30,52 +33,53 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         }
     }
 
+    function renderPractice(practice: TPractice): JSX.Element {
+        return (
+            <div className={styles.tableContainer} key={practice.id}>
+                <div className={styles.tableName}>
+                    {practice.title}
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{Strings.ID}</th>
+                            <th>{Strings.PROBLEM}</th>
+                            <th>{Strings.DIFFICULTY}</th>
+                            <th>{Strings.COMPANIES}</th>
+                            <th>{Strings.ACCEPTED}</th>
+                            <th>{Strings.STATUS}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {practice.problems.map(problem => (
+                        <tr key={problem.id}>
+                            <td>{problem.id}</td>
+                            <td className={styles.problemTitle}>{problem.title}</td>
+                            <td>
+                                <div className={classnames(styles.problemDifficulty, styles[`difficulty${problem.difficulty}`])}>
+                                    {problem.difficulty}
+                                </div>
+                            </td>
+                            <td>{generateCompaniesNames(problem.companies)}</td>
+                            <td>{problem.totalAccepted}</td>
+                            <td>
+                                <Image src={getStatusIconSrc(problem.status.result)}
+                                    width={15.3} height={15.3} layout='fixed' />
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.container}>
             <span>{Strings.PRACTICE}</span>
             <div className={styles.practices}>
-                {practices.map(practice => {
-                    return (
-                        <div className={styles.tableContainer} key={practice.id}>
-                            <div className={classnames(styles.tableName, 'textAlign_left')}>
-                                {practice.title}
-                            </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className='textAlign_left'>{Strings.ID}</th>
-                                        <th className='textAlign_left'>{Strings.PROBLEM}</th>
-                                        <th className='textAlign_left'>{Strings.DIFFICULTY}</th>
-                                        <th className='textAlign_right'>{Strings.COMPANIES}</th>
-                                        <th className='textAlign_right'>{Strings.ACCEPTED}</th>
-                                        <th className='textAlign_right'>{Strings.STATUS}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {practice.problems.map(problem => (
-                                    <tr key={problem.id}>
-                                        <td className='textAlign_left'>{problem.id}</td>
-                                        <td className={classnames(styles.problemTitle, 'textAlign_left')}>{problem.title}</td>
-                                        <td className='textAlign_left'>
-                                            <div className={classnames(styles.problemDifficulty, styles[`difficulty${problem.difficulty}`])}>
-                                                {problem.difficulty}
-                                            </div>
-                                        </td>
-                                        <td className='textAlign_right'>{generateCompaniesNames(problem.companies)}</td>
-                                        <td className='textAlign_right'>{problem.totalAccepted}</td>
-                                        <td className='textAlign_right'>
-                                            <Image src={getStatusIconSrc(problem.status.result)}
-                                                width={15.3} height={15.3} layout='fixed' />
-                                        </td>
-                                    </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )
-                })}
+                {practices.map(practice => renderPractice(practice))}
             </div>
-
         </div>
     )
 })

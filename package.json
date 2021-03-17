@@ -23,7 +23,9 @@
     "react-circular-progressbar": "^2.0.3",
     "react-collapse": "^5.1.0",
     "react-dom": "17.0.1",
+    "react-markdown": "^5.0.3",
     "react-query": "^3.9.8",
+    "remark-gfm": "^1.0.0",
     "sass": "^1.32.4"
   },
   "devDependencies": {

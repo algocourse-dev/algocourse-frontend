@@ -1,4 +1,4 @@
-import { ProblemResult } from "common"
+import { ProblemResult } from "constants/constants"
 import { topicsProgressFetcher, TOPICS_PROGRESS_KEY, TPracticesFetcherData, TTopicsProgressFetcherData } from "fetchers"
 import { TModulesPresenterData, useModulesPresenter, usePracticesPresenter } from "presenters/course-content"
 import { TPresenter } from "presenters/types"

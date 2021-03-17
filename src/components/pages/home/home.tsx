@@ -5,7 +5,8 @@ import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
 import { Layout } from 'components/layout'
 import { useRouter } from 'next/router'
-import { Strings, Images } from 'common'
+import { Strings } from 'constants/strings'
+import { Images } from 'constants/images'
 
 export const Home: FC = () => {
     return (
@@ -35,7 +36,7 @@ const LandingBlock: FC = () => {
         <div className={styles.landingBlockContainer}>
             <div className={styles.landingDescription}>
                 <h1>
-                    <span className='boldText'>The Ultimate Course</span> <br className={styles.newline}/>
+                    <span>The Ultimate Course</span> <br className={styles.newline}/>
                     for your coding interview<br className={styles.newline}/>
                 </h1>
                 <p>

@@ -30,6 +30,11 @@ export type TPractice = {
     readonly problems: ReadonlyArray<TProblem>
 }
 
+export type TLesson = {
+    readonly id: string
+    readonly title: string
+}
+
 export type TTopic = {
     readonly id: string
     readonly title: string
@@ -38,6 +43,7 @@ export type TTopic = {
     readonly necesssity: TopicNecesssity
     readonly totalLessons: number
     readonly completedLessons: number
+    readonly lessons: ReadonlyArray<TLesson>
 }
 
 export type TModule = {
@@ -52,6 +58,7 @@ export type TStreak = {
 }
 
 export type TCourseLeaderboardUserInfo = {
+    ranking: number
     avatarSrc: string
     name: string
     progress: number

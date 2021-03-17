@@ -1,30 +1,30 @@
 import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
-import { TTipCardPresenter } from 'presenters/card/tip-card'
+import { TCourseLeaderboardCardPresenter } from 'presenters'
 import React, { memo } from 'react'
 import { BaseCard } from '../base-card'
-import styles from 'styles/TipCard.module.sass'
+import styles from 'styles/CourseLeaderboardCard.module.sass'
 
-type TipCardProps = {
-    tipCardPresenter: TTipCardPresenter
+type CourseLeaderboardCardProps = {
+    courseLeaderboardCardPresenter: TCourseLeaderboardCardPresenter
 }
 
-export const TipCard = memo<TipCardProps>(({tipCardPresenter}) => {
-    if (tipCardPresenter.isLoading) {
+export const CourseLeaderboardCard = memo<CourseLeaderboardCardProps>(({courseLeaderboardCardPresenter}) => {
+    if (courseLeaderboardCardPresenter.isLoading) {
         return null  // TODO: handle isLoading
     }
 
-    if (tipCardPresenter.isError) {
+    if (courseLeaderboardCardPresenter.isError) {
         return null  // TODO: handle isError
     }
 
     return (
         <BaseCard
-            title={Strings.RANDOM_TIP}
+            title={Strings.LEADERBOARD}
             utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
             className={styles.overrideBaseCard}>
             <div className={styles.container}>
-                {tipCardPresenter.data.content}
+
             </div>
         </BaseCard>
     )

@@ -1,43 +1,60 @@
-@import 'variables'
+@import 'common'
+
+$header-burger-width: 20px
+$header-burger-height: 20px
+$header-burger-bar-height: 2px
+$header-burger-bar-1-width: 80%
+$header-burger-bar-2-width: 100%
+$header-burger-bar-3-width: 60%
+$header-burger-bar-gap: 7px
+$header-burger-bar-color: $text-annotation-primary-color
+$header-burger-bar-hover-color: $text-primary-color
 
 .burgerContainer
     display: flex
     flex-direction: column
     align-items: flex-end
     justify-content: space-around
-    width: 20px
-    height: 20px
+    width: $header-burger-width
+    height: $header-burger-height
     background: transparent
     border: none
     cursor: pointer
-    padding: 0
-    z-index: 1000
+    position: relative
+    min-width: $header-burger-width
+    z-index: $z-index-top-layer
+
+    &:hover div
+        background: $header-burger-bar-hover-color
 
     div
-        height: 2px
-        background: $text-color
-        border-radius: 10px
-        transition: all #{$animation-fast-time} linear
-        position: relative
-        transform-origin: 20px
-        transform: rotate(0)
+        display: block
+        position: absolute
+        height: $header-burger-bar-height
+        background: $header-burger-bar-color
+        border-radius: $header-burger-bar-height / 2
+        transition: transform $animation-fast-time
         
     div:nth-child(1)
-        width: 80%
+        width: $header-burger-bar-1-width
+        transform: translate3d(0, -$header-burger-bar-gap, 0)
 
     div:nth-child(2)
-        width: 100%
+        width: $header-burger-bar-2-width
+        transform: translate3d(0,0,0)
 
     div:nth-child(3)
-        width: 60%
+        width: $header-burger-bar-3-width
+        transform: translate3d(0, $header-burger-bar-gap, 0)
 
     .transformDiv1
-        width: 100% !important
-        transform: rotate(-45deg)
+        width: $header-burger-width !important
+        transform: translate3d(0, 0, 0) rotate(-45deg) !important
 
     .transformDiv2
-        opacity: 0
+        width: $header-burger-width !important
+        transform: translate3d(0, 0, 0) scale(0.1, 1) !important
 
     .transformDiv3
-        width: 100% !important
-        transform: rotate(45deg)
+        width: $header-burger-width !important
+        transform: translate3d(0, 0, 0) rotate(45deg) !important

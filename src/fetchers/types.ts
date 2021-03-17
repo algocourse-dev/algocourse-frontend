@@ -1,10 +1,10 @@
-import { TCourseLeaderboardUserInfo, TModule, TPractice, TStreak, TTopic } from "common"
+import { TCourseLeaderboardUserInfo, TModule, TPractice, TStreak, TTopic } from "constants/types"
 
 export type TStreakFetcherData = TStreak
 
 export type TModuleFetcherData =
     Pick<TModule, 'id' | 'title'> &
-    { topics: ReadonlyArray<Omit<TTopic, 'completedLessons'>> }
+    { topics: ReadonlyArray<Omit<TTopic, 'completedLessons' | 'lessons'>> }
 
 export type TModulesFetcherData = {
     readonly modules: ReadonlyArray<TModuleFetcherData>
@@ -21,4 +21,7 @@ export type TTipData = {
 
 export type TCourseLeaderBoardData = {
     topUsers: ReadonlyArray<TCourseLeaderboardUserInfo>
+    currentUser: TCourseLeaderboardUserInfo
 }
+
+export type TTopicFetcherData = TTopic

@@ -1,4 +1,5 @@
-import { Images, Strings } from 'common'
+import { Images } from 'constants/images'
+import { Strings } from 'constants/strings'
 import React, { memo } from 'react'
 import { BaseCard } from '../base-card'
 import styles from 'styles/ProgressCard.module.sass'
@@ -70,9 +71,9 @@ export const ProgressCard = memo<ProgressCardProps>(({progressCardPresenter}) =>
                     'lessonsCircularProgressbar',
                     styles.lessonsInnerCircle,
                     {
-                        src: Images.LESSON_ROYAL_BLUE,
-                        width: 14.33,
-                        height: 17.46,
+                        src: Images.LESSON_JAVA,
+                        width: 14,
+                        height: 14,
                     }
                 )}
                 {renderProgressItem(
@@ -83,9 +84,9 @@ export const ProgressCard = memo<ProgressCardProps>(({progressCardPresenter}) =>
                     'practiceProblemsCircularProgressbar',
                     styles.practiceProblemsInnerCircle,
                     {
-                        src: Images.TERMINAL_MULBERRY,
-                        width: 17,
-                        height: 13,
+                        src: Images.CONSOLE,
+                        width: 16,
+                        height: 12,
                     }
                 )}
             </div>

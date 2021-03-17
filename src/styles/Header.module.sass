@@ -1,9 +1,12 @@
-@import 'variables'
+@import 'common'
 @import 'utils'
 
 .container
     @extend %header-container
     flex-direction: column
+    z-index: $z-index-top-layer
+    position: fixed
+    top: 0
 
     .menuBar
         width: $main-content-container-size
@@ -21,8 +24,12 @@
             background-color: unset
             border: unset
             padding: 0
-            color: $text-color
+            color: $text-annotation-primary-color
             font-size: $small-font-size
+            cursor: pointer
+            
+            &:hover
+                color: $text-primary-color
 
         .leftNavigationBar
             display: flex
@@ -53,6 +60,43 @@
 
                 @include screen-respond($breakpoint: extra-small)
                     display: flex
+
+                .hamburgerMenuContent
+                    display: flex
+                    position: fixed
+                    bottom: 0
+                    flex-direction: column
+                    justify-content: flex-start
+                    align-items: flex-start
+                    left: 0
+                    top: 0
+                    width: 100vw
+                    transition: transform $animation-medium-time ease
+                    background-color: $background-color
+                    overflow-y: auto
+
+                    .hamburgerMenuHeaderContainer
+                        @extend %header-container
+                        align-items: center
+                        height: $header-height
+                        position: fixed
+
+                    .hamburgerMenuItemsContainer
+                        display: flex
+                        flex-direction: column
+                        justify-content: flex-start
+                        align-items: flex-start
+                        padding: 0 $edge-margin
+                        margin-top: $header-height
+
+                        > *
+                            margin-top: 26px
+
+                .isOpened
+                    transform: translateX(0)
+
+                .isClosed
+                    transform: translateX(100%)
 
     .logoContainer
         display: flex

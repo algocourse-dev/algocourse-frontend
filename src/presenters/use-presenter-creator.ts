@@ -1,4 +1,4 @@
-/* Inspired and referenced from 'reselect */
+/* Inspired and referenced from 'reselect' */
 
 import { useMemo } from "react";
 import { TPresenter } from "./types";
@@ -43,11 +43,21 @@ export function usePresenterCreator(...funcs) {
 
         const presenterData = useMemo(() => compiledFunc.apply(undefined, dataResults), dataResults)
 
+        const data = presenterData
+        const isLoading = isLoadingResults.some(Boolean)
+        const isDependencyError = isErrorResults.some(Boolean)
+        const isResultError =  !isDependencyError && !isLoading && !presenterData
+        const error = isDependencyError ?
+                        errorResults.find(error => !!error) :
+                      isResultError ?
+                        new Error('Data returned from presenter is undefined') :
+                      undefined
+
         return {
-            data: presenterData,
-            error: errorResults.find(error => !!error), 
-            isError: isErrorResults.some(Boolean),
-            isLoading: isLoadingResults.some(Boolean),
+            data,
+            error,
+            isError: isDependencyError || isResultError,
+            isLoading
         }
     }
 

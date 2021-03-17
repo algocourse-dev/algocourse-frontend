@@ -1,0 +1,117 @@
+// =============================== COLORS ===============================
+
+// Primitive colors
+// https://chir.ag/projects/name-that-color
+// https://colornames.org/
+$athens-gray-color: #E9EBEF
+$black-color: #000000
+$brink-pink-color: #F96878
+$cadet-blue-color: #A6AFBE
+$can-you-hear-me-major-tom-color: #192841
+$cloud-burst-color: #203354
+$deep-blush-color: #E36BAE
+$edge-of-darkness-color: #152238
+$java-color: #15CDD8
+$genesys-blue-color: #23395D
+$sanmarino-color: #4267B2
+$shark-color: #24292F
+$silver-tree-color: #6ABE8E
+$slate-gray-color: #6F7D95
+$texas-rose-color: #FFB74D
+$turquoise-blue-color: #69F0AE
+$white-color: #ffffff
+
+// Primitive-alpha colors
+$black-65-color: rgba($black-color, 0.65)
+$deep-blush-8-color: rgba($deep-blush-color, 0.08)
+$java-8-color: rgba($java-color, 0.08)
+$silver-tree-20-color: rgba($silver-tree-color, 0.2)
+
+// Text colors
+$text-primary-color: $white-color
+$text-secondary-color: $athens-gray-color
+$text-annotation-primary-color: $cadet-blue-color
+$text-annotation-secondary-color: $slate-gray-color
+
+// Component colors
+$background-color: $can-you-hear-me-major-tom-color
+$header-background-color: $edge-of-darkness-color
+$lessons-progress-primary-color: $java-color
+$lessons-progress-inner-circle-color: $java-8-color
+$practice-problems-progress-primary-color: $deep-blush-color
+$practice-problems-inner-cirle-color: $deep-blush-8-color
+$module-background-color: $cloud-burst-color
+$module-highlighted-color: $turquoise-blue-color
+$module-hover-color: $genesys-blue-color
+$module-title-color: $text-annotation-secondary-color
+$topic-background-color: $cloud-burst-color
+$difficulty-easy-color: $silver-tree-color
+$difficulty-medium-color: $texas-rose-color
+$difficulty-hard-color: $brink-pink-color
+$login-panel-background-color: $cloud-burst-color
+$login-panel-title-color: $white-color
+$login-button-background-color: $header-background-color
+$topic-circular-progress-bar-path-color: $silver-tree-color
+$topic-circular-progress-bar-trail-color: $silver-tree-20-color
+$google-icon-color: $brink-pink-color
+$facebook-icon-color: $sanmarino-color
+$github-icon-color: $shark-color
+$primary-button-color: $turquoise-blue-color
+$logo-text-color: $white-color
+$overlay-background-color: $black-65-color
+$base-card-background-color: $cloud-burst-color
+$base-card-title-color: $text-primary-color
+$practice-table-background-color: $cloud-burst-color
+
+// =============================== SCREEN SIZES, COMPONENT SIZES ===============================
+
+$main-content-container-size: 1250px
+$edge-margin: 20px
+$header-height: 58px
+$dashboard-components-margin: 26px
+$left-panel-width: 290px
+$right-panel-width: $main-content-container-size - $left-panel-width - $dashboard-components-margin
+$card-border-radius: 2px
+$module-padding: 30px
+$topic-card-width: ($right-panel-width - 4 * $module-padding) / 3
+$topic-padding: 10px
+$practice-padding: $topic-padding
+$practice-header-height: 38px
+$practice-row-height: 42px
+$secondary-button-border-width: 2px
+$base-card-padding: 15px
+
+// =============================== FONT SIZES ===============================
+
+$extra-small-font-size: 13px
+$small-font-size: 14px
+$small-medium-font-size: 15px
+$medium-font-size: 16px
+$large-font-size: 17px
+$extra-large-font-size: 26px
+
+$regular-font-weight: 400
+$medium-font-weight: 500
+$semi-bold-font-weight: 600
+$bold-font-weight: 700
+
+// =============================== BREAKPOINTS ===============================
+
+// Refer to styles/utils.sass
+$extra-large-breakpoint: 1200px  // for 1200px-and-up devices
+$large-breakpoint: 992px         // for 992px-and-up devices
+$medium-breakpoint: 768px        // for 768px-and-up devices
+$small-breakpoint: 600px         // for 600px-and-up devices
+$extra-small-breakpoint: 600px   // for 600px-and-down devices
+
+// =============================== EFFECT, ANIMATION ===============================
+
+$animation-fast-time: 0.3s
+$animation-medium-time: 0.5s
+
+// =============================== Z-INDEX LEVELS ===============================
+
+$no-z-index: -1
+$z-index-bottom-layer: 1
+$z-index-middle-layer: 500
+$z-index-top-layer: 1000

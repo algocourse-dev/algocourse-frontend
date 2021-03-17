@@ -3,7 +3,9 @@ import { BaseCard } from '../base-card'
 import styles from 'styles/StreakCard.module.sass'
 import Image from 'next/image'
 import { TStreakCardPresenter } from 'presenters'
-import { Strings, Images, StreakStatus } from 'common'
+import { Images } from 'constants/images'
+import { Strings } from 'constants/strings'
+import { StreakStatus } from 'constants/constants'
 import classnames from 'classnames'
 
 type StreakCardProps = {

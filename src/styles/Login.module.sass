@@ -1,15 +1,13 @@
-@import 'variables'
+@import 'common'
 @import 'utils'
 
 .loginButton
-    @extend %primary-button
-    width: 68px
-    height: 30px
+    @include secondary-button(68px, 30px, $login-button-background-color, $primary-button-color)
     font-size: $small-font-size
 
 .loginPanelContainer
     width: 300px
-    background-color: $white-color
+    background-color: $login-panel-background-color
     display: flex
     flex-direction: column
     align-items: center
@@ -18,10 +16,11 @@
     position: absolute
     padding: 20px 0 25px 0
     border-radius: $card-border-radius
+    margin-left: calc(50% - 150px)
 
     h2
         font-weight: $bold-font-weight
-        color: $text-bold-color
+        color: $login-panel-title-color
         font-size: $medium-font-size
         margin: 0
 
@@ -31,10 +30,11 @@
         margin-top: 18px
         align-items: center
         padding: 6px 10px 6px 10px
+        border-radius: $card-border-radius
 
         span
             font-size: $small-font-size
-            color: $white-color
+            color: $text-primary-color
             margin-left: 28px
 
     .facebookLogin

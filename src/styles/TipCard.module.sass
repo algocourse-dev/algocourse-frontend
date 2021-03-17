@@ -1,17 +1,11 @@
-@import 'variables'
+@import 'common'
+@import 'utils'
 
 .overrideBaseCard
-    margin-top: $panel-components-margin
+    margin-top: $dashboard-components-margin
 
 .container
-    color: $text-color
+    @include max-line($number-of-lines: 6, $line-height: 17px)
+    color: $text-annotation-primary-color
     font-size: $small-font-size
     margin-top: 15px
-    word-break: break-word
-    overflow: hidden
-    text-overflow: ellipsis
-    display: -webkit-box
-    -webkit-line-clamp: 6
-    -webkit-box-orient: vertical
-    line-height: 17px
-    max-height: 102px
