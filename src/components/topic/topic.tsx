@@ -1,7 +1,7 @@
 import { Strings } from 'constants/strings'
 import { Header } from 'components/header'
 import { Layout } from 'components/layout'
-import { TTopicPresenter } from 'presenters'
+import { TTopicLessonPresenter, TTopicPresenter } from 'presenters'
 import React, { memo, SyntheticEvent, useRef, useState } from 'react'
 import styles from 'styles/Topic.module.sass'
 import ReactMarkdown from 'react-markdown'
@@ -13,13 +13,16 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { Images } from 'constants/images'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { TLesson } from 'constants/types'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
+    topicLessonPresenter: TTopicLessonPresenter
 }
 
 export const Topic = memo<TopicProps>(({
-    topicPresenter
+    topicPresenter,
+    topicLessonPresenter,
 }) => {
     const burgerRef = useRef<BurgerRefProps>(null)
     const lessonsListRef = useRef<OverlayRefProps>(null)
@@ -46,6 +49,16 @@ console.log('It works!')  // highlight-line
 ~~~
 `
 
+    if (topicPresenter.isLoading) {
+        return null  // TODO: handle isLoading
+    }
+
+    if (topicPresenter.isError) {
+        return null  // TODO: handle isError
+    }
+
+    console.log(topicLessonPresenter)
+
     function renderNavigationBar(): JSX.Element {
         return (
             <div className={styles.navigationBar}>
@@ -68,11 +81,11 @@ console.log('It works!')  // highlight-line
                 <Burger ref={burgerRef}
                     className={styles.burgerContainer}
                     barsClassName={styles.burgerBarsClassName}
-                    onClick={onBurgerClicked}
+                    onClick={onBurgerClick}
                     bar1ClassName={styles.burgerBar1}
                     bar3ClassName={styles.burgerBar3} />
                 <div>
-                    {getCurrentLessonTitle()}
+                    {getLessonTitle()}
                 </div>
             </div>
         )
@@ -98,18 +111,6 @@ console.log('It works!')  // highlight-line
         )
     }
 
-    function getCurrentLessonTitle(): string {
-        if (topicPresenter.isLoading) {
-            return ''  // TODO: handle isLoading
-        }
-
-        if (topicPresenter.isError) {
-            return ''  // TODO: handle isError
-        }
-
-        return topicPresenter.data.lessons[topicPresenter.data.completedLessons].title
-    }
-
     function renderLessonsList(): JSX.Element {
         return (
             topicPresenter.isLoading ?
@@ -130,8 +131,9 @@ console.log('It works!')  // highlight-line
                                 <li key={lesson.id} className={classnames({
                                     [styles.lessonCompleted]: isCompleted(index),
                                     [styles.lessonNotStarted]: isNotStarted(index),
-                                    [styles.lessonInProgress]: isInProgress(index),
-                                })}>
+                                    [styles.lessonSelected]: isSelected(index),
+                                    [styles.lessonNextToLearn]: isNextToLearn(index),
+                                })} onClick={() => onLessonItemClick(lesson, index)}>
                                     <span>{lesson.title}</span>
                                     {
                                         isCompleted(index) ?
@@ -148,7 +150,14 @@ console.log('It works!')  // highlight-line
         )
     }
 
-    function onBurgerClicked(open: boolean) {
+    function onLessonItemClick(lesson: TLesson, lessonIndex: number) {
+        if ((isCompleted(lessonIndex) || isNextToLearn(lessonIndex)) && !isSelected(lessonIndex)) {
+            router.replace(`/topic/${topicPresenter.data.id}/lesson/${lesson.id}`)
+            lessonsListRef.current.hide()
+        }
+    }
+
+    function onBurgerClick(open: boolean) {
         if (open) {
             lessonsListRef.current.show()
         } else {
@@ -181,11 +190,46 @@ console.log('It works!')  // highlight-line
         )
     }
 
-    const isCompleted = (lessonIndex) => lessonIndex < topicPresenter.data?.completedLessons;
+    function isCompleted(lessonIndex: number): boolean {
+        return lessonIndex < getCompletedLessons()
+    }
 
-    const isNotStarted = (lessonIndex) => lessonIndex > topicPresenter.data?.completedLessons;
+    function isNotStarted(lessonIndex: number): boolean {
+        return lessonIndex > getCompletedLessons()
+    }
 
-    const isInProgress = (lessonIndex) => lessonIndex === topicPresenter.data?.completedLessons;
+    function isSelected(lessonIndex: number): boolean {
+        return lessonIndex === getLessonIndex()
+    }
+
+    function isNextToLearn(lessonIndex: number): boolean {
+        return lessonIndex === getCompletedLessons()
+    }
+
+    function getCompletedLessons(): number {
+        return topicPresenter.data?.completedLessons
+    }
+
+    function getLessonTitle(): string {
+        if (topicPresenter.isLoading) {
+            return ''  // TODO: handle isLoading
+        }
+
+        if (topicPresenter.isError) {
+            return ''  // TODO: handle isError
+        }
+
+        return topicPresenter.data.lessons[getLessonIndex()]?.title
+    }
+
+    function getLessonIndex(): number {
+        return topicPresenter.data?.lessons?.findIndex(lesson => lesson.id === getLessonId())
+    }
+
+    function getLessonId(): string {
+        return topicLessonPresenter.data?.id
+    }
+
 
     return (
         <Layout pageTitle='undefined' className={styles.topicLayout}>

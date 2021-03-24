@@ -1,5 +1,11 @@
-import { TTopic } from "constants/types"
-import { topicFetcher, TOPIC_QUERY_KEY, TTopicFetcherData } from "fetchers"
+import {
+    topicLessonFetcher,
+    TOPIC_LESSON_QUERY_KEY,
+    TTopicFetcherData,
+    TOPIC_QUERY_KEY,
+    topicFetcher,
+    TTopicLessonFetcherData
+} from "fetchers"
 import { TPresenter } from "presenters/types"
 import { usePresenterCreator } from "presenters/use-presenter-creator"
 import { useQuery } from "react-query"
@@ -25,9 +31,11 @@ export function useTopicPresenter(topicId: string): TTopicPresenter {
     )()
 }
 
-// export function useLessonContentPresenter(): TLessonContentPresenter {
-//     return usePresenterCreator(
-//         () => useQuery(),
-
-//     )()
-// }
+type TTopicLessonPresenterData = TTopicLessonFetcherData
+export type TTopicLessonPresenter = TPresenter<TTopicLessonPresenterData>
+export function useTopicLessonPresenter(topicId: string, lessonId: string): TTopicLessonPresenter {
+    return usePresenterCreator(
+        () => useQuery(TOPIC_LESSON_QUERY_KEY(topicId, lessonId), topicLessonFetcher),
+        topicLesson => topicLesson
+    )()
+}

@@ -25,3 +25,8 @@ export type TCourseLeaderBoardData = {
 }
 
 export type TTopicFetcherData = TTopic
+
+export type TTopicLessonFetcherData = {
+    id: string
+    blocks: ReadonlyArray<object>
+}

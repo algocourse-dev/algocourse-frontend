@@ -12,7 +12,7 @@ export const MockData = {
                         id: 'course-intro',
                         title: 'Course Introduction',
                         description: 'Neque porro quisquam est qui Dolores Ipsum quia dolor sit amet. Neque porro quisquam est qui Dolores Ipsum quia dolor sit amet',
-                        total_lessons: 3,
+                        total_lessons: 4,
                         difficulty: 'Beginner',
                         necesssity: 'Must learn'
                     },
@@ -91,7 +91,7 @@ export const MockData = {
         ]
     },
     topicsProgress: {
-        'course-intro': { completedLessons: 1 },
+        'course-intro': { completedLessons: 2 },
         'bigo-notation': { completedLessons: 1 },
         'complexity': { completedLessons: 1 },
         'recursion': { completedLessons: 1 },
@@ -345,29 +345,40 @@ export const MockData = {
             completed_lessons: 2
         }
     },
-    lesson_content: {
-        'introduction-0': {
-            id: 'introduction-0',
-            blocks: [
-                {
-                    type: 'MARKDOWN',
-                    content: `
-                        
-                    `,
-                },
-                // {
-                //     type: 'PROBLEM',
-                //     content: '',
-                // },
-                {
-                    type: 'QUIZ',
-                    content: ''
-                },
-                // {
-                //     type: 'IMAGES_PLAYER',
-                //     content: ''
-                // },
-            ],
+    topic_lesson: {
+        'course-intro': {
+            'introduction-0': {
+                id: 'introduction-0',
+            },
+            'introduction-1': {
+                id: 'introduction-1'
+            },
+            'introduction-2': {
+                id: 'introduction-2',
+                blocks: [
+                    {
+                        type: 'MARKDOWN',
+                        content: `
+                            
+                        `,
+                    },
+                    // {
+                    //     type: 'PROBLEM',
+                    //     content: '',
+                    // },
+                    {
+                        type: 'QUIZ',
+                        content: ''
+                    },
+                    // {
+                    //     type: 'IMAGES_PLAYER',
+                    //     content: ''
+                    // },
+                ],
+            },
+            'introduction-3': {
+                id: 'introduction-3'
+            }
         }
     }
 }

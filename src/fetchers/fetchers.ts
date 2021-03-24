@@ -10,7 +10,8 @@ import {
     TPracticesFetcherData,
     TTipData,
     TCourseLeaderBoardData,
-    TTopicFetcherData
+    TTopicFetcherData,
+    TTopicLessonFetcherData
 } from "./types"
 
 export const STREAK_DATA_QUERY_KEY = 'streak'
@@ -130,6 +131,20 @@ export async function topicFetcher(context: QueryFunctionContext<any>): Promise<
     }
     const serverTopic = MockData.topic[topicId]
 
+    // const promise: Promise<TTopicFetcherData> = new Promise((resolve) => {
+    //     setTimeout(() => {
+    //         resolve({
+    //             id: serverTopic['id'],
+    //             title: serverTopic['title'],
+    //             description: serverTopic['description'],
+    //             difficulty: serverTopic['difficulty'] as TopicDifficulty,  // TODO: need further validation here
+    //             necesssity: serverTopic['necesssity'] as TopicNecesssity,  // TODO: need further validation here
+    //             totalLessons: serverTopic['total_lessons'],
+    //             lessons: serverTopic['lessons'],
+    //             completedLessons: serverTopic['completed_lessons'],
+    //         })
+    //     }, 500)
+    // })
     const clientTopic = {
         id: serverTopic['id'],
         title: serverTopic['title'],
@@ -141,5 +156,29 @@ export async function topicFetcher(context: QueryFunctionContext<any>): Promise<
         completedLessons: serverTopic['completed_lessons'],
     }
 
+    // return 
     return clientTopic
+}
+
+export const TOPIC_LESSON_QUERY_KEY = (topicId: string, lessonId: string) => ['topic', topicId, 'lesson', lessonId]
+export async function topicLessonFetcher(context: QueryFunctionContext<any>): Promise<TTopicLessonFetcherData> {
+    const [_topicKey, topicId, _lessonKey, lessonId] = context.queryKey
+
+    if (!topicId) {
+        return undefined
+    }
+
+    if (!lessonId) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(MockData.topic_lesson[topicId]['introduction-2'])
+            }, 200)
+        })
+    }
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(MockData.topic_lesson[topicId][lessonId])
+        }, 200)
+    })
 }
