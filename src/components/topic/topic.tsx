@@ -2,7 +2,7 @@ import { Strings } from 'constants/strings'
 import { Header } from 'components/header'
 import { Layout } from 'components/layout'
 import { TTopicLessonPresenter, TTopicPresenter } from 'presenters'
-import React, { memo, SyntheticEvent, useRef, useState } from 'react'
+import React, { Fragment, memo, SyntheticEvent, useRef, useState } from 'react'
 import styles from 'styles/Topic.module.sass'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
@@ -13,7 +13,10 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import { Images } from 'constants/images'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { TLesson } from 'constants/types'
+import { BlockType } from 'constants/constants'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+// import { duotoneSea as style } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import duotoneSea from 'utils/themes/duotone-sea'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
@@ -24,30 +27,11 @@ export const Topic = memo<TopicProps>(({
     topicPresenter,
     topicLessonPresenter,
 }) => {
+    const router = useRouter()
     const burgerRef = useRef<BurgerRefProps>(null)
     const lessonsListRef = useRef<OverlayRefProps>(null)
     const [lessonsListShow, setLessonsListShow] = useState<boolean>(false)
-    const router = useRouter()
-
-    const markdown = `A paragraph with *emphasis* and **strong importance**. A paragraph with *emphasis* and **strong importance**.
-
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |
-
-Here is some JavaScript code:
-
-~~~js
-console.log('It works!')  // highlight-line
-~~~
-`
+    const [currentStep, setCurrentStep] = useState<number>(1)
 
     if (topicPresenter.isLoading) {
         return null  // TODO: handle isLoading
@@ -57,34 +41,34 @@ console.log('It works!')  // highlight-line
         return null  // TODO: handle isError
     }
 
-    console.log(topicLessonPresenter)
-
     function renderNavigationBar(): JSX.Element {
         return (
-            <div className={styles.navigationBar}>
-                {renderNavigationLeft()}
-                {renderNavigationMiddle()}
-                {renderNavigationRight()}
-            </div>   
+            <Fragment>
+                <Overlay ref={lessonsListRef}
+                    className={styles.lessonsListOverlay}
+                    onShow={onLessonsListShow}
+                    onHide={onLessonsListHide}>
+                    {renderLessonsList()}
+                </Overlay>
+                <div className={styles.navigationBar}>
+                    {renderNavigationLeft()}
+                    {renderNavigationMiddle()}
+                    {renderNavigationRight()}
+                </div>
+            </Fragment>
         )
     }
 
     function renderNavigationLeft(): JSX.Element {
         return (
             <div className={styles.navigationLeft}>
-                <Overlay ref={lessonsListRef}
-                    className={styles.lessonsListOverlay}
-                    onShow={onLessonsListShow}
-                    onHide={onLessonsListHide}>
-                        {renderLessonsList()}
-                </Overlay>
                 <Burger ref={burgerRef}
                     className={styles.burgerContainer}
                     barsClassName={styles.burgerBarsClassName}
                     onClick={onBurgerClick}
                     bar1ClassName={styles.burgerBar1}
                     bar3ClassName={styles.burgerBar3} />
-                <div>
+                <div className={styles.lessonTitle}>
                     {getLessonTitle()}
                 </div>
             </div>
@@ -92,21 +76,56 @@ console.log('It works!')  // highlight-line
     }
 
     function renderNavigationMiddle(): JSX.Element {
+        if (topicLessonPresenter.isLoading) {
+            return <div>Loading</div>  // TODO: handle isLoading
+        }
+
+        if (topicLessonPresenter.isError) {
+            return <div>Error</div>  // TODO: handle isError
+        }
+
+        const { numberOfSteps } = topicLessonPresenter.data
+
         return (
             <div className={styles.navigationMiddle}>
                 <div className={styles.navigationMiddleContent}>
-                    <button>{Strings.BACK}</button>
-                    <div>1/14</div>
-                    <button>{Strings.NEXT}</button>
+                    <button
+                        className={classnames({
+                            [styles.backActiveButton]: currentStep > 1,
+                            [styles.backDisabledButton]: currentStep === 1
+                        })}
+                        onClick={onBackButtonClick}>
+                        {Strings.BACK}
+                    </button>
+                    <div>{`${currentStep}/${numberOfSteps}`}</div>
+                    <button
+                        className={classnames({
+                            [styles.nextActiveButton]: currentStep < numberOfSteps,
+                            [styles.nextDisabledButton]: currentStep === numberOfSteps
+                        })}
+                        onClick={onNextButtonClick}>
+                        {Strings.NEXT}
+                    </button>
                 </div>
         </div>
         )
     }
 
+    function onBackButtonClick() {
+        if (currentStep > 1) {
+            setCurrentStep(currentStep - 1)
+        }
+    }
+
+    function onNextButtonClick() {
+        if (currentStep < topicLessonPresenter.data.numberOfSteps) {
+            setCurrentStep(currentStep + 1)
+        }
+    }
+
     function renderNavigationRight(): JSX.Element {
         return (
             <div className={styles.navigationRight}>
-                y
             </div>
         )
     }
@@ -150,7 +169,7 @@ console.log('It works!')  // highlight-line
         )
     }
 
-    function onLessonItemClick(lesson: TLesson, lessonIndex: number) {
+    function onLessonItemClick(lesson: TTopicPresenter['data']['lessons'][0], lessonIndex: number) {
         if ((isCompleted(lessonIndex) || isNextToLearn(lessonIndex)) && !isSelected(lessonIndex)) {
             router.replace(`/topic/${topicPresenter.data.id}/lesson/${lesson.id}`)
             lessonsListRef.current.hide()
@@ -175,15 +194,42 @@ console.log('It works!')  // highlight-line
     }
 
     function renderLessonContent(): JSX.Element {
+        if (topicLessonPresenter.isLoading) {
+            return <div>Loading</div>  // TODO: handle isLoading
+        }
+
+        if (topicLessonPresenter.isError) {
+            return <div>Error</div>  // TODO: handle isError
+        }
+
+        const stopBlockIndex = topicLessonPresenter.data.stopBlocksIndices[currentStep - 1]
+
+        const renderers = {
+            code: ({language, value}) => {
+               return (
+                    <div className={styles.syntaxHighlighterContainer}>
+                        <SyntaxHighlighter wrapLongLines style={duotoneSea} language={language} children={value}/>
+                    </div>
+               )
+            }
+        }
+
         return (
             <div className={styles.lessonContent}>
-                <div className={styles.lessonHeader}>
+                {/* <div className={styles.lessonHeader}>
                     <h1>Qui officia deserunt mollit anim id est laborum</h1>
-                </div>
+                </div> */}
 
                 <div className={styles.lessonContentContainer}>
                     <div className={styles.lessonContent}>
-                        <ReactMarkdown plugins={[gfm]} children={markdown} />
+                        {/* <ReactMarkdown plugins={[gfm]} children={markdown} /> */}
+                        {
+                            topicLessonPresenter.data.blocks.slice(0, stopBlockIndex).map((block, index) => {
+                                // return <div key={index}>{!!block.content && block.content}</div>
+                                return (block.type === BlockType.MARKDOWN ) &&
+                                    <ReactMarkdown key={index} plugins={[gfm]} children={block.content} renderers={renderers}/>
+                            })
+                        }
                     </div>
                 </div>
             </div>
@@ -230,7 +276,6 @@ console.log('It works!')  // highlight-line
         return topicLessonPresenter.data?.id
     }
 
-
     return (
         <Layout pageTitle='undefined' className={styles.topicLayout}>
             <Header className={classnames({[styles.header]: lessonsListShow})}
@@ -238,7 +283,6 @@ console.log('It works!')  // highlight-line
                     showLogoText={false}
                     leftButtonsLabel={[
                         Strings.DASHBOARD,
-                        Strings.PROBLEMS,
                         Strings.PRACTICE,
                         Strings.LEADERBOARD]}
                     menuBarClassName={styles.menuBar}/>

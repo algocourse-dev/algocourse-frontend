@@ -34,28 +34,29 @@
     display: inline-block
     border-radius: $card-border-radius
     cursor: pointer
+    font-weight: $semi-bold-font-weight
 
-@mixin primary-button($width, $height, $background-color, $text-color)
+@mixin primary-button($width, $height, $primary-color, $secondary-color)
     @extend %button
     border: none
     width: $width
     height: $height
-    background-color: $background-color
-    color: $text-color
+    background-color: $primary-color
+    color: $secondary-color
 
-@mixin secondary-button($width, $height, $background-color, $text-color)
+@mixin secondary-button($width, $height, $primary-color, $secondary-color)
     @extend %button
     width: $width
     height: $height
-    background-color: $background-color
-    border: $secondary-button-border-width solid $text-color
-    color: $text-color
+    background-color: $secondary-color
+    border: $secondary-button-border-width solid $primary-color
+    color: $primary-color
 
 %header-container
     width: 100%
     display: flex
     padding: 0 $edge-margin
-    background-color: $header-background-color
+    background-color: #242f3b
 
 @mixin max-line($number-of-lines, $line-height)
     word-break: break-word

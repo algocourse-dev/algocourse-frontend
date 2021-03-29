@@ -15,10 +15,8 @@ export const Dashboard: FC = () => {
                     showLogoText={false}
                     leftButtonsLabel={[
                         Strings.DASHBOARD,
-                        Strings.PROBLEMS,
                         Strings.PRACTICE,
                         Strings.LEADERBOARD]}/>
-
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
                     <div className={styles.courseContainer}>

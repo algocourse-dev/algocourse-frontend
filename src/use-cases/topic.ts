@@ -37,11 +37,11 @@ export const handleRedirectionOnPageLoad = async (path: Array<string>) => {
  * @returns - true if path is valid, false otherwise.
  */
 export function isValidTopicPath(path: ReadonlyArray<string>): boolean {
-    if (path.length > 3) {
+    if (path!.length > 3) {
         return false
     }
 
-    if (path.length > 1 && path[1] !== 'lesson') {
+    if (path!.length > 1 && path![1] !== 'lesson') {
         return false
     }
 

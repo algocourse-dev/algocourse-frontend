@@ -8,13 +8,12 @@
     top: 0
     position: fixed
     z-index: $z-index-top-layer
-    opacity: 0
 
 .containerShow
     opacity: 1
     transition: opacity $animation-fast-time
 
 .containerHide
-    left: 100vw
     opacity: 0
-    transition: opacity $animation-fast-time, left 0ms $animation-fast-time
+    transition: opacity $animation-fast-time
+    pointer-events: none

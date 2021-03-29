@@ -12,7 +12,6 @@ export const Strings = {
     FAQs: 'FAQs',
     CONTACT_US: 'Contact us',
     DASHBOARD: 'Dashboard',
-    PROBLEMS: 'Problems',
     PROBLEM: 'Problem',
     PRACTICE: 'Practice',
     LEADERBOARD: 'Leaderboard',

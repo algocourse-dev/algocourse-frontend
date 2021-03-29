@@ -3,6 +3,7 @@ import {
     TopicNecesssity,
     ProblemDifficulty,
     ProblemResult,
+    BlockType,
 } from "./constants"
 
 export type TCompany = {
@@ -30,9 +31,19 @@ export type TPractice = {
     readonly problems: ReadonlyArray<TProblem>
 }
 
+export type TBlock = {
+    readonly type: BlockType
+    readonly [key: string]: any
+}
+
+export type TMarkdownBlock = Pick<TBlock, 'type'> & {
+    readonly content: string
+}
+
 export type TLesson = {
     readonly id: string
     readonly title: string
+    readonly blocks: ReadonlyArray<TBlock>
 }
 
 export type TTopic = {

@@ -6,22 +6,27 @@ export enum StreakStatus {
 export enum TopicDifficulty {
     Beginner = 'Beginner',
     Intermediate = 'Intermediate',
-    Advanced = 'Advanced'
+    Advanced = 'Advanced',
 }
 
 export enum TopicNecesssity {
     MustLearn = 'Must learn',
-    GoodToKnow = 'Good to know'
+    GoodToKnow = 'Good to know',
 }
 
 export enum ProblemDifficulty {
     Easy = 'Easy',
     Medium = 'Medium',
-    Hard = 'Hard'
+    Hard = 'Hard',
 }
 
 export enum ProblemResult {
     Accepted = 'Accepted',
     Rejected = 'Rejected',
-    Unsolved = 'Unsolved'
+    Unsolved = 'Unsolved',
+}
+
+export enum BlockType {
+    MARKDOWN = 'Markdown',
+    STOP = 'Stop',
 }

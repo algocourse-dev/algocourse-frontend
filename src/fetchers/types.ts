@@ -1,4 +1,4 @@
-import { TCourseLeaderboardUserInfo, TModule, TPractice, TStreak, TTopic } from "constants/types"
+import { TCourseLeaderboardUserInfo, TLesson, TModule, TPractice, TStreak, TTopic } from "constants/types"
 
 export type TStreakFetcherData = TStreak
 
@@ -24,9 +24,8 @@ export type TCourseLeaderBoardData = {
     currentUser: TCourseLeaderboardUserInfo
 }
 
-export type TTopicFetcherData = TTopic
-
-export type TTopicLessonFetcherData = {
-    id: string
-    blocks: ReadonlyArray<object>
+export type TTopicFetcherData = Omit<TTopic, 'lessons'> & {
+    lessons: ReadonlyArray<Omit<TLesson, 'blocks'>>
 }
+
+export type TTopicLessonFetcherData = TLesson
