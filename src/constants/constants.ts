@@ -28,5 +28,4 @@ export enum ProblemResult {
 
 export enum BlockType {
     MARKDOWN = 'Markdown',
-    STOP = 'Stop',
 }

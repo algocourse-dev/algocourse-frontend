@@ -32,27 +32,11 @@ export function useTopicPresenter(topicId: string): TTopicPresenter {
     )()
 }
 
-type TTopicLessonPresenterData = TTopicLessonFetcherData & {
-    numberOfSteps: number
-    stopBlocksIndices: number[]
-}
+type TTopicLessonPresenterData = TTopicLessonFetcherData
 export type TTopicLessonPresenter = TPresenter<TTopicLessonPresenterData>
 export function useTopicLessonPresenter(topicId: string, lessonId: string): TTopicLessonPresenter {
     return usePresenterCreator(
         () => useQuery(TOPIC_LESSON_QUERY_KEY(topicId, lessonId), topicLessonFetcher),
-        topicLesson => {
-            if (!topicLesson) {
-                return undefined
-            }
-
-            const blocks = topicLesson.blocks
-            const stopBlocksIndices = blocks.map((_, index) => index).filter(index => blocks[index].type === BlockType.STOP).concat([blocks.length])
-
-            return {
-                ...topicLesson,
-                numberOfSteps: stopBlocksIndices.length,
-                stopBlocksIndices: stopBlocksIndices
-            }
-        }
+        topicLesson => topicLesson
     )()
 }

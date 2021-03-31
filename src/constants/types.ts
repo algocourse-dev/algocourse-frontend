@@ -33,6 +33,7 @@ export type TPractice = {
 
 export type TBlock = {
     readonly type: BlockType
+    readonly stop: boolean
     readonly [key: string]: any
 }
 

@@ -2,7 +2,7 @@ import { Strings } from 'constants/strings'
 import { Header } from 'components/header'
 import { Layout } from 'components/layout'
 import { TTopicLessonPresenter, TTopicPresenter } from 'presenters'
-import React, { Fragment, memo, SyntheticEvent, useRef, useState } from 'react'
+import React, { Fragment, memo, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import styles from 'styles/Topic.module.sass'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
@@ -15,8 +15,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { BlockType } from 'constants/constants'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// import { duotoneSea as style } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import duotoneSea from 'utils/themes/duotone-sea'
+import { scroller, Element } from 'react-scroll'
+import { usePreviousDistinct } from 'react-use'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
@@ -31,7 +32,19 @@ export const Topic = memo<TopicProps>(({
     const burgerRef = useRef<BurgerRefProps>(null)
     const lessonsListRef = useRef<OverlayRefProps>(null)
     const [lessonsListShow, setLessonsListShow] = useState<boolean>(false)
-    const [currentStep, setCurrentStep] = useState<number>(1)
+    const [currentBlockIndex, setCurrentBlockIndex] = useState<number>(0)
+    const previousBlockIndex = usePreviousDistinct<number>(currentBlockIndex)
+
+    useEffect(() => {
+        if (previousBlockIndex !== undefined) {
+            scroller.scrollTo(getBlockAnchorId(currentBlockIndex), {
+                duration: 800,
+                delay: 0,
+                smooth: 'easeInOutQuart',
+                offset: -70
+            })
+        }
+    }, [currentBlockIndex])
 
     if (topicPresenter.isLoading) {
         return null  // TODO: handle isLoading
@@ -40,6 +53,23 @@ export const Topic = memo<TopicProps>(({
     if (topicPresenter.isError) {
         return null  // TODO: handle isError
     }
+
+    return (
+        <Layout pageTitle='undefined' className={styles.topicLayout}>
+            <Header className={classnames({[styles.header]: lessonsListShow})}
+                    enableHamburgerMenu={false}
+                    showLogoText={false}
+                    leftButtonsLabel={[
+                        Strings.DASHBOARD,
+                        Strings.PRACTICE,
+                        Strings.LEADERBOARD]}
+                    menuBarClassName={styles.menuBar}/>
+            <main className={styles.mainContainer}>
+                {renderNavigationBar()}
+                {renderLessonContent()}
+            </main>
+        </Layout>
+    )
 
     function renderNavigationBar(): JSX.Element {
         return (
@@ -59,23 +89,7 @@ export const Topic = memo<TopicProps>(({
         )
     }
 
-    function renderNavigationLeft(): JSX.Element {
-        return (
-            <div className={styles.navigationLeft}>
-                <Burger ref={burgerRef}
-                    className={styles.burgerContainer}
-                    barsClassName={styles.burgerBarsClassName}
-                    onClick={onBurgerClick}
-                    bar1ClassName={styles.burgerBar1}
-                    bar3ClassName={styles.burgerBar3} />
-                <div className={styles.lessonTitle}>
-                    {getLessonTitle()}
-                </div>
-            </div>
-        )
-    }
-
-    function renderNavigationMiddle(): JSX.Element {
+    function renderLessonContent(): JSX.Element {
         if (topicLessonPresenter.isLoading) {
             return <div>Loading</div>  // TODO: handle isLoading
         }
@@ -84,48 +98,47 @@ export const Topic = memo<TopicProps>(({
             return <div>Error</div>  // TODO: handle isError
         }
 
-        const { numberOfSteps } = topicLessonPresenter.data
+        const renderers = {
+            code: ({language, value}) => {
+               return (
+                    <div className={styles.syntaxHighlighterContainer}>
+                        <SyntaxHighlighter wrapLongLines style={duotoneSea} language={language} children={value}/>
+                    </div>
+               )
+            }
+        }
 
         return (
-            <div className={styles.navigationMiddle}>
-                <div className={styles.navigationMiddleContent}>
-                    <button
-                        className={classnames({
-                            [styles.backActiveButton]: currentStep > 1,
-                            [styles.backDisabledButton]: currentStep === 1
-                        })}
-                        onClick={onBackButtonClick}>
-                        {Strings.BACK}
-                    </button>
-                    <div>{`${currentStep}/${numberOfSteps}`}</div>
-                    <button
-                        className={classnames({
-                            [styles.nextActiveButton]: currentStep < numberOfSteps,
-                            [styles.nextDisabledButton]: currentStep === numberOfSteps
-                        })}
-                        onClick={onNextButtonClick}>
-                        {Strings.NEXT}
-                    </button>
+            <div className={styles.lessonContent}>
+                {/* <div className={styles.lessonHeader}>
+                    <h1>Qui officia deserunt mollit anim id est laborum</h1>
+                </div> */}
+
+                <div className={styles.lessonContentContainer}>
+                    <div className={styles.blocksContainer}>
+                        {
+                            topicLessonPresenter.data.blocks.slice(0, currentBlockIndex + 2).map((block, index) => {
+                                if (block.type !== BlockType.MARKDOWN) {
+                                    return null
+                                }
+                                // console.log('nhan-debug', previousBlockIndex, currentBlockIndex)
+
+                                const blockClassName = classnames({
+                                    [styles.block]: true,
+                                    // [styles.hiddenBlock]: index > currentBlockIndex,
+                                    // [styles.showBlock]: index === previousBlockIndex + 1,
+                                    [styles.hideBlock]: index > currentBlockIndex,
+                                })
+
+                                return (
+                                    <Element key={index} name={getBlockAnchorId(index)} className={blockClassName}>
+                                        <ReactMarkdown plugins={[gfm]} children={block.content} renderers={renderers}/>
+                                    </Element>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-        </div>
-        )
-    }
-
-    function onBackButtonClick() {
-        if (currentStep > 1) {
-            setCurrentStep(currentStep - 1)
-        }
-    }
-
-    function onNextButtonClick() {
-        if (currentStep < topicLessonPresenter.data.numberOfSteps) {
-            setCurrentStep(currentStep + 1)
-        }
-    }
-
-    function renderNavigationRight(): JSX.Element {
-        return (
-            <div className={styles.navigationRight}>
             </div>
         )
     }
@@ -169,6 +182,84 @@ export const Topic = memo<TopicProps>(({
         )
     }
 
+    function renderNavigationLeft(): JSX.Element {
+        return (
+            <div className={styles.navigationLeft}>
+                <Burger ref={burgerRef}
+                    className={styles.burgerContainer}
+                    barsClassName={styles.burgerBarsClassName}
+                    onClick={onBurgerClick}
+                    bar1ClassName={styles.burgerBar1}
+                    bar3ClassName={styles.burgerBar3} />
+                <div className={styles.lessonTitle}>
+                    {getLessonTitle()}
+                </div>
+            </div>
+        )
+    }
+
+    function renderNavigationMiddle(): JSX.Element {
+        if (topicLessonPresenter.isLoading) {
+            return <div>Loading</div>  // TODO: handle isLoading
+        }
+
+        if (topicLessonPresenter.isError) {
+            return <div>Error</div>  // TODO: handle isError
+        }
+
+        return (
+            <div className={styles.navigationMiddle}>
+                <div className={styles.navigationMiddleContent}>
+                    <button
+                        className={classnames({
+                            [styles.backActiveButton]: getCurrentStep() > 1,
+                            [styles.backDisabledButton]: getCurrentStep() === 1
+                        })}
+                        onClick={onBackButtonClick}>
+                        {Strings.BACK}
+                    </button>
+                    <div>{`${getCurrentStep()}/${getTotalSteps()}`}</div>
+                    <button
+                        className={classnames({
+                            [styles.nextActiveButton]: getCurrentStep() < getTotalSteps(),
+                            [styles.nextDisabledButton]: getCurrentStep() === getTotalSteps()
+                        })}
+                        onClick={onNextButtonClick}>
+                        {Strings.NEXT}
+                    </button>
+                </div>
+        </div>
+        )
+    }
+
+    function renderNavigationRight(): JSX.Element {
+        return (
+            <div className={styles.navigationRight}>
+            </div>
+        )
+    }
+
+    function onLessonsListShow() {
+        setLessonsListShow(true)
+    }
+
+    function onLessonsListHide() {
+        burgerRef.current.close()
+        setLessonsListShow(false)
+    }
+
+    function onBackButtonClick() {
+        if (getCurrentStep() > 1) {
+            setCurrentBlockIndex(currentBlockIndex - 1)
+        }
+    }
+
+    function onNextButtonClick() {
+        if (getCurrentStep() < getTotalSteps()) {
+            setCurrentBlockIndex(currentBlockIndex + 1)
+        }
+    }
+
     function onLessonItemClick(lesson: TTopicPresenter['data']['lessons'][0], lessonIndex: number) {
         if ((isCompleted(lessonIndex) || isNextToLearn(lessonIndex)) && !isSelected(lessonIndex)) {
             router.replace(`/topic/${topicPresenter.data.id}/lesson/${lesson.id}`)
@@ -182,58 +273,6 @@ export const Topic = memo<TopicProps>(({
         } else {
             lessonsListRef.current.hide()
         }
-    }
-
-    function onLessonsListShow() {
-        setLessonsListShow(true)
-    }
-
-    function onLessonsListHide() {
-        burgerRef.current.close()
-        setLessonsListShow(false)
-    }
-
-    function renderLessonContent(): JSX.Element {
-        if (topicLessonPresenter.isLoading) {
-            return <div>Loading</div>  // TODO: handle isLoading
-        }
-
-        if (topicLessonPresenter.isError) {
-            return <div>Error</div>  // TODO: handle isError
-        }
-
-        const stopBlockIndex = topicLessonPresenter.data.stopBlocksIndices[currentStep - 1]
-
-        const renderers = {
-            code: ({language, value}) => {
-               return (
-                    <div className={styles.syntaxHighlighterContainer}>
-                        <SyntaxHighlighter wrapLongLines style={duotoneSea} language={language} children={value}/>
-                    </div>
-               )
-            }
-        }
-
-        return (
-            <div className={styles.lessonContent}>
-                {/* <div className={styles.lessonHeader}>
-                    <h1>Qui officia deserunt mollit anim id est laborum</h1>
-                </div> */}
-
-                <div className={styles.lessonContentContainer}>
-                    <div className={styles.lessonContent}>
-                        {/* <ReactMarkdown plugins={[gfm]} children={markdown} /> */}
-                        {
-                            topicLessonPresenter.data.blocks.slice(0, stopBlockIndex).map((block, index) => {
-                                // return <div key={index}>{!!block.content && block.content}</div>
-                                return (block.type === BlockType.MARKDOWN ) &&
-                                    <ReactMarkdown key={index} plugins={[gfm]} children={block.content} renderers={renderers}/>
-                            })
-                        }
-                    </div>
-                </div>
-            </div>
-        )
     }
 
     function isCompleted(lessonIndex: number): boolean {
@@ -276,20 +315,15 @@ export const Topic = memo<TopicProps>(({
         return topicLessonPresenter.data?.id
     }
 
-    return (
-        <Layout pageTitle='undefined' className={styles.topicLayout}>
-            <Header className={classnames({[styles.header]: lessonsListShow})}
-                    enableHamburgerMenu={false}
-                    showLogoText={false}
-                    leftButtonsLabel={[
-                        Strings.DASHBOARD,
-                        Strings.PRACTICE,
-                        Strings.LEADERBOARD]}
-                    menuBarClassName={styles.menuBar}/>
-            <main className={styles.mainContainer}>
-                {renderNavigationBar()}
-                {renderLessonContent()}
-            </main>
-        </Layout>
-    )
+    function getTotalSteps(): number {
+        return topicLessonPresenter.data.blocks.length
+    }
+
+    function getCurrentStep(): number {
+        return currentBlockIndex + 1
+    }
+
+    function getBlockAnchorId(index: number): string {
+        return `block-${index}`
+    }
 })

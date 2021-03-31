@@ -191,19 +191,18 @@ $navigation-bar-height: $header-height
         font-weight: normal
         padding-left: 0
         padding-right: 0
-        padding-bottom: 3rem
+        padding-bottom: calc(100vh - 116px)
         margin-left: auto
         margin-right: auto
+        max-width: 1000px
 
         @media (min-width: 750px)
             padding-left: 1.5rem
             padding-right: 1.5rem
-            padding-bottom: 1.5rem
 
         @media (min-width: 1300px)
             padding-left: 3rem
             padding-right: 3rem
-            padding-bottom: 3rem
 
         .lessonHeader
             display: flex
@@ -214,14 +213,21 @@ $navigation-bar-height: $header-height
 
         .lessonContentContainer
 
-            .lessonContent
+            .blocksContainer
                 color: rgb(132, 139, 151)
-                max-width: 1000px
+                width: 100%
 
-                // > p
-                //     color: rgb(132, 139, 151)
+                .block
+                    transition: opacity $animation-medium-time ease, height $animation-medium-time ease
+                    opacity: 1
+                    height: auto
 
-                > h2
+                .hideBlock
+                    opacity: 0
+                    height: 0
+
+
+                h2
                     color: rgb(238, 238, 238)
                     border-bottom: 0.4px solid rgba(255, 255, 255, 0.1)
 

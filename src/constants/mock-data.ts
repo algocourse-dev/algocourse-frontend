@@ -363,6 +363,7 @@ export const MockData = {
                 blocks: [
                     {
                         type: 'Markdown',
+                        stop: true,
                         content: `
 ## C Programming
 
@@ -529,15 +530,9 @@ int main() {
 ### Data Types
                         `
                     },
-                    // {
-                    //     type: 'PROBLEM',
-                    //     content: '',
-                    // },
-                    {
-                        type: 'Stop'
-                    },
                     {
                         type: 'Markdown',
+                        stop: true,
                         content: `
 Here is some JavaScript code:
 
@@ -547,10 +542,8 @@ console.log('It works!')  // highlight-line
                         `
                     },
                     {
-                        type: 'Stop',
-                    },
-                    {
                         type: 'Markdown',
+                        stop: true,
                         content:  `
 Here is some JavaScript code:
 
@@ -559,10 +552,6 @@ console.log('It works!')  // highlight-line
 ~~~
                         `
                     }
-                    // {
-                    //     type: 'IMAGES_PLAYER',
-                    //     content: ''
-                    // },
                 ],
             },
             'introduction-3': {

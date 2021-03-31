@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import styles from 'styles/Overlay.module.sass'
 import classnames from 'classnames'
-import { usePrevious } from 'utils/hooks'
+import { usePrevious } from 'react-use'
 
 type OverlayProps = {
     className?: string
