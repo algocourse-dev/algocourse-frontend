@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import styles from 'styles/Overlay.module.sass'
 import classnames from 'classnames'
-import { usePrevious } from 'react-use'
+import { usePrevious, useKeyPressEvent } from 'react-use'
 
 type OverlayProps = {
     className?: string
@@ -22,13 +22,7 @@ export const Overlay = forwardRef<OverlayRefProps, OverlayProps>(({
 }, ref) => {
     const [show, setShow] = useState<boolean>(false)
     const prevShow = usePrevious<boolean>(show)
-
-    useEffect(() => {
-        document.addEventListener('keydown', onKeyDown, false)
-        return () => {
-            document.removeEventListener('keydown', onKeyDown, false)
-        }
-    }, [show])
+    useKeyPressEvent('Escape', () => setShow(false))
 
     useEffect(() => {
         if (!prevShow && show) {
@@ -46,19 +40,13 @@ export const Overlay = forwardRef<OverlayRefProps, OverlayProps>(({
         hide: () => setShow(false)
     } as OverlayRefProps))
 
-    function onContainerClick() {
-        setShow(false)
-    }
-
-    function onKeyDown(e: KeyboardEvent) {
-        if (e.key === 'Escape') {
-            setShow(false)
-        }
-    }
-
     return (
         <div className={classnames(styles.container, className, styles[show ? 'containerShow' : 'containerHide'])} onClick={onContainerClick}>
             {children}
         </div>
     )
+
+    function onContainerClick() {
+        setShow(false)
+    }
 })
