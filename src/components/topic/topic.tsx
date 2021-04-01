@@ -18,6 +18,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import duotoneSea from 'utils/themes/duotone-sea'
 import { scroller, Element } from 'react-scroll'
 import { usePreviousDistinct } from 'react-use'
+import { LoadingSpinner } from 'components/loading-spinner'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
@@ -29,16 +30,21 @@ export const Topic = memo<TopicProps>(({
     topicLessonPresenter,
 }) => {
     const router = useRouter()
+
     const burgerRef = useRef<BurgerRefProps>(null)
     const lessonsListRef = useRef<OverlayRefProps>(null)
+
     const [lessonsListShow, setLessonsListShow] = useState<boolean>(false)
     const [currentBlockIndex, setCurrentBlockIndex] = useState<number>(0)
+    const [isNextButtonLoading, setNextButtonLoading] = useState<boolean>(false)
+    const [isBackButtonLoading, setBackButtonLoading] = useState<boolean>(false)
+
     const previousBlockIndex = usePreviousDistinct<number>(currentBlockIndex)
 
     useEffect(() => {
         if (previousBlockIndex !== undefined) {
             scroller.scrollTo(getBlockAnchorId(currentBlockIndex), {
-                duration: 800,
+                duration: 1000,
                 delay: 0,
                 smooth: 'easeInOutQuart',
                 offset: -70
@@ -63,6 +69,9 @@ export const Topic = memo<TopicProps>(({
                         Strings.DASHBOARD,
                         Strings.PRACTICE,
                         Strings.LEADERBOARD]}
+                    leftButtonsCallbacks={[
+                        () => router.push('/dashboard')
+                    ]}
                     menuBarClassName={styles.menuBar}/>
             <main className={styles.mainContainer}>
                 {renderNavigationBar()}
@@ -121,12 +130,9 @@ export const Topic = memo<TopicProps>(({
                                 if (block.type !== BlockType.MARKDOWN) {
                                     return null
                                 }
-                                // console.log('nhan-debug', previousBlockIndex, currentBlockIndex)
 
                                 const blockClassName = classnames({
                                     [styles.block]: true,
-                                    // [styles.hiddenBlock]: index > currentBlockIndex,
-                                    // [styles.showBlock]: index === previousBlockIndex + 1,
                                     [styles.hideBlock]: index > currentBlockIndex,
                                 })
 
@@ -212,20 +218,28 @@ export const Topic = memo<TopicProps>(({
                 <div className={styles.navigationMiddleContent}>
                     <button
                         className={classnames({
-                            [styles.backActiveButton]: getCurrentStep() > 1,
-                            [styles.backDisabledButton]: getCurrentStep() === 1
+                            [styles.backActiveButton]: (getCurrentStep() > 1) && !isBackButtonLoading,
+                            [styles.backDisabledButton]: getCurrentStep() === 1 || isBackButtonLoading,
                         })}
                         onClick={onBackButtonClick}>
-                        {Strings.BACK}
+                        {
+                            isBackButtonLoading
+                                ? <LoadingSpinner className={styles.backLoadingSpinner} />
+                                : Strings.BACK
+                        }
                     </button>
                     <div>{`${getCurrentStep()}/${getTotalSteps()}`}</div>
                     <button
                         className={classnames({
-                            [styles.nextActiveButton]: getCurrentStep() < getTotalSteps(),
-                            [styles.nextDisabledButton]: getCurrentStep() === getTotalSteps()
+                            [styles.nextActiveButton]: (getCurrentStep() < getTotalSteps()) && !isNextButtonLoading,
+                            [styles.nextDisabledButton]: (getCurrentStep() === getTotalSteps()) || isNextButtonLoading,
                         })}
                         onClick={onNextButtonClick}>
-                        {Strings.NEXT}
+                            {
+                                isNextButtonLoading
+                                    ? <LoadingSpinner className={styles.nextLoadingSpinner}/>
+                                    : Strings.NEXT
+                            }
                     </button>
                 </div>
         </div>
@@ -249,14 +263,22 @@ export const Topic = memo<TopicProps>(({
     }
 
     function onBackButtonClick() {
-        if (getCurrentStep() > 1) {
+        if (getCurrentStep() > 1 && !isBackButtonLoading) {
             setCurrentBlockIndex(currentBlockIndex - 1)
+            setBackButtonLoading(true)
+            setTimeout(() => {
+                setBackButtonLoading(false)
+            }, 1000)
         }
     }
 
     function onNextButtonClick() {
-        if (getCurrentStep() < getTotalSteps()) {
+        if (getCurrentStep() < getTotalSteps() && !isNextButtonLoading) {
             setCurrentBlockIndex(currentBlockIndex + 1)
+            setNextButtonLoading(true)
+            setTimeout(() => {
+                setNextButtonLoading(false)
+            }, 1000)
         }
     }
 

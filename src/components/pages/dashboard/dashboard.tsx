@@ -7,8 +7,11 @@ import { Strings } from 'constants/strings'
 import { CourseContent, ProgressCard } from 'containers'
 import { TipCard } from 'containers/card/tip-card'
 import { CourseLeaderboardCard } from 'containers/card/course-leaderboard-card'
+import { useRouter } from 'next/router'
 
 export const Dashboard: FC = () => {
+    const router = useRouter()
+
     return (
         <Layout pageTitle={Strings.DASHBOARD} className={styles.layout}>
             <Header enableHamburgerMenu={false}
@@ -16,7 +19,10 @@ export const Dashboard: FC = () => {
                     leftButtonsLabel={[
                         Strings.DASHBOARD,
                         Strings.PRACTICE,
-                        Strings.LEADERBOARD]}/>
+                        Strings.LEADERBOARD]}
+                    leftButtonsCallbacks={[
+                        () => router.push('/dashboard')
+                    ]} />
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
                     <div className={styles.courseContainer}>

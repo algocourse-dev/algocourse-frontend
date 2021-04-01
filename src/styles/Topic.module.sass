@@ -6,7 +6,7 @@ $header-burger-bar-height: 1px
 $navigation-bar-height: $header-height
 
 .topicLayout
-    background-color: #171e26
+    background-color: $background-color
 
     .header
         z-index: $no-z-index !important
@@ -114,7 +114,7 @@ $navigation-bar-height: $header-height
         display: flex
         flex-direction: row
         align-items: center
-        background-color: #242f3b
+        background-color: $header-background-color
         padding: 0 $edge-margin 0 $edge-margin
         z-index: $z-index-top-layer
             
@@ -154,14 +154,45 @@ $navigation-bar-height: $header-height
                 max-width: 500px
                 width: 100%
 
-                div
+                > div
                     flex: 1
 
             button
+                display: flex !important
+                align-items: center
+                justify-content: center
                 font-size: 15px
 
+                .nextLoadingSpinner, .backLoadingSpinner
+                    width: 18px
+                    height: 18px
+
+                .nextLoadingSpinner
+                    background: $text-annotation-primary-color
+                    background: linear-gradient(to right, $text-annotation-primary-color 10%, rgba(255, 255, 255, 0) 42%)
+
+                .backLoadingSpinner
+                    background: $text-annotation-secondary-color
+                    background: linear-gradient(to right, $text-annotation-secondary-color 10%, rgba(255, 255, 255, 0) 42%)
+
+                .nextLoadingSpinner:after, .backLoadingSpinner:after
+                    width: 65%
+                    height: 65%
+
+                .nextLoadingSpinner:before
+                    background: $text-annotation-primary-color
+                
+                .nextLoadingSpinner:after
+                    background: $topic-navigation-button-disable-color
+
+                .backLoadingSpinner:before
+                    background: $text-annotation-secondary-color
+
+                .backLoadingSpinner:after
+                    background: $header-background-color
+
             .backActiveButton
-                @include secondary-button(90px, 35px, $primary-button-color, rgb(33, 37, 42))
+                @include secondary-button(90px, 35px, $primary-button-color, $header-background-color)
 
                 &:hover
                     background-color: rgba(255, 255, 255, 0.05)
@@ -234,8 +265,11 @@ $navigation-bar-height: $header-height
                 h3
                     color: rgb(238, 238, 238)
 
+                pre
+                    background-color: #1d1e32 !important
+
                 code
-                    background-color: #242f3b
+                    background-color: #1d1e32 !important
                     border-radius: 6px
                     line-height: 2
                     white-space: nowrap

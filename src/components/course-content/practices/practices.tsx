@@ -16,22 +16,14 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         return null
     }
 
-    const generateCompaniesNames = (companies: ReadonlyArray<TCompany>) => {
-        return companies.map(company => company.name).join(', ')
-    }
-
-    function getStatusIconSrc(result: ProblemResult): string {
-        switch (result) {
-            case ProblemResult.Accepted:
-                return Images.ACCEPTED_CHECK_MARK
-            case ProblemResult.Rejected:
-                return Images.REJECTED_CHECK_MARK
-            case ProblemResult.Unsolved:
-                return Images.UNSOLVED_CHECK_MARK
-            default:
-                return ''
-        }
-    }
+    return (
+        <div className={styles.container}>
+            <span>{Strings.PRACTICE}</span>
+            <div className={styles.practices}>
+                {practices.map(practice => renderPractice(practice))}
+            </div>
+        </div>
+    )
 
     function renderPractice(practice: TPractice): JSX.Element {
         return (
@@ -74,12 +66,20 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         )
     }
 
-    return (
-        <div className={styles.container}>
-            <span>{Strings.PRACTICE}</span>
-            <div className={styles.practices}>
-                {practices.map(practice => renderPractice(practice))}
-            </div>
-        </div>
-    )
+    function generateCompaniesNames(companies: ReadonlyArray<TCompany>) {
+        return companies.map(company => company.name).join(', ')
+    }
+
+    function getStatusIconSrc(result: ProblemResult): string {
+        switch (result) {
+            case ProblemResult.Accepted:
+                return Images.ACCEPTED_CHECK_MARK
+            case ProblemResult.Rejected:
+                return Images.REJECTED_CHECK_MARK
+            case ProblemResult.Unsolved:
+                return Images.UNSOLVED_CHECK_MARK
+            default:
+                return ''
+        }
+    }
 })

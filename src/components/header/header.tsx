@@ -9,6 +9,7 @@ import { Burger } from 'components/burger'
 type HeaderProps = {
     className?: string
     leftButtonsLabel?: Array<string>
+    leftButtonsCallbacks?: Array<(args: any) => any>,
     enableHamburgerMenu?: boolean
     showLogoText?: boolean
     menuBarClassName?: string
@@ -16,13 +17,14 @@ type HeaderProps = {
 
 export const Header: FC<HeaderProps> = ({
     className,
-    leftButtonsLabel,
+    leftButtonsLabel = [],
+    leftButtonsCallbacks = [],
     enableHamburgerMenu = true,
     showLogoText = true,
     menuBarClassName
 }) => {
     const [open, setOpen] = useState(false);
-    const leftButtons = buildLeftButtons(leftButtonsLabel)
+    const leftButtons = buildLeftButtons(leftButtonsLabel, leftButtonsCallbacks)
 
     function renderLeftNavigationBar(): JSX.Element {
         return (
@@ -96,6 +98,12 @@ export const Header: FC<HeaderProps> = ({
     );
 }
 
-const buildLeftButtons = (leftButtonsLabel: Array<string>) => (
-    !leftButtonsLabel ? [] : leftButtonsLabel.map((label, index) => <button key={index} className={styles.leftButton}>{label}</button>)
+const buildLeftButtons = (leftButtonsLabel: Array<string>, leftButtonsCallbacks: Array<(args: any) => any>) => (
+    leftButtonsLabel.map((label, index) =>
+        <button key={index}
+                className={styles.leftButton}
+                onClick={leftButtonsCallbacks[index]}>
+            {label}
+        </button>
+    )
 )
