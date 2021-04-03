@@ -1,17 +1,20 @@
 import React, { memo } from 'react'
 import styles from 'styles/Practices.module.sass'
-import { TCompany, TPractice } from 'constants/types'
+import { TCompany, TPractice, TProblem } from 'constants/types'
 import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
 import { ProblemResult } from 'constants/constants'
 import classnames from 'classnames'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 type PracticesProps = {
     practices: ReadonlyArray<TPractice>
 }
 
 export const Practices = memo<PracticesProps>(({practices: practices}) => {
+    const router = useRouter()
+
     if (!practices || practices.length === 0) {
         return null
     }
@@ -44,7 +47,7 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
                     </thead>
                     <tbody>
                         {practice.problems.map(problem => (
-                        <tr key={problem.id}>
+                        <tr key={problem.id} onClick={() => onProblemClick(problem)}>
                             <td>{problem.id}</td>
                             <td className={styles.problemTitle}>{problem.title}</td>
                             <td>
@@ -81,5 +84,9 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
             default:
                 return ''
         }
+    }
+
+    function onProblemClick(problem: TProblem) {
+        router.push(`/problem/${problem.id}`)
     }
 })

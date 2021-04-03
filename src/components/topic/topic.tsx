@@ -61,7 +61,7 @@ export const Topic = memo<TopicProps>(({
     }
 
     return (
-        <Layout pageTitle='undefined' className={styles.topicLayout}>
+        <Layout pageTitle='undefined'>
             <Header className={classnames({[styles.header]: lessonsListShow})}
                     enableHamburgerMenu={false}
                     showLogoText={false}
@@ -72,7 +72,7 @@ export const Topic = memo<TopicProps>(({
                     leftButtonsCallbacks={[
                         () => router.push('/dashboard')
                     ]}
-                    menuBarClassName={styles.menuBar}/>
+                    menuBarClassName={styles.menuBar} />
             <main className={styles.mainContainer}>
                 {renderNavigationBar()}
                 {renderLessonContent()}
