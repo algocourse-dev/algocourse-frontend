@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useImperativeHandle, useState } from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef, useImperativeHandle, useState, memo } from 'react'
 import styles from 'styles/Burger.module.sass'
 import classnames from 'classnames'
 
@@ -16,7 +16,7 @@ export type BurgerRefProps = {
     close(): void
 }
 
-export const Burger = forwardRef<BurgerRefProps, BurgerProps>(({
+export const Burger = memo(forwardRef<BurgerRefProps, BurgerProps>(({
     onClick = () => undefined,
     className,
     barsClassName,
@@ -55,4 +55,4 @@ export const Burger = forwardRef<BurgerRefProps, BurgerProps>(({
             )}/>
         </div>
     )
-})
+}))

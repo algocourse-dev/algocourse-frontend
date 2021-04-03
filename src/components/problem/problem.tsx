@@ -4,6 +4,8 @@ import { Strings } from 'constants/strings'
 import { useRouter } from 'next/router'
 import React, { useRef, memo, useEffect } from 'react'
 import styles from 'styles/Problem.module.sass'
+import { IDEPane } from './ide-pane'
+import { Ace } from 'ace-builds'
 
 type ProblemProps = {}
 
@@ -14,7 +16,9 @@ export const Problem = memo<ProblemProps>((props) => {
     const horizontalHandlerRef = useRef<HTMLDivElement>(undefined)
     const mainRef = useRef<HTMLDivElement>(undefined)
     const problemPaneRef = useRef<HTMLDivElement>(undefined)
-    const consolePaneRef = useRef<HTMLDivElement>(undefined)
+    const idePaneRef = useRef<HTMLDivElement>(undefined)
+
+    const aceEditorRef = useRef<Ace.Editor>(undefined)
 
     const isVerticalHandlerDragging = useRef<boolean>(false)
     const isHorizontalHandlerDragging = useRef<boolean>(false)
@@ -68,17 +72,9 @@ export const Problem = memo<ProblemProps>((props) => {
     function renderIDEAndConsolePane(): JSX.Element {
         return (
             <div className={styles.IDEAndConsolePaneContainer}>
-                {renderIDEPane()}
+                <IDEPane onAceEditorLoad={onAceEditorLoad} ref={idePaneRef} />
                 <div className={styles.horizontalHandler} ref={horizontalHandlerRef} />
                 {renderConsolePane()}
-            </div>
-        )
-    }
-
-    function renderIDEPane(): JSX.Element {
-        return (
-            <div className={styles.IDEPaneContainer} ref={consolePaneRef}>
-
             </div>
         )
     }
@@ -115,17 +111,28 @@ export const Problem = memo<ProblemProps>((props) => {
 
         problemPaneRef.current.style.width = pointerRelativeXpos + 'px'
         problemPaneRef.current.style.flexGrow = 'unset'
+
+        if (!!aceEditorRef.current) {
+            aceEditorRef.current.resize()
+        }
     }
 
     function handleHorizontalHandlerDragging(event: MouseEvent) {
-        if (!isHorizontalHandlerDragging.current || !mainRef.current || !consolePaneRef.current) {
+        if (!isHorizontalHandlerDragging.current || !mainRef.current || !idePaneRef.current) {
             return
         }
 
         const pointerRelativeYpos = event.clientY - mainRef.current.offsetTop
 
-        consolePaneRef.current.style.height = pointerRelativeYpos + 'px'
-        consolePaneRef.current.style.flexGrow = 'unset'
+        idePaneRef.current.style.height = pointerRelativeYpos + 'px'
+        idePaneRef.current.style.flexGrow = 'unset'
+
+        if (!!aceEditorRef.current) {
+            aceEditorRef.current.resize()
+        }
     }
 
+    function onAceEditorLoad(editor: Ace.Editor) {
+        aceEditorRef.current = editor
+    }
 })

@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle, useState } from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle, useState, memo } from 'react'
 import styles from 'styles/Overlay.module.sass'
 import classnames from 'classnames'
 import { usePrevious, useKeyPressEvent } from 'react-use'
@@ -14,7 +14,7 @@ export type OverlayRefProps = {
     hide(): void
 }
 
-export const Overlay = forwardRef<OverlayRefProps, OverlayProps>(({
+export const Overlay = memo(forwardRef<OverlayRefProps, OverlayProps>(({
     className,
     onShow = () => undefined,
     onHide = () => undefined,
@@ -49,4 +49,4 @@ export const Overlay = forwardRef<OverlayRefProps, OverlayProps>(({
     function onContainerClick() {
         setShow(false)
     }
-})
+}))
