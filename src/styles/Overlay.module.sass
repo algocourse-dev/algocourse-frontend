@@ -1,0 +1,19 @@
+@import 'common'
+
+.container
+    width: 100vw
+    bottom: 0
+    background-color: $overlay-background-color
+    left: 0
+    top: 0
+    position: fixed
+    z-index: $z-index-top-layer
+
+.containerShow
+    opacity: 1
+    transition: opacity $animation-fast-time
+
+.containerHide
+    opacity: 0
+    transition: opacity $animation-fast-time
+    pointer-events: none

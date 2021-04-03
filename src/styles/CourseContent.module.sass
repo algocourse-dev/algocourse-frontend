@@ -1,0 +1,93 @@
+@import 'common'
+
+.modulesContainer
+    width: 100%
+
+    .moduleContainer
+        display: flex
+        flex-direction: column
+        width: 100%
+        margin-bottom: $dashboard-components-margin
+
+        .collapseContainer
+            position: relative
+            border-bottom-left-radius: $card-border-radius
+            border-bottom-right-radius: $card-border-radius
+            border-top: unset !important
+
+            .seeMoreButton
+                position: absolute
+                background-color: $module-highlighted-color
+                width: 76px
+                border-radius: 38px
+                left: calc(100%/2 - 38px)
+                height: 18px
+                bottom: -9px
+                text-align: center
+                cursor: pointer
+                font-size: $extra-small-font-size
+                color: $background-color
+                padding-top: 2px
+                font-weight: $semi-bold-font-weight
+
+        .selectedCollapseContainer
+            border: 2px solid $module-highlighted-color
+
+        .unselecteCollapseContainer
+            border: 2px solid transparent
+        
+        .moduleTitle
+            display: flex
+            align-items: center
+            padding: 0 $module-padding  
+            width: 100%
+            height: 54px
+            background-color: $module-background-color
+            border-radius: $card-border-radius
+            cursor: pointer
+            color: $text-secondary-color
+
+            .moduleIndex
+                font-size: $extra-large-font-size
+                font-weight: $bold-font-weight
+                margin-right: 20px
+                opacity: 0.35
+
+            &:hover
+                background-color: $module-hover-color
+                color: $text-primary-color
+
+                .moduleIndex
+                    opacity: 1 !important
+
+            > h2
+                font-size: $medium-font-size
+                font-weight: $semi-bold-font-weight
+                margin: 15px 0 15px 0
+
+        .highlightedModule
+            color: $background-color !important
+            background-color: $module-highlighted-color !important
+            border-bottom-left-radius: 0px
+            border-bottom-right-radius: 0px
+
+            .moduleIndex
+                opacity: 1 !important
+
+        .topicCollapse, .practiceCollapse
+            max-width: 100%
+            transition: height $animation-fast-time
+
+        .unselectedCollapseContent
+            opacity: 0
+            transition: opacity $animation-medium-time
+
+        .selectedCollapseContent
+            opacity: 1
+            transition: opacity $animation-medium-time
+
+        .topicContent
+            padding: $module-padding/2 $module-padding $module-padding $module-padding
+
+        .practiceContent
+            padding: 0px $module-padding $module-padding $module-padding

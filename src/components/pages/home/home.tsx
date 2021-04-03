@@ -3,21 +3,20 @@ import Image from 'next/image'
 import { Footer } from 'components/footer'
 import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
-import { SEO } from 'components/seo'
 import { Layout } from 'components/layout'
+import { useRouter } from 'next/router'
+import { Strings } from 'constants/strings'
+import { Images } from 'constants/images'
 
 export const Home: FC = () => {
     return (
-        <Layout>
-            <SEO title="Home page" />
-
-            <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
-                    {/* <button className={styles.navigationHeaderButton}>Home</button>,
-                    <button className={styles.navigationHeaderButton}>Features</button>,
-                    <button className={styles.navigationHeaderButton}>Pricing</button>,
-                    <button className={styles.navigationHeaderButton}>FAQs</button>,
-                    <button className={styles.navigationHeaderButton}>Contact us</button>
-            ]}/> */}
+        <Layout pageTitle={Strings.HOME_PAGE}>
+            <Header leftButtonsLabel={[
+                Strings.HOME,
+                Strings.FEATURES,
+                Strings.PRICING,
+                Strings.FAQs,
+                Strings.CONTACT_US]} />
 
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
@@ -31,11 +30,13 @@ export const Home: FC = () => {
 }
 
 const LandingBlock: FC = () => {
+    const router = useRouter()
+
     return (
         <div className={styles.landingBlockContainer}>
             <div className={styles.landingDescription}>
                 <h1>
-                    <span className='boldText'>The Ultimate Course</span> <br className={styles.newline}/>
+                    <span>The Ultimate Course</span> <br className={styles.newline}/>
                     for your coding interview<br className={styles.newline}/>
                 </h1>
                 <p>
@@ -43,14 +44,16 @@ const LandingBlock: FC = () => {
                     through instructive and interactive lessons
                 </p>
                 <div className={styles.landingButtons}>
-                    <button className={styles.getStartedButton}>Go to course</button>
+                    <button className={styles.getStartedButton}
+                            onClick={() => router.push('/dashboard')}>
+                        Go to course
+                    </button>
                     <button className={styles.readMissionButton}>Read our mission letter</button>
                 </div>
             </div>
             <div className={styles.landingLogo}>
                 <Image
-                    src='/landing-logo.svg'
-                    alt='Landing Logo'
+                    src={Images.LANDING_LOGO}
                     width='250'
                     height='235.9'
                     layout='intrinsic' />

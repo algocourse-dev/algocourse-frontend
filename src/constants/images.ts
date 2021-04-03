@@ -1,0 +1,18 @@
+export const Images = {
+    ACCEPTED_CHECK_MARK: '/images/accepted-check-mark.svg',
+    DONE_CHECK_MARK: '/images/done-check-mark.svg',
+    EXTERNAL_LINK_BUTTON: '/images/external-link-button.svg',
+    LANDING_LOGO: '/images/landing-logo.svg',
+    LOGO: '/images/logo.svg',
+    LESSON: '/images/lesson.svg',
+    LESSON_JAVA: '/images/lesson-java.svg',
+    NECESSITY: '/images/necessity.svg',
+    NO_STREAK_FIRE: '/images/no-streak-fire.svg',
+    REJECTED_CHECK_MARK: '/images/rejected-check-mark.svg',
+    STREAK_FIRE: '/images/streak-fire.svg',
+    CONSOLE: '/images/console.svg',
+    UNSOLVED_CHECK_MARK: '/images/unsolved-checkmark.svg',
+    GOOGLE_ICON: '/images/google-icon.svg',
+    FACEBOOK_ICON: '/images/facebook-icon.svg',
+    GITHUB_ICON: '/images/github-icon.svg',
+}

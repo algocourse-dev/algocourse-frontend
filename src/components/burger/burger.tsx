@@ -1,18 +1,58 @@
-import React, { FC, Dispatch, SetStateAction } from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef, useImperativeHandle, useState } from 'react'
 import styles from 'styles/Burger.module.sass'
 import classnames from 'classnames'
 
 type BurgerProps = {
-    open: boolean
-    setOpen: Dispatch<SetStateAction<boolean>>
+    onClick?(open: boolean): void
+    className?: string
+    barsClassName?: string
+    bar1ClassName?: string
+    bar2ClassName?: string
+    bar3ClassName?: string
+} & ComponentPropsWithoutRef<any>
+
+export type BurgerRefProps = {
+    open(): void
+    close(): void
 }
 
-export const Burger: FC<BurgerProps> = ({open, setOpen}) => {
+export const Burger = forwardRef<BurgerRefProps, BurgerProps>(({
+    onClick = () => undefined,
+    className,
+    barsClassName,
+    bar1ClassName,
+    bar2ClassName,
+    bar3ClassName,
+}, ref) => {
+    const [open, setOpen] = useState<boolean>(false)
+
+    useImperativeHandle(ref, () => ({
+        open: () => setOpen(true),
+        close: () => setOpen(false),
+    } as BurgerRefProps))
+
+    function onBurgerClick() {
+        onClick(!open)
+        setOpen(!open)
+    }
+
     return (
-        <div className={styles.burgerContainer} onClick={() => setOpen(!open)}>
-            <div className={classnames({[styles.transformDiv1]: open})}/>
-            <div className={classnames({[styles.transformDiv2]: open})}/>
-            <div className={classnames({[styles.transformDiv3]: open})}/>
+        <div className={classnames(styles.burgerContainer, className)} onClick={onBurgerClick}>
+            <div className={classnames(
+                barsClassName,
+                bar1ClassName,
+                {[styles.transformDiv1]: open}
+            )}/>
+            <div className={classnames(
+                barsClassName,
+                bar2ClassName,
+                {[styles.transformDiv2]: open}
+            )}/>
+            <div className={classnames(
+                barsClassName,
+                bar3ClassName,
+                {[styles.transformDiv3]: open}
+            )}/>
         </div>
     )
-}
+})

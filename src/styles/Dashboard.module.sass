@@ -1,0 +1,44 @@
+@import 'common'
+
+.layout
+    background-color: $background-color
+
+.mainContainer
+    display: flex
+    width: 100%
+    padding: 0 $edge-margin
+    flex-direction: column
+    margin-top: $dashboard-components-margin
+
+    .main
+        display: flex
+        align-self: center
+        width: $main-content-container-size
+
+        .courseContainer
+            display: flex
+            flex-direction: column
+            width: $right-panel-width
+            margin-right: $dashboard-components-margin
+
+            .courseNotice
+                width: 100%
+                margin-bottom: 26px
+
+                h2, p
+                    margin: 0
+
+                h2
+                    font-size: $large-font-size
+                    margin-bottom: 10px
+                    font-weight: $bold-font-weight
+                    color: $text-primary-color
+
+                p
+                    font-size: $small-medium-font-size
+                    font-weight: $regular-font-weight
+                    color: $text-annotation-primary-color
+
+        .widgetsContainer
+            width: $left-panel-width
+            border-radius: 5px

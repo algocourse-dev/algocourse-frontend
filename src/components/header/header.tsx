@@ -1,52 +1,109 @@
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import styles from 'styles/Header.module.sass'
-import { Login } from './login';
-import { HamburgerMenu } from './hamburger-menu';
+import { Login } from './login'
+import classnames from 'classnames'
+import { Images } from 'constants/images'
+import { Burger } from 'components/burger'
 
 type HeaderProps = {
+    className?: string
     leftButtonsLabel?: Array<string>
+    leftButtonsCallbacks?: Array<(args: any) => any>,
+    enableHamburgerMenu?: boolean
+    showLogoText?: boolean
+    menuBarClassName?: string
 }
 
-export const Header: FC<HeaderProps> = ({leftButtonsLabel}) => {
+export const Header: FC<HeaderProps> = ({
+    className,
+    leftButtonsLabel = [],
+    leftButtonsCallbacks = [],
+    enableHamburgerMenu = true,
+    showLogoText = true,
+    menuBarClassName
+}) => {
     const [open, setOpen] = useState(false);
-    const leftButtons = buildLeftButtons(leftButtonsLabel)
+    const leftButtons = buildLeftButtons(leftButtonsLabel, leftButtonsCallbacks)
 
-    return (
-        <header className={styles.container}>
-            <div className={styles.menuBar}>
+    function renderLeftNavigationBar(): JSX.Element {
+        return (
+            <div className={styles.leftNavigationBar}>
+                <div className={styles.logoContainer}>
+                    <Image src={Images.LOGO}
+                        width={22}
+                        height={22}
+                        layout='fixed'/>
+                    {showLogoText && <div className={styles.logoText}>algocourse</div>}
+                </div>
+                <div className={classnames(
+                        styles.leftButtons,
+                        {[styles.noCollapseOnExtraSmall]: !enableHamburgerMenu})}>
+                    {leftButtons}
+                </div>
+        </div>
+        )
+    }
 
-                <div className={styles.leftNavigationBar}>
-                    <div className={styles.logoContainer}>
-                        <Image src='/logo.svg'
-                            alt='Logo'
-                            width={22}
-                            height={22}
-                            layout='fixed'/>
-                        <div className={styles.logoText}>algocourse</div>
+    function renderRightNavigationBar(): JSX.Element {
+        return (
+            <div className={styles.rightNavigationBar}>
+                <div className={classnames(
+                        styles.rightFlatMenu,
+                        {[styles.noCollapseOnExtraSmall]: !enableHamburgerMenu})}>
+                    <Login />
+                </div>
+                {renderHamburgerMenu()}
+            </div>
+        )
+    }
+
+    function renderHamburgerMenu(): JSX.Element {
+        const pane = classnames(
+            styles.hamburgerMenuContent, 
+            {
+                [styles.isOpened]: open,
+                [styles.isClosed]: !open,
+            }
+        );
+
+        return enableHamburgerMenu ? (
+            <div className={classnames(
+                    styles.hamburgerMenu,
+                    {[styles.noCollapseOnExtraSmall]: !enableHamburgerMenu})}>
+                <Burger onClick={onBurgerClick}/>
+                <div className={pane}>
+                    <div className={styles.hamburgerMenuHeaderContainer}>
+                        <Login />
                     </div>
-                    <div className={styles.leftButtons}>
+                    <div className={styles.hamburgerMenuItemsContainer}>
                         {leftButtons}
                     </div>
                 </div>
+            </div>
+        ) : null
+    }
 
-                <div className={styles.rightNavigationBar}>
-                    <div className={styles.rightFlatMenu}>
-                        <Login />
-                    </div>
-                    <HamburgerMenu
-                        className={styles.hamburgerMenu}
-                        items={leftButtons}
-                        mainComponent={(<Login />)}
-                        open={open}
-                        setOpen={setOpen}
-                    />
-                </div>
+    function onBurgerClick(open: boolean) {
+        setOpen(open)
+    }
+
+    return (
+        <header className={classnames(styles.container, className)}>
+            <div className={classnames(styles.menuBar, menuBarClassName)}>
+                {renderLeftNavigationBar()}
+                {renderRightNavigationBar()}
             </div>
         </header>
     );
 }
 
-const buildLeftButtons = (leftButtonsLabel: Array<string>) => (
-    !leftButtonsLabel ? [] : leftButtonsLabel.map((label, index) => <button key={index} className={styles.leftButton}>{label}</button>)
+const buildLeftButtons = (leftButtonsLabel: Array<string>, leftButtonsCallbacks: Array<(args: any) => any>) => (
+    leftButtonsLabel.map((label, index) =>
+        <button key={index}
+                className={styles.leftButton}
+                onClick={leftButtonsCallbacks[index]}>
+            {label}
+        </button>
+    )
 )
