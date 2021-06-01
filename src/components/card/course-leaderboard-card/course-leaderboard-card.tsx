@@ -21,7 +21,7 @@ export const CourseLeaderboardCard = memo<CourseLeaderboardCardProps>(({courseLe
     return (
         <BaseCard
             title={Strings.LEADERBOARD}
-            utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
+            // utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
             className={styles.overrideBaseCard}>
             <div className={styles.container}>
 

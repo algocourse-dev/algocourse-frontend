@@ -36,43 +36,94 @@
         .unselecteCollapseContainer
             border: 2px solid transparent
         
-        .moduleTitle
+        .moduleTitleContainer
             display: flex
-            align-items: center
-            padding: 0 $module-padding  
+            align-items: center  
+            padding-right: 8px
             width: 100%
-            height: 54px
-            background-color: $module-background-color
+            height: 54px !important
             border-radius: $card-border-radius
             cursor: pointer
-            color: $text-secondary-color
+            color: $text-primary-color
+            border: $separator-border
+            // transition: background-color $animation-fast-time ease
 
             .moduleIndex
                 font-size: $extra-large-font-size
                 font-weight: $bold-font-weight
                 margin-right: 20px
-                opacity: 0.35
+                color: rgba($text-primary-color, 0.5)
+                width: 54px !important
+                height: 100%
+                background-color: $module-index-background-color
+                display: flex
+                align-items: center
+                justify-content: center
+                // transition: color $animation-fast-time ease
+
+            .moduleTitle
+                font-size: $medium-font-size
+                font-weight: $semi-bold-font-weight
+                width: calc(100% - 54px - 20px - 300px - 18px - 8px)
+            
+            .moduleInfo
+                font-size: $small-medium-font-size
+                color: $text-annotation-secondary-color
+                width: 300px
+                padding-right: 100px
+                text-align: right
+
+            .moduleProgress
+                width: 18px
+                height: 18px
+
+                path:nth-child(1)
+                    stroke: #292a3d
+
+                path:nth-child(2)
+                    stroke: $topic-circular-progress-bar-path-color !important
 
             &:hover
                 background-color: $module-hover-color
                 color: $text-primary-color
+                border-color: $module-hover-color
 
                 .moduleIndex
+                    color: $text-primary-color
                     opacity: 1 !important
+                    border-top-right-radius: 0px
+                    border-bottom-right-radius: 0px
 
-            > h2
-                font-size: $medium-font-size
-                font-weight: $semi-bold-font-weight
-                margin: 15px 0 15px 0
+                .moduleProgress
+
+                    path:nth-child(1)   
+                        stroke: $background-color
 
         .highlightedModule
             color: $background-color !important
             background-color: $module-highlighted-color !important
             border-bottom-left-radius: 0px
             border-bottom-right-radius: 0px
+            border-color: $module-highlighted-color !important
 
             .moduleIndex
+                background-color: #5ce19b !important
+                color: $background-color !important
                 opacity: 1 !important
+                border-top-right-radius: 0px
+                border-bottom-right-radius: 0px
+                border-bottom-left-radius: 0px
+
+            .moduleInfo
+                color: $background-color !important
+
+            .moduleProgress
+
+                > svg > path:nth-child(1)
+                    stroke: rgba($background-color, 0.2) !important
+
+                > svg > path:nth-child(2)
+                    stroke: $background-color !important
 
         .topicCollapse, .practiceCollapse
             max-width: 100%

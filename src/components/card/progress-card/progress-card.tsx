@@ -4,9 +4,6 @@ import React, { memo } from 'react'
 import { BaseCard } from '../base-card'
 import styles from 'styles/ProgressCard.module.sass'
 import { TProgressCardPresenter } from 'presenters'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import classnames from 'classnames'
-import Image from 'next/image'
 
 type ProgressCardProps = {
     progressCardPresenter: TProgressCardPresenter
@@ -21,37 +18,17 @@ export const ProgressCard = memo<ProgressCardProps>(({progressCardPresenter}) =>
         return null  // TODO: handle isError
     }
 
-    const renderProgressItem = (containerClassName: string,
-                                percentage: number,
+    const renderProgressItem = (percentage: number,
                                 ratio: string,
-                                annotation: string,
-                                circularProgressClassName: string,
-                                innerCircleClassName: string,
-                                innerIcon: {
-                                    src: string,
-                                    width: number,
-                                    height: number,
-                                }) => {
+                                annotation: string) => {
         return (
-            <div className={containerClassName}>
-                <div className={styles.circularProgressContainer}>
-                    <div className={styles.circularProgress}>
-                        <CircularProgressbar
-                            strokeWidth={6}
-                            className={circularProgressClassName}
-                            value={percentage} />
-                    </div>
-                    <div className={classnames(styles.innerCircle, innerCircleClassName)}>
-                        <Image
-                            src={innerIcon.src}
-                            width={innerIcon.width}
-                            height={innerIcon.height}
-                            layout='fixed' />
-                    </div>
-                </div>
+            <div className={styles.progressBarContainer}>
                 <div className={styles.progressContent}>
-                    <span>{ratio}</span>
-                    <span>{annotation}</span>
+                    <div>{annotation}</div>
+                    <div>{ratio.toString() + ' (' + percentage.toString() + '%)'}</div>
+                </div>
+                <div className={styles.progressBar}>
+                    <div style={{width: percentage.toString() + '%'}}/>
                 </div>
             </div>
         )
@@ -60,34 +37,18 @@ export const ProgressCard = memo<ProgressCardProps>(({progressCardPresenter}) =>
     return (
         <BaseCard
             title={Strings.YOUR_PREGRESS}
-            utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
+            // utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
             className={styles.overrideBaseCard}>
             <div className={styles.container}>
                 {renderProgressItem(
-                    styles.lessonsProgress,
                     progressCardPresenter.data.lessonsPercentage,
                     progressCardPresenter.data.lessonsRatio,
-                    Strings.LESSONS_LEARNED,
-                    'lessonsCircularProgressbar',
-                    styles.lessonsInnerCircle,
-                    {
-                        src: Images.LESSON_JAVA,
-                        width: 14,
-                        height: 14,
-                    }
+                    Strings.LESSONS_LEARNED
                 )}
                 {renderProgressItem(
-                    styles.practicesProgress,
                     progressCardPresenter.data.practiceProblemsPercentage,
                     progressCardPresenter.data.practiceProblemsRatio,
-                    Strings.PRACTICE_PROBLEMS_SOLVED,
-                    'practiceProblemsCircularProgressbar',
-                    styles.practiceProblemsInnerCircle,
-                    {
-                        src: Images.CONSOLE,
-                        width: 16,
-                        height: 12,
-                    }
+                    Strings.PROBLEMS_SOLVED
                 )}
             </div>
         </BaseCard>

@@ -3,7 +3,7 @@
 // Primitive colors
 // https://chir.ag/projects/name-that-color
 // https://colornames.org/
-$athens-gray-color: #E9EBEF
+$steel-gray-color: #1E1D2B
 $black-color: #000000
 $brink-pink-color: #F96878
 $cadet-blue-color: #A6AFBE
@@ -30,23 +30,24 @@ $turquoise-blue-80-color: rgba($turquoise-blue-color, 0.8)
 $silver-tree-20-color: rgba($silver-tree-color, 0.2)
 
 // Text colors
-$text-primary-color: #EEEEEE
-$text-secondary-color: #B8B8BF
-$text-annotation-primary-color: #888994
-$text-annotation-secondary-color: #595A68
+$text-primary-color: #FFFFFF
+$text-secondary-color: #828394
+$text-annotation-primary-color: #757689
+$text-annotation-secondary-color: #66677C
 
 // Component colors
-$background-color: #111227
-$header-background-color: #292a3d
+$background-color: $steel-gray-color
+$foreground-color: #2f3042
+$header-background-color: #242635
 $lessons-progress-primary-color: $java-color
 $lessons-progress-inner-circle-color: $java-8-color
 $practice-problems-progress-primary-color: $deep-blush-color
 $practice-problems-inner-cirle-color: $deep-blush-8-color
-$module-background-color: #1d1e32
 $module-highlighted-color: $turquoise-blue-color
-$module-hover-color: #292a3d
+$module-hover-color: $foreground-color
 $module-title-color: $text-annotation-secondary-color
-$topic-background-color: #1d1e32
+$module-index-background-color: $header-background-color
+$topic-background-color: $foreground-color
 $difficulty-easy-color: $silver-tree-color
 $difficulty-medium-color: $texas-rose-color
 $difficulty-hard-color: $brink-pink-color
@@ -61,16 +62,18 @@ $github-icon-color: $shark-color
 $primary-button-color: $turquoise-blue-color
 $logo-text-color: $white-color
 $overlay-background-color: $black-65-color
-$base-card-background-color: #1d1e32
+$base-card-background-color: $foreground-color
 $base-card-title-color: $text-primary-color
-$practice-table-background-color: #1d1e32
+$practice-table-header-color: #252436
+$practice-table-background-color: $foreground-color
 $topic-navigation-button-disable-color: #474858
+$separator-color: $header-background-color
 
 // =============================== SCREEN SIZES, COMPONENT SIZES ===============================
 
-$main-content-container-size: 1250px
 $edge-margin: 20px
-$header-height: 58px
+$header-height: 50px
+$main-content-container-size: 1250px
 $dashboard-components-margin: 26px
 $left-panel-width: 290px
 $right-panel-width: $main-content-container-size - $left-panel-width - $dashboard-components-margin
@@ -83,6 +86,11 @@ $practice-header-height: 38px
 $practice-row-height: 42px
 $secondary-button-border-width: 2px
 $base-card-padding: 15px
+$problem-top-bar-height: 40px
+
+$icon-medium-size: 16px
+$icon-small-size: 14px
+$icon-extra-small-size: 10px
 
 // =============================== FONT SIZES ===============================
 
@@ -119,3 +127,8 @@ $no-z-index: -1
 $z-index-bottom-layer: 1
 $z-index-middle-layer: 500
 $z-index-top-layer: 1000
+
+// =============================== BORDER ===============================
+
+$separator-border: 2px solid $separator-color
+$problem-top-bar-box-shadow: none // 0 6px 4px -5px $black-color

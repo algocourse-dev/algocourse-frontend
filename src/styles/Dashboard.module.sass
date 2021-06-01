@@ -1,7 +1,12 @@
 @import 'common'
+@import 'utils'
 
-.layout
-    background-color: $background-color
+.html
+    overflow-x: scroll
+    overflow-y: scroll
+
+    .layout
+        background-color: $background-color
 
 .mainContainer
     display: flex
@@ -21,9 +26,12 @@
             width: $right-panel-width
             margin-right: $dashboard-components-margin
 
-            .courseNotice
+            .courseHeader
+                display: flex
+                flex-direction: row
                 width: 100%
                 margin-bottom: 26px
+                justify-content: flex-end
 
                 h2, p
                     margin: 0
@@ -33,11 +41,46 @@
                     margin-bottom: 10px
                     font-weight: $bold-font-weight
                     color: $text-primary-color
+                    @include max-line($number-of-lines: 1, $line-height: 17px)
 
                 p
                     font-size: $small-medium-font-size
                     font-weight: $regular-font-weight
-                    color: $text-annotation-primary-color
+                    color: $text-annotation-secondary-color
+                    @include max-line($number-of-lines: 1, $line-height: 17px)
+
+                .courseIntro
+                    width: calc(100% - 46px)
+                    opacity: 1
+                    transition: width $animation-fast-time ease, opacity $animation-fast-time ease
+
+            .courseContent
+                opacity: 1
+                transition: opacity $animation-fast-time
+                position: relative
+
+                .contentOverlay
+                    position: absolute
+                    left: 0
+                    top: 0
+                    width: 100%
+                    height: 100%
+                    transition: background-color $animation-fast-time ease
+                    pointer-events: none
+
+        .isSearching
+
+            .courseIntro
+                width: 0 !important
+                height: 0 !important
+                opacity: 0 !important
+
+            .courseContent
+                opacity: 0
+
+                .contentOverlay
+                    background-color: $background-color
+                    pointer-events: inherit
 
         .widgetsContainer
             width: $left-panel-width

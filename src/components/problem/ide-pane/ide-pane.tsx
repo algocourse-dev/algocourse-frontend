@@ -1,7 +1,9 @@
 import { AceEditor } from 'components/ace-editor'
 import { Ace } from 'ace-builds'
-import React, { forwardRef, useRef, memo } from 'react'
+import React, { forwardRef, memo } from 'react'
 import styles from 'styles/IDEPane.module.sass'
+import { Images } from 'constants/images'
+import { ReactSVG } from 'react-svg'
 
 type IDEPaneProps = {
     onAceEditorLoad?: (editor: Ace.Editor) => void
@@ -10,14 +12,21 @@ type IDEPaneProps = {
 export const IDEPane = memo(forwardRef<HTMLDivElement, IDEPaneProps>(({onAceEditorLoad}, ref) => {
     return (
         <div className={styles.container} ref={ref}>
-            {renderTopBar()}
+            {renderControlBar()}
             {renderIDE()}
         </div>
     )
 
-    function renderTopBar(): JSX.Element {
+    function renderControlBar(): JSX.Element {
         return (
-            <div className={styles.topBar} />
+            <div className={styles.controlBar}>
+                <div className={styles.language}>C++</div>
+                <div className={styles.extraButtons}>
+                    <ReactSVG src={Images.RESET} className={styles.extraButton} />
+                    <ReactSVG src={Images.GEAR} className={styles.extraButton} />
+                    <ReactSVG src={Images.RESIZE} className={styles.extraButton} />
+                </div>
+            </div>
         )
     }
 
@@ -46,16 +55,25 @@ public:
         return res;
     }
 };`
+
         return (
             <AceEditor
-                onLoad={onAceEditorLoad}
-                name={styles.aceEditor}
+                name='aceEditor'
+                onLoad={onLoad}
                 mode='c_cpp'
-                // theme='solarized_dark'
+                theme='twilight'
                 value={code}
-                wrapEnabled={false}
-                showPrintMargin={true}
+                wrapEnabled={true}
+                showPrintMargin={false}
             />
         )
+    }
+
+    function onLoad(editor: Ace.Editor) {
+        if (!!onAceEditorLoad) {
+            onAceEditorLoad(editor)
+        }
+        editor.renderer.setPadding(10)
+        editor.renderer.setScrollMargin(10, 0, 0, 0)
     }
 }))

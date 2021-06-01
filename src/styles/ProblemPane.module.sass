@@ -1,0 +1,168 @@
+@import 'common'
+@import 'utils'
+
+.container
+    display: flex
+    flex-direction: column
+    flex: 1 1 0
+    border-radius: $card-border-radius
+    background-color: #1d1e32
+
+    .tabsBar
+        display: flex
+        flex-direction: row
+        height: $problem-top-bar-height
+        background-color: $foreground-color
+        border-top-left-radius: $card-border-radius
+        border-top-right-radius: $card-border-radius
+        box-shadow: $problem-top-bar-box-shadow
+        position: relative
+
+        .selectedTab
+            color: $text-primary-color
+            background-color: $background-color
+        
+        > div
+            width: 120px
+            display: flex
+            height: 100%
+            align-items: center
+            justify-content: center
+            font-size: $small-font-size
+            color: $text-annotation-primary-color
+            cursor: pointer
+
+            &:hover
+                color: $text-primary-color
+        
+    .tabContent
+        width: 100%
+        background-color: $background-color
+        height: calc(100% - #{$header-height} - #{$problem-top-bar-height})
+
+        .statementContainer
+            max-height: 100%
+            padding: $edge-margin $edge-margin 0 $edge-margin
+            overflow-y: scroll
+
+            h1, h2
+                margin: 0
+                color: $text-primary-color
+
+            h1
+                font-size: $large-font-size
+                font-weight: $bold-font-weight
+
+            h2
+                margin-top: 40px
+                font-size: $medium-font-size
+                font-weight: $bold-font-weight
+
+            .statement
+                color: $text-secondary-color
+                margin-top: 15px
+                font-size: $medium-font-size
+
+            .testCases
+                font-size: $medium-font-size
+
+                > div
+                    margin-top: 1em
+                    border: $separator-border
+                    width: 100%
+                    padding: 10px
+                    border-radius: $card-border-radius
+                    color: $text-secondary-color
+
+                    pre
+                        margin: 0
+                        line-height: 1.4
+                        white-space: break-spaces
+
+                        span
+                            color: #90CAF9
+
+            .constraints
+                width: 100%
+                color: $text-secondary-color
+                font-size: $medium-font-size
+
+                ul
+                    margin: 0
+                    margin-top: 1em
+
+                    li::marker
+                        font-size: $extra-large-font-size
+                pre
+                    margin: 0
+
+            .hints
+
+                > div
+                    margin-top: 1em
+                    width: 100%
+                    height: 40px
+                    background-color: $foreground-color
+                    color: $text-secondary-color
+                    font-size: $medium-font-size
+                    display: flex
+                    align-items: center
+                    padding: 0 10px 0 10px
+                    font-weight: $semi-bold-font-weight
+                    border-radius: $card-border-radius
+
+    .problemsNavigationBar
+        display: flex
+        align-items: center
+        justify-content: space-between
+        height: $header-height
+        background-color: $header-background-color
+        padding: 0 $edge-margin 0 $edge-margin
+        font-size: $small-font-size
+
+        > div:first-child
+            color: $text-annotation-primary-color
+            cursor: not-allowed
+            transition: color $animation-fast-time ease
+
+            &:hover
+                color: $text-primary-color
+
+        .navigationButtons
+            display: flex
+            
+            .navigationButton:nth-of-type(1)
+                margin-right: $edge-margin
+
+                .arrow
+                    margin-right: 5px
+            
+            .navigationButton:nth-of-type(2) .arrow
+                margin-left: 5px
+
+            .navigationButton
+                display: flex
+                align-items: center
+                justify-content: space-between
+                padding: 0 10px 0 10px
+                transition: color $animation-fast-time ease, border-color $animation-fast-time ease
+                @include secondary-button(auto, 34px, $text-annotation-primary-color, transparent)
+
+                .arrow
+                    display: flex
+                    align-items: center
+
+                    svg
+                        width: 10px
+                        height: 10px
+
+                        g
+                            fill: $text-annotation-primary-color
+                            transition: fill $animation-fast-time ease
+
+                &:hover
+                    color: $text-primary-color
+                    border-color: $text-primary-color
+
+                    .arrow g
+                        fill: $text-primary-color

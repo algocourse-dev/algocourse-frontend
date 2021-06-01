@@ -33,9 +33,6 @@
             &:nth-child(1), &:nth-child(2), &:nth-child(3)
                 margin-top: 0
 
-            span
-                display: block
-
             > *:nth-child(1)
                 font-weight: $bold-font-weight
                 color: $text-primary-color
@@ -65,6 +62,9 @@
 
             > *:nth-child(4)
                 margin-top: 5px
+
+            .metadataIcon
+                @include svg-icon($icon-small-size, $icon-small-size, $text-primary-color)
 
             .difficulty
                 position: absolute

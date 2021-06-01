@@ -1,19 +1,12 @@
 import { MockData } from 'constants/mock-data'
 import { ProblemDifficulty, ProblemResult, TopicDifficulty, TopicNecesssity } from 'constants/constants'
-import { TCompany, TPractice, TProblem, TProblemStatus } from "constants/types"
+import { TBlock, TCompany, TProblemStatus } from "constants/types"
 import { QueryFunctionContext } from "react-query"
-import {
-    TStreakFetcherData,
-    TModulesFetcherData,
-    TModuleFetcherData,
-    TTopicsProgressFetcherData,
-    TPracticesFetcherData,
-    TTipData,
-    TCourseLeaderBoardData,
-    TTopicFetcherData,
-    TTopicLessonFetcherData
-} from "./types"
 
+export type TStreakFetcherData = {
+    streak: number
+    timeLeft?: number
+}
 export const STREAK_DATA_QUERY_KEY = 'streak'
 export const streakDataFetcher: () => Promise<TStreakFetcherData> = async () => {
     const response = MockData.streakData
@@ -36,6 +29,22 @@ export const streakDataFetcher: () => Promise<TStreakFetcherData> = async () => 
     }
 }
 
+type TModuleTopicFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly description: string
+    readonly difficulty: TopicDifficulty
+    readonly necesssity: TopicNecesssity
+    readonly totalLessons: number
+}
+type TModuleFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly topics: ReadonlyArray<TModuleTopicFetcherData>
+}
+type TModulesFetcherData = {
+    readonly modules: ReadonlyArray<TModuleFetcherData>
+}
 export const MODULES_QUERY_KEY = 'course'
 export const modulesFetcher: () => Promise<TModulesFetcherData> = async () => {
     const serverModules = MockData.courseContent
@@ -59,12 +68,27 @@ export const modulesFetcher: () => Promise<TModulesFetcherData> = async () => {
     }
 }
 
+export type TTopicsProgressFetcherData = Record<string, { readonly completedLessons: number }>
 export const TOPICS_PROGRESS_KEY = 'topics-progress'
 export const topicsProgressFetcher: () => Promise<TTopicsProgressFetcherData> = async () => {
     const response = MockData.topicsProgress
     return response
 }
 
+type TPracticeProblemFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly difficulty: ProblemDifficulty
+    readonly companies: ReadonlyArray<TCompany>
+    readonly totalAccepted: number
+    readonly status: TProblemStatus
+}
+type TPracticeFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly problems: ReadonlyArray<TPracticeProblemFetcherData>
+}
+export type TPracticesFetcherData = Record<string, ReadonlyArray<TPracticeFetcherData>>
 export const PRACTICES_QUERY_KEY = 'practices'
 export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () => {
     const serverPractices = MockData.practices
@@ -83,8 +107,8 @@ export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () =
         }
     }
 
-    function parseProblems(problems): ReadonlyArray<TProblem> {
-        return problems && problems.map((problem): TProblem => ({
+    function parseProblems(problems): ReadonlyArray<TPracticeProblemFetcherData> {
+        return problems && problems.map((problem): TPracticeProblemFetcherData => ({
             id: problem['id'],
             title: problem['title'],
             difficulty: problem['difficulty'] as ProblemDifficulty,
@@ -94,8 +118,8 @@ export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () =
         }))
     }
 
-    function parsePractices(practices): ReadonlyArray<TPractice> {
-        return practices && practices.map((practice): TPractice => ({
+    function parsePractices(practices): ReadonlyArray<TPracticeFetcherData> {
+        return practices && practices.map((practice): TPracticeFetcherData => ({
             id: practice['id'],
             title: practice['title'],
             problems: parseProblems(practice['problems']),
@@ -111,25 +135,53 @@ export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () =
     return clientPractices
 }
 
+type TTipFetcherData = {
+    id: string
+    content: string
+}
 export const TIP_QUERY_KEY = 'tip'
-export const tipFetcher: () => Promise<TTipData> = async () => {
+export const tipFetcher: () => Promise<TTipFetcherData> = async () => {
     const response = MockData.tip
     return response
 }
 
+type TCourseLeaderboardUserInfoFetcherData = {
+    ranking: number
+    avatarSrc: string
+    name: string
+    progress: number
+}
+type TCourseLeaderBoardFetcherData = {
+    topUsers: ReadonlyArray<TCourseLeaderboardUserInfoFetcherData>
+    currentUser: TCourseLeaderboardUserInfoFetcherData
+}
 export const COURSE_LEADERBOARD_QUERY_KEY = 'course-leaderboard'
-export const courseLeaderBoardDataFetcher: () => Promise<TCourseLeaderBoardData> = async () => {
+export const courseLeaderBoardDataFetcher: () => Promise<TCourseLeaderBoardFetcherData> = async () => {
     const response = MockData.courseLeaderboard
     return response
 }
 
+type TTopicLessonLessonFetcherData = {
+    readonly id: string
+    readonly title: string
+}
+type TTopicFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly description: string
+    readonly difficulty: TopicDifficulty
+    readonly necesssity: TopicNecesssity
+    readonly totalLessons: number
+    readonly completedLessons: number
+    readonly lessons: ReadonlyArray<TTopicLessonLessonFetcherData>
+}
 export const TOPIC_QUERY_KEY = (topicId: string) => ['topic', topicId]
 export async function topicFetcher(context: QueryFunctionContext<any>): Promise<TTopicFetcherData> {
     const [_key, topicId] = context.queryKey
     if (!topicId) {
         return undefined
     }
-    const serverTopic = MockData.topic[topicId]
+    const serverTopic = MockData.topics[topicId]
 
     // const promise: Promise<TTopicFetcherData> = new Promise((resolve) => {
     //     setTimeout(() => {
@@ -156,10 +208,14 @@ export async function topicFetcher(context: QueryFunctionContext<any>): Promise<
         completedLessons: serverTopic['completed_lessons'],
     }
 
-    // return 
     return clientTopic
 }
 
+type TTopicLessonFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly blocks: ReadonlyArray<TBlock>
+}
 export const TOPIC_LESSON_QUERY_KEY = (topicId: string, lessonId: string) => ['topic', topicId, 'lesson', lessonId]
 export async function topicLessonFetcher(context: QueryFunctionContext<any>): Promise<TTopicLessonFetcherData> {
     const [_topicKey, topicId, _lessonKey, lessonId] = context.queryKey
@@ -171,14 +227,47 @@ export async function topicLessonFetcher(context: QueryFunctionContext<any>): Pr
     if (!lessonId) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve(MockData.topic_lesson[topicId]['introduction-2'])
+                resolve(MockData.topicLessons[topicId]['introduction-2'])
             }, 200)
         })
     }
 
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(MockData.topic_lesson[topicId][lessonId])
+            resolve(MockData.topicLessons[topicId][lessonId])
         }, 200)
+    })
+}
+
+type TProblemFetcherData = {
+    readonly id: string
+    readonly title: string
+    readonly difficulty: ProblemDifficulty
+    readonly companies: ReadonlyArray<TCompany>
+    readonly totalAccepted: number
+    readonly testCases: ReadonlyArray<string>
+    readonly statement: string
+    readonly constraints: string
+    readonly hints: ReadonlyArray<string>
+}
+export const PROBLEM_QUERY_KEY = (problemId: string) => ['problemId', problemId]
+export async function problemFetcher(context: QueryFunctionContext<any>): Promise<TProblemFetcherData> {
+    const [_problemKey, problemId] = context.queryKey
+
+    if (!problemId) {
+        return undefined
+    }
+    
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (!MockData.problems[problemId]) {
+                resolve({} as TProblemFetcherData)
+            }
+            resolve({
+                ...MockData.problems[problemId],
+                totalAccepted: MockData.problems[problemId]['total_accepted'],
+                testCases: MockData.problems[problemId]['test_cases'],
+            })
+        })
     })
 }

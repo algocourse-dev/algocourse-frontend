@@ -1,0 +1,93 @@
+@import 'common'
+@import 'utils'
+
+.container
+    border-radius: $card-border-radius
+    flex: 1 1 auto
+    background-color: $background-color
+    display: flex
+    flex-direction: column
+
+    .tabsBar
+        display: flex
+        height: $problem-top-bar-height
+        background-color: $foreground-color
+        width: 100%
+        box-shadow: $problem-top-bar-box-shadow
+        position: relative
+        color: $text-annotation-primary-color
+
+        .selectedTab
+            color: $text-primary-color
+            background-color: $background-color
+        
+        > div
+            width: 130px
+            display: flex
+            height: 100%
+            align-items: center
+            justify-content: center
+            font-size: $small-font-size
+            cursor: pointer
+
+            &:hover
+                color: $text-primary-color
+
+    .tabContent
+        width: 100%
+        height: calc(100% - #{$header-height} - #{$problem-top-bar-height}) !important
+        padding: 20px
+
+        .inputBox
+            background-color: transparent
+            border: $separator-border
+            border-radius: $card-border-radius
+            width: 100%
+            height: 100%
+            vertical-align: top
+            font-size: $medium-font-size
+            color: #90CAF9
+            resize: none
+            padding: 10px
+
+    .controlBar
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        height: $header-height
+        background-color: $header-background-color
+        width: 100%
+        align-items: center
+        padding: 0 $edge-margin 0 $edge-margin
+        font-size: $small-font-size
+
+        button
+            height: 34px
+            padding: 1px 14px 1px 14px
+
+        button:nth-child(1)
+            margin-right: $edge-margin
+            @include secondary-button(auto, 34px, #7380d7, transparent)
+
+        button:nth-child(2)
+            @include primary-button(auto, 34px, $primary-button-color, #242f3b)
+
+        .minimizeButton
+            display: flex
+            align-items: center
+            color: $text-annotation-primary-color
+            transition: color $animation-fast-time ease, border-color $animation-fast-time ease
+            cursor: pointer
+
+            .downFilledArrow
+                @include svg-icon(auto, $icon-extra-small-size, $text-annotation-primary-color)
+                margin-left: 8px
+                display: flex
+                align-items: center
+
+            &:hover
+                color: $text-primary-color
+                border-color: $text-primary-color
+
+                .downFilledArrow
+                    @include svg-icon(auto, $icon-extra-small-size, $text-primary-color)

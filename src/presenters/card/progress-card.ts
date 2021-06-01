@@ -30,9 +30,9 @@ export function useProgressCardPresenter(): TProgressCardPresenter {
 
             return {
                 lessonsPercentage: Math.round(totalCompletedLessons / totalLessons * 100),
-                lessonsRatio: `${totalCompletedLessons}/${totalLessons}`,
+                lessonsRatio: `${totalCompletedLessons} of ${totalLessons}`,
                 practiceProblemsPercentage: Math.round(totalCompletedPracticeLessons / totalPracticeProblems * 100),
-                practiceProblemsRatio: `${totalCompletedPracticeLessons}/${totalPracticeProblems}`,
+                practiceProblemsRatio: `${totalCompletedPracticeLessons} of ${totalPracticeProblems}`,
             }
         }
     )()

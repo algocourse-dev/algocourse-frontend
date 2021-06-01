@@ -1,13 +1,40 @@
 @import 'common'
+@import 'utils'
 
 .container
     flex: 1 1 auto
     background-color: #1d1e32
+    border-radius: $card-border-radius
 
-    .topBar
-        height: 38px
-        background-color: $header-background-color
+    .controlBar
+        display: flex
+        flex-direction: row
+        height: $problem-top-bar-height
+        align-items: center
+        background-color: $foreground-color
+        border-top-left-radius: $card-border-radius
+        border-top-right-radius: $card-border-radius
+        box-shadow: $problem-top-bar-box-shadow
+        position: relative
+        z-index: 500
+        justify-content: space-between
 
-    #aceEditor
-        width: 100% !important
-        height: calc(100% - 38px) !important
+        .language
+            display: flex
+            align-items: center
+            height: 100%
+            width: 110px
+            background-color: $background-color
+            padding-left: $edge-margin
+            font-weight: $bold-font-weight
+            color: $text-annotation-primary-color
+        
+        .extraButtons
+            padding-right: $edge-margin
+            display: flex
+            align-items: center
+            
+            .extraButton
+                @include svg-icon($icon-small-size, $icon-small-size, $text-secondary-color, $text-primary-color)
+                margin-left: $edge-margin / 1.2
+                cursor: pointer

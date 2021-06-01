@@ -1,15 +1,16 @@
 import React, { memo } from 'react'
 import styles from 'styles/Practices.module.sass'
-import { TCompany, TPractice, TProblem } from 'constants/types'
+import { TCompany } from 'constants/types'
 import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
 import { ProblemResult } from 'constants/constants'
 import classnames from 'classnames'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { TPracticePresenterData, TPracticeProblemPresenterData } from 'presenters'
+import { ReactSVG } from 'react-svg'
 
 type PracticesProps = {
-    practices: ReadonlyArray<TPractice>
+    practices: ReadonlyArray<TPracticePresenterData>
 }
 
 export const Practices = memo<PracticesProps>(({practices: practices}) => {
@@ -28,7 +29,7 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         </div>
     )
 
-    function renderPractice(practice: TPractice): JSX.Element {
+    function renderPractice(practice: TPracticePresenterData): JSX.Element {
         return (
             <div className={styles.tableContainer} key={practice.id}>
                 <div className={styles.tableName}>
@@ -58,8 +59,8 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
                             <td>{generateCompaniesNames(problem.companies)}</td>
                             <td>{problem.totalAccepted}</td>
                             <td>
-                                <Image src={getStatusIconSrc(problem.status.result)}
-                                    width={15.3} height={15.3} layout='fixed' />
+                                <ReactSVG src={getStatusIconSrc(problem.status.result)}
+                                    className={getStatusIconStyle(problem.status.result)} />
                             </td>
                         </tr>
                         ))}
@@ -86,7 +87,20 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         }
     }
 
-    function onProblemClick(problem: TProblem) {
+    function getStatusIconStyle(result: ProblemResult): string {
+        switch (result) {
+            case ProblemResult.Accepted:
+                return styles.acceptedIcon
+            case ProblemResult.Rejected:
+                return styles.rejectedIcon
+            case ProblemResult.Unsolved:
+                return styles.unsolvedIcon
+            default:
+                return ''
+        }
+    }
+
+    function onProblemClick(problem: TPracticeProblemPresenterData) {
         router.push(`/problem/${problem.id}`)
     }
 })

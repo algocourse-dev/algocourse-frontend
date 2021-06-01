@@ -1,46 +1,41 @@
 @import 'common'
 
+.menuBar
+    width: 100% !important
+
 .mainContainer
     display: flex
     width: 100%
-    padding: 0 $edge-margin
+    // padding: 0 $edge-margin
     flex-direction: column
-    margin-top: $dashboard-components-margin
 
     .main
         display: flex
         align-self: center
-        width: $main-content-container-size
-        height: calc(100vh - 2 * #{$dashboard-components-margin} - #{$header-height})
-
-        .problemPaneContainer, .IDEAndConsolePaneContainer
-            flex: 1 1 auto
-            border-radius: $card-border-radius
-
-        .problemPaneContainer
-            background-color: #1d1e32
+        width: 100%
+        height: calc(100vh - #{$header-height})
 
         .verticalHandler
-            width: 14px
+            width: 2px
             cursor: ew-resize
             transition: background $animation-fast-time
+            background-color: $separator-color
+            z-index: $z-index-top-layer
 
             &:hover
-                background: yellow
+                background: #7380d7
 
         .IDEAndConsolePaneContainer
             display: flex
+            flex: 1 1 0
             flex-direction: column
             height: 100%
 
-            .consolePaneContainer
-                flex: 1 1 auto
-                background-color: #1d1e32
-
             .horizontalHandler
-                height: 14px
+                height: 2px
                 cursor: ns-resize
                 transition: background $animation-fast-time
+                background-color: $separator-color
 
                 &:hover
-                    background: yellow
+                    background: #7380d7

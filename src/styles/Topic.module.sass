@@ -47,7 +47,7 @@ $navigation-bar-height: $header-height
                 padding: 0 $edge-margin 0 $edge-margin
                 padding-top: 20px
                 padding-bottom: 5px
-                border-bottom: 1px solid $black-65-color
+                border-bottom: $separator-border
 
                 h1
                     margin: 0
@@ -95,6 +95,9 @@ $navigation-bar-height: $header-height
                             background-color: #1F3353
                             color: $text-primary-color
 
+                    .lessonCompleted .doneCheckMark
+                        @include svg-icon($width: $icon-medium-size, $height: $icon-medium-size, $color: #69f0ae,)
+
                     .lessonNotStarted
                         color: $text-annotation-secondary-color
                         cursor: not-allowed
@@ -106,7 +109,7 @@ $navigation-bar-height: $header-height
         position: fixed
         left: 0
         bottom: 0
-        height: 58px
+        height: $header-height
         width: 100%
         display: flex
         flex-direction: row
@@ -253,7 +256,6 @@ $navigation-bar-height: $header-height
                 .hideBlock
                     opacity: 0
                     height: 0
-
 
                 h2
                     color: rgb(238, 238, 238)

@@ -1,15 +1,5 @@
 @import 'common'
 
-@mixin progress-percentage($primary-color)
-    color: $primary-color
-    font-weight: $semi-bold-font-weight
-    font-size: $medium-font-size
-    margin-top: 5px
-
-%progress-annotation
-    color: $text-annotation-primary-color
-    font-size: $small-font-size
-
 .overrideBaseCard
     margin-top: $dashboard-components-margin
 
@@ -17,55 +7,42 @@
     display: flex
     flex-direction: column
 
-    .lessonsProgress
-        span:nth-child(1)
-            @include progress-percentage($lessons-progress-primary-color)
-
-        span:nth-child(2)
-            @extend %progress-annotation
-
-    .practicesProgress
-        span:nth-child(1)
-            @include progress-percentage($practice-problems-progress-primary-color)
-
-        span:nth-child(2)
-            @extend %progress-annotation
-
-    .progressContent
-        display: inline-block
-
-    span
-        display: block
-    
-    > div:first-child
+    .progressBarContainer:nth-child(1)
         margin-top: 15px
-        margin-bottom: 20px
 
-    > div
+        .progressBar
+            background-color: rgba(#69F0AE, 0.08)
+
+            div
+                background-color: #69F0AE
+    
+    .progressBarContainer:nth-child(2)
+        margin-top: 30px
+
+        .progressBar
+            background-color: $practice-problems-inner-cirle-color
+
+            div
+                background-color: $practice-problems-progress-primary-color
+
+    .progressBarContainer
         display: flex
-        flex-direction: row
-        position: relative
+        flex-direction: column
 
-        .circularProgressContainer
-            margin-right: 20px
+        .progressContent
+            color: $text-annotation-secondary-color
+            font-size: $small-font-size
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+        
+        .progressBar
+            width: 100%
+            height: 6px
+            border-radius: 3px
+            background-color: $white-color
+            margin-top: 5px
 
-            .circularProgress
-                width: 50px
-                height: 50px
-
-            .innerCircle
-                width: 38px
-                height: 38px
-                border-radius: 19px
-                position: absolute
-                top: 6px
-                left: 6px
-                display: flex
-                align-items: center
-                justify-content: center
-
-            .lessonsInnerCircle
-                background-color: $lessons-progress-inner-circle-color
-
-            .practiceProblemsInnerCircle
-                background-color: $practice-problems-inner-cirle-color
+            div
+                height: 6px
+                border-radius: 3px

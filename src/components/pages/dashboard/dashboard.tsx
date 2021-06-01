@@ -1,16 +1,22 @@
 import { StreakCard } from 'containers/card/streak-card'
 import { Header } from 'components/header'
 import { Layout } from 'components/layout'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from 'styles/Dashboard.module.sass'
 import { Strings } from 'constants/strings'
 import { CourseContent, ProgressCard } from 'containers'
 import { TipCard } from 'containers/card/tip-card'
 import { CourseLeaderboardCard } from 'containers/card/course-leaderboard-card'
 import { useRouter } from 'next/router'
+import classnames from 'classnames'
+import { Search } from './search'
+import { useHtmlClassName } from 'utils/hooks/hooks'
 
 export const Dashboard: FC = () => {
     const router = useRouter()
+    const [isSearching, setSearching] = useState(false)
+
+    useHtmlClassName(styles.html)
 
     return (
         <Layout pageTitle={Strings.DASHBOARD} className={styles.layout}>
@@ -25,12 +31,18 @@ export const Dashboard: FC = () => {
                     ]} />
             <main className={styles.mainContainer}>
                 <div className={styles.main}>
-                    <div className={styles.courseContainer}>
-                        <div className={styles.courseNotice}>
-                            <h2>Welcome back, Lena!</h2>
-                            <p>{Strings.COURSE_NOTICE}</p>
+                    <div className={classnames(styles.courseContainer, {[styles.isSearching]: isSearching})}>
+                        <div className={styles.courseHeader}>
+                            <div className={styles.courseIntro}>
+                                <h2>Welcome back, Lena!</h2>
+                                <p>{Strings.COURSE_NOTICE}</p>
+                            </div>
+                            <Search onSearchIconClick={() => setSearching(!isSearching)} />
                         </div>
-                        <CourseContent />
+                        <div className={styles.courseContent}>
+                            <CourseContent />
+                            <div className={styles.contentOverlay} />
+                        </div>
                     </div>
                     <div className={styles.widgetsContainer}>
                         <StreakCard />
@@ -40,7 +52,6 @@ export const Dashboard: FC = () => {
                     </div>
                 </div>
             </main>
-
         </Layout>
     )
 }

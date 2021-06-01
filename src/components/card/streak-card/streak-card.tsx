@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { BaseCard } from '../base-card'
 import styles from 'styles/StreakCard.module.sass'
-import Image from 'next/image'
 import { TStreakCardPresenter } from 'presenters'
 import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
@@ -31,10 +30,10 @@ export const StreakCard = memo<StreakCardProps>(({streakCardPresenter}) => {
     return (
         <BaseCard
             title={Strings.YOUR_STREAK}
-            utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
+            // utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
             >
             <div className={styles.container}>
-                <div className={styles.streakImage}>
+                {/* <div className={styles.streakImage}>
                     <Image src={streakImageSource}
                         width={39}
                         height={52}
@@ -42,7 +41,7 @@ export const StreakCard = memo<StreakCardProps>(({streakCardPresenter}) => {
                 </div>
                 <div className={streakDaysStyle}>
                     {streakDays}
-                </div>
+                </div> */}
                 <div className={styles.streakNote}>
                     {streakNote}
                 </div>

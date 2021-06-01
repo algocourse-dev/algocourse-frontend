@@ -1,0 +1,58 @@
+@import 'common'
+@import 'utils'
+
+.container
+    display: flex
+    flex-direction: row-reverse
+    align-items: center
+    width: 46px
+    height: 46px
+    cursor: pointer
+    border-radius: $card-border-radius
+    padding-left: 14px
+    transition: width $animation-fast-time ease, background-color $animation-fast-time ease
+    background-color: #242635
+    position: relative
+
+    &:hover
+        background-color: #2f3042
+
+        .searchIcon
+            @include svg-icon($width: $icon-medium-size , $height: $icon-medium-size, $color: $text-primary-color)
+            background-color: #2f3042
+
+    .searchIcon
+        @include svg-icon($width: $icon-medium-size , $height: $icon-medium-size, $color: $text-annotation-secondary-color)
+        position: absolute
+        width: 46px !important
+        height: 46px !important
+        padding: 14px 0 0 14px
+        transition: background-color $animation-fast-time ease
+
+    input
+        display: none
+        width: 100%
+        background: none
+        border: none
+        color: $text-secondary-color
+
+        &::placeholder
+            color: $text-annotation-secondary-color
+
+        &:focus
+            outline: none !important
+
+.isSearching
+    width: 100% !important
+    background-color: #2f3042 !important
+
+    img
+        opacity: 1 !important
+
+    input
+        display: inherit !important
+        color: $text-primary-color !important
+
+    .searchIcon svg path
+        fill: $text-primary-color !important
+

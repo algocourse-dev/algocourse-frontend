@@ -1,7 +1,7 @@
 import { Strings } from 'constants/strings'
 import { Header } from 'components/header'
 import { Layout } from 'components/layout'
-import { TTopicLessonPresenter, TTopicPresenter } from 'presenters'
+import { TTopicLessonPresenter, TTopicPresenter, TTopicLessonLessonPresenterData } from 'presenters'
 import React, { Fragment, memo, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import styles from 'styles/Topic.module.sass'
 import ReactMarkdown from 'react-markdown'
@@ -11,7 +11,6 @@ import { Overlay, OverlayRefProps } from 'components/overlay'
 import classnames from 'classnames'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import { Images } from 'constants/images'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { BlockType } from 'constants/constants'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -19,6 +18,7 @@ import duotoneSea from 'utils/themes/duotone-sea'
 import { scroller, Element } from 'react-scroll'
 import { usePreviousDistinct } from 'react-use'
 import { LoadingSpinner } from 'components/loading-spinner'
+import { ReactSVG } from 'react-svg'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
@@ -175,7 +175,7 @@ export const Topic = memo<TopicProps>(({
                                     <span>{lesson.title}</span>
                                     {
                                         isCompleted(index) ?
-                                            <Image src={Images.DONE_CHECK_MARK} width={16} height={16} layout='fixed'/> :
+                                            <ReactSVG src={Images.DONE_CHECK_MARK} className={styles.doneCheckMark} /> :
                                             <div className={styles.lessonsProgress}>
                                                 <CircularProgressbar value={0} strokeWidth={14} className='topicCircularProgressbar' />
                                             </div>
@@ -282,7 +282,7 @@ export const Topic = memo<TopicProps>(({
         }
     }
 
-    function onLessonItemClick(lesson: TTopicPresenter['data']['lessons'][0], lessonIndex: number) {
+    function onLessonItemClick(lesson: TTopicLessonLessonPresenterData, lessonIndex: number) {
         if ((isCompleted(lessonIndex) || isNextToLearn(lessonIndex)) && !isSelected(lessonIndex)) {
             router.replace(`/topic/${topicPresenter.data.id}/lesson/${lesson.id}`)
             lessonsListRef.current.hide()

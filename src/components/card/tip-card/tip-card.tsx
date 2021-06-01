@@ -21,7 +21,7 @@ export const TipCard = memo<TipCardProps>(({tipCardPresenter}) => {
     return (
         <BaseCard
             title={Strings.RANDOM_TIP}
-            utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
+            // utilButton={{imgSrc: Images.EXTERNAL_LINK_BUTTON}}
             className={styles.overrideBaseCard}>
             <div className={styles.container}>
                 {tipCardPresenter.data.content}

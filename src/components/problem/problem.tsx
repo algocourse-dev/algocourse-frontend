@@ -6,17 +6,24 @@ import React, { useRef, memo, useEffect } from 'react'
 import styles from 'styles/Problem.module.sass'
 import { IDEPane } from './ide-pane'
 import { Ace } from 'ace-builds'
+import { ProblemPane } from './problem-pane'
+import { TProblemPresenter } from 'presenters'
+import { ConsolePane } from './console-pane'
 
-type ProblemProps = {}
+type ProblemProps = {
+    readonly problemPresenter: TProblemPresenter
+}
 
-export const Problem = memo<ProblemProps>((props) => {
+export const Problem = memo<ProblemProps>(({problemPresenter}) => {
     const router = useRouter()
 
     const verticalHandlerRef = useRef<HTMLDivElement>(undefined)
     const horizontalHandlerRef = useRef<HTMLDivElement>(undefined)
+
     const mainRef = useRef<HTMLDivElement>(undefined)
     const problemPaneRef = useRef<HTMLDivElement>(undefined)
     const idePaneRef = useRef<HTMLDivElement>(undefined)
+    const consolePaneRef = useRef<HTMLDivElement>(undefined)
 
     const aceEditorRef = useRef<Ace.Editor>(undefined)
 
@@ -50,10 +57,11 @@ export const Problem = memo<ProblemProps>((props) => {
                     ]}
                     leftButtonsCallbacks={[
                         () => router.push('/dashboard')
-                    ]} />
+                    ]}
+                    menuBarClassName={styles.menuBar} />
             <main className={styles.mainContainer}>
                 <div className={styles.main} ref={mainRef}>
-                    {renderProblemPane()}
+                    <ProblemPane problemPresenter={problemPresenter} ref={problemPaneRef} />
                     <div className={styles.verticalHandler} ref={verticalHandlerRef} />
                     {renderIDEAndConsolePane()}
                 </div>
@@ -61,28 +69,20 @@ export const Problem = memo<ProblemProps>((props) => {
         </Layout>
     )
 
-    function renderProblemPane(): JSX.Element {
-        return (
-            <div className={styles.problemPaneContainer} ref={problemPaneRef}>
-
-            </div>
-        )
-    }
-
     function renderIDEAndConsolePane(): JSX.Element {
         return (
             <div className={styles.IDEAndConsolePaneContainer}>
                 <IDEPane onAceEditorLoad={onAceEditorLoad} ref={idePaneRef} />
                 <div className={styles.horizontalHandler} ref={horizontalHandlerRef} />
-                {renderConsolePane()}
+                <ConsolePane ref={consolePaneRef} />
+                {/* {renderConsolePane()} */}
             </div>
         )
     }
 
     function renderConsolePane(): JSX.Element {
         return(
-            <div className={styles.consolePaneContainer}>
-                
+            <div className={styles.consolePaneContainer} ref={consolePaneRef}>
             </div>
         )
     }
@@ -107,28 +107,43 @@ export const Problem = memo<ProblemProps>((props) => {
             return
         }
 
-        const pointerRelativeXpos = event.clientX - mainRef.current.offsetLeft
+        const problemPaneWidthCandidate = event.clientX - mainRef.current.offsetLeft
 
-        problemPaneRef.current.style.width = pointerRelativeXpos + 'px'
-        problemPaneRef.current.style.flexGrow = 'unset'
+        const problemPaneMinWidth = 360
+        const problemPaneMaxWidth = mainRef.current.offsetWidth - problemPaneMinWidth - 14
 
-        if (!!aceEditorRef.current) {
-            aceEditorRef.current.resize()
+        if (problemPaneMinWidth <= problemPaneWidthCandidate && problemPaneWidthCandidate <= problemPaneMaxWidth) {
+            problemPaneRef.current.style.width = problemPaneWidthCandidate + 'px'
+            problemPaneRef.current.style.flexGrow = 'unset'
+            problemPaneRef.current.style.flexBasis = 'auto'
+
+            if (!!aceEditorRef.current) {
+                aceEditorRef.current.resize()
+            }
         }
     }
 
     function handleHorizontalHandlerDragging(event: MouseEvent) {
-        if (!isHorizontalHandlerDragging.current || !mainRef.current || !idePaneRef.current) {
+        if (!isHorizontalHandlerDragging.current
+            || !mainRef.current
+            || !idePaneRef.current
+            || !consolePaneRef.current) {
             return
         }
 
-        const pointerRelativeYpos = event.clientY - mainRef.current.offsetTop
+        const idePaneHeightCandidate = event.clientY - mainRef.current.offsetTop
 
-        idePaneRef.current.style.height = pointerRelativeYpos + 'px'
-        idePaneRef.current.style.flexGrow = 'unset'
+        const idePaneMinHeight = 40
+        const idePaneMaxHeight = mainRef.current.offsetHeight - 40 - 14
 
-        if (!!aceEditorRef.current) {
-            aceEditorRef.current.resize()
+        if (idePaneMinHeight <= idePaneHeightCandidate && idePaneHeightCandidate <= idePaneMaxHeight) {
+            idePaneRef.current.style.height = idePaneHeightCandidate + 'px'
+            idePaneRef.current.style.flexGrow = 'unset'
+            idePaneRef.current.style.flexBasis = 'auto'
+
+            if (!!aceEditorRef.current) {
+                aceEditorRef.current.resize()
+            }
         }
     }
 

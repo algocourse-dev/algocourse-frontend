@@ -36,6 +36,12 @@
     cursor: pointer
     font-weight: $semi-bold-font-weight
 
+%header-container
+    width: 100%
+    display: flex
+    padding: 0 $edge-margin
+    background-color: $header-background-color
+
 @mixin primary-button($width, $height, $primary-color, $secondary-color)
     @extend %button
     border: none
@@ -52,12 +58,6 @@
     border: $secondary-button-border-width solid $primary-color
     color: $primary-color
 
-%header-container
-    width: 100%
-    display: flex
-    padding: 0 $edge-margin
-    background-color: $header-background-color
-
 @mixin max-line($number-of-lines, $line-height)
     word-break: break-word
     overflow: hidden
@@ -67,3 +67,19 @@
     -webkit-box-orient: vertical
     line-height: $line-height
     max-height: $number-of-lines * $line-height
+
+@mixin svg-icon($width, $height, $color, $hover-color: none)
+    width: $width
+    height: $height
+
+    svg
+        width: $width
+        height: $height
+
+        path
+            fill: $color
+            transition: fill $animation-fast-time ease
+
+    &:hover path
+        @if ($hover-color != none)
+            fill: $hover-color

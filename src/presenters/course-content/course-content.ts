@@ -1,10 +1,24 @@
 import { useQuery } from 'react-query'
-import { TPresenter } from "presenters/types";
-import { TModuleFetcherData, TPracticesFetcherData } from 'fetchers/types'
+import { TPresenter } from "presenters/types"
 import { modulesFetcher, MODULES_QUERY_KEY, practicesFetcher, PRACTICES_QUERY_KEY, topicsProgressFetcher, TOPICS_PROGRESS_KEY } from "fetchers"
 import { usePresenterCreator } from 'presenters/use-presenter-creator';
+import { ProblemDifficulty, TopicDifficulty, TopicNecesssity } from 'constants/constants';
+import { TCompany, TProblemStatus } from 'constants/types';
 
-export type TModulePresenterData = TModuleFetcherData & { index: string }
+export type TTopicPresenterData = {
+    readonly id: string
+    readonly title: string
+    readonly description: string
+    readonly difficulty: TopicDifficulty
+    readonly necesssity: TopicNecesssity
+    readonly totalLessons: number
+}
+export type TModulePresenterData = {
+    readonly id: string
+    readonly index: string
+    readonly title: string
+    readonly topics: ReadonlyArray<TTopicPresenterData>
+}
 export type TModulesPresenterData = {
     readonly modules: ReadonlyArray<TModulePresenterData>
 }
@@ -24,7 +38,21 @@ export function useModulesPresenter(): TModulesPresenter {
     )()
 }
 
-type TPracticesPresenterData = TPracticesFetcherData
+
+export type TPracticeProblemPresenterData = {
+    readonly id: string
+    readonly title: string
+    readonly difficulty: ProblemDifficulty
+    readonly companies: ReadonlyArray<TCompany>
+    readonly totalAccepted: number
+    readonly status: TProblemStatus
+}
+export type TPracticePresenterData = {
+    readonly id: string
+    readonly title: string
+    readonly problems: ReadonlyArray<TPracticeProblemPresenterData>
+}
+type TPracticesPresenterData = Record<string, ReadonlyArray<TPracticePresenterData>>
 export type TPracticesPresenter = TPresenter<TPracticesPresenterData>
 export function usePracticesPresenter(): TPracticesPresenter {
     return usePresenterCreator(

@@ -316,7 +316,7 @@ export const MockData = {
             progress: 65,
         },
     },
-    topic: {
+    topics: {
         'course-intro': {
             id: 'course-intro',
             title: 'Course Introduction',
@@ -345,7 +345,7 @@ export const MockData = {
             completed_lessons: 2
         }
     },
-    topic_lesson: {
+    topicLessons: {
         'course-intro': {
             'introduction-0': {
                 id: 'introduction-0',
@@ -559,6 +559,46 @@ console.log('It works!')  // highlight-line
                 title: 'Mi bibendum neque egestas congue',
                 blocks: [],
             }
+        }
+    },
+    problems: {
+        'KL01': {
+            id: 'KL01',
+            title: 'Find K-th largest element in an array',
+            difficulty: 'Medium',
+            companies: [
+                {
+                    id: 'google',
+                    name: 'Google',
+                },
+            ],
+            total_accepted: 3424,
+            statement: `
+Given an **integer** array \`nums\` and an integer \`k\`, return the \`kth\` largest element in the array.
+
+Note that it is the \`kth\` largest element in the sorted order, not the \`kth\` distinct element.
+    `,
+            test_cases: [
+`<pre>
+<b>Input</b>: <span>nums = [3,2,1,5,6,4], k = 2</span>
+<b>Output</b>: <span>5</span>
+</pre>
+`,
+`<pre>
+<b>Input</b>: <span>nums = [3,2,3,1,2,4,5,5,6], k = 4</span>
+<b>Output</b>: <span>4</span>
+<b>Explanation</b>: Neque porro quisquam est qui Dolores Ipsum quia dolor sit amet.
+</pre>
+`
+            ],
+            constraints: `
+- <pre>1 <= k <= nums.length <= 10<sup>4</sup></pre>
+- <pre>-10<sup>4</sup> <= nums[i] <= 10<sup>4</sup></pre>
+            `,
+            hints: [
+                'Lorem ipsum',
+                'Lorem ipsum',
+            ]
         }
     }
 }

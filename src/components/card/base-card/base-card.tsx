@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styles from 'styles/BaseCard.module.sass'
-import Image from 'next/image'
 import classnames from 'classnames'
+import { ReactSVG } from 'react-svg'
 
 type UtilButtonProps = {
     imgSrc?: string
@@ -10,7 +10,7 @@ type UtilButtonProps = {
 
 type BaseCardProps = {
     title: string
-    utilButton: UtilButtonProps
+    utilButton?: UtilButtonProps
     mainContentStyle?: string
     className?: string
 }
@@ -21,12 +21,13 @@ export const BaseCard: FC<BaseCardProps> = ({
         <div className={classnames(styles.container, className)}>
             <div className={styles.topRow}>
                 <div className={styles.title}>{title}</div>
-                <div className={styles.utilButtonContainer}>
-                    <Image src={utilButton.imgSrc}
-                        width={20}
-                        height={20}
-                        layout='fixed'/>
-                </div>
+                {
+                    !!utilButton && (
+                        <div className={styles.utilButtonContainer}>
+                            <ReactSVG src={utilButton.imgSrc} />
+                        </div>
+                    )
+                }
             </div>
             <div className={mainContentStyle}>
                 {children}

@@ -1,4 +1,5 @@
 @import 'common'
+@import 'utils'
 
 .container
     width: 100%
@@ -60,7 +61,7 @@
                 th
                     font-size: $small-font-size
                     font-weight: $bold-font-weight
-                    background-color: $header-background-color
+                    background-color: $practice-table-header-color
 
                 tbody
                     font-size: $small-font-size
@@ -75,6 +76,23 @@
 
                         td:nth-child(n+4)
                             text-align: right
+
+                        td:last-child
+
+                            > div
+                                width: 100% !important
+
+                            .acceptedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, #6abe8e)
+
+                            .rejectedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, #ef7e88)
+
+                            .unsolvedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, unset)
+                                
+                                g
+                                    stroke: $text-annotation-secondary-color
 
                 .problemTitle
                     color: $text-secondary-color

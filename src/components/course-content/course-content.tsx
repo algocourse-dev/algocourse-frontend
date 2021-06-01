@@ -6,6 +6,7 @@ import classnames from 'classnames'
 import { Collapse } from 'react-collapse'
 import { Topics } from './topics/topics'
 import { Practices } from 'components'
+import { CircularProgressbar } from 'react-circular-progressbar'
 
 type CourseContentProps = {
     modulesPresenter: TModulesPresenter
@@ -108,10 +109,14 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
     function renderModuleTitle(module: TModulePresenterData): JSX.Element {
         const isSelected = isModuleSelected(module.id)
         return (
-            <div className={classnames(styles.moduleTitle, {[styles.highlightedModule]: isSelected})}
+            <div className={classnames(styles.moduleTitleContainer, {[styles.highlightedModule]: isSelected})}
                 onClick={() => onModuleClick(module.id)}>
                 <div className={styles.moduleIndex}>{module.index}</div>
-                <h2>{module.title}</h2>
+                <div className={styles.moduleTitle}>{module.title}</div>
+                <div className={styles.moduleInfo}>{'3 topics • 12 problems'}</div>
+                <div className={styles.moduleProgress}>
+                    <CircularProgressbar value={0} strokeWidth={16} />
+                </div>
             </div>
         )
     }
