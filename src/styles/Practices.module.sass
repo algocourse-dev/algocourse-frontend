@@ -7,10 +7,10 @@
     flex-direction: column
 
     > span:first-child
-        color: $text-annotation-secondary-color
-        font-size: $medium-font-size
-        font-weight: $bold-font-weight
         margin-bottom: 10px
+        font-weight: $bold-font-weight
+        font-size: $medium-font-size
+        color: $text-annotation-secondary-color
 
     .practices
 
@@ -19,14 +19,12 @@
             flex-direction: column
             background-color: $practice-table-background-color
             padding: $practice-padding
-            border-radius: $card-border-radius
+            border-radius: $border-radius
             margin-top: $module-padding / 1.5
 
             .tableName
-                font-weight: $bold-font-weight
-                font-size: $medium-font-size !important
-                color: $text-primary-color
-                margin-bottom: 8px
+                @extend %h-style
+                font-size: $medium-font-size
 
             table
                 background-color: $practice-table-background-color
@@ -41,12 +39,12 @@
                         padding-right: 10px
                     
                     > th:first-child
-                        border-top-left-radius: $card-border-radius
-                        border-bottom-left-radius: $card-border-radius
+                        border-top-left-radius: $border-radius
+                        border-bottom-left-radius: $border-radius
                     
                     > th:last-child
-                        border-top-right-radius: $card-border-radius
-                        border-bottom-right-radius: $card-border-radius
+                        border-top-right-radius: $border-radius
+                        border-bottom-right-radius: $border-radius
 
                 thead tr
                     height: $practice-header-height
@@ -83,10 +81,10 @@
                                 width: 100% !important
 
                             .acceptedIcon
-                                @include svg-icon($icon-small-size, $icon-small-size, #6abe8e)
+                                @include svg-icon($icon-small-size, $icon-small-size, $problem-status-accepted-color)
 
                             .rejectedIcon
-                                @include svg-icon($icon-small-size, $icon-small-size, #ef7e88)
+                                @include svg-icon($icon-small-size, $icon-small-size, $problem-status-rejected-color)
 
                             .unsolvedIcon
                                 @include svg-icon($icon-small-size, $icon-small-size, unset)
@@ -98,14 +96,14 @@
                     color: $text-secondary-color
 
                 .problemDifficulty
-                    color: $text-primary-color !important
+                    color: $text-primary-color
                     text-align: center
-                    height: 18px
-                    border-radius: 9px
+                    height: $problem-difficulty-label-height
+                    border-radius: $problem-difficulty-label-height / 2
                     font-size: $extra-small-font-size
                     font-weight: $semi-bold-font-weight
                     display: inline-block
-                    padding: 2px 8px 0 8px
+                    padding: $problem-difficulty-label-padding
 
                 .difficultyEasy
                     background-color: $difficulty-easy-color

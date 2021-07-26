@@ -5,10 +5,10 @@
     display: flex
     flex-direction: row-reverse
     align-items: center
-    width: 46px
-    height: 46px
+    width: $dashbboard-search-button-size
+    height: $dashbboard-search-button-size
     cursor: pointer
-    border-radius: $card-border-radius
+    border-radius: $border-radius
     padding-left: 14px
     transition: width $animation-fast-time ease, background-color $animation-fast-time ease
     background-color: #242635
@@ -24,8 +24,8 @@
     .searchIcon
         @include svg-icon($width: $icon-medium-size , $height: $icon-medium-size, $color: $text-annotation-secondary-color)
         position: absolute
-        width: 46px !important
-        height: 46px !important
+        width: $dashbboard-search-button-size !important
+        height: $dashbboard-search-button-size !important
         padding: 14px 0 0 14px
         transition: background-color $animation-fast-time ease
 

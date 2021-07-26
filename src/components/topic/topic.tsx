@@ -19,6 +19,7 @@ import { scroller, Element } from 'react-scroll'
 import { usePreviousDistinct } from 'react-use'
 import { LoadingSpinner } from 'components/loading-spinner'
 import { ReactSVG } from 'react-svg'
+import { useHtmlClassName } from 'utils/hooks/hooks'
 
 type TopicProps = {
     topicPresenter: TTopicPresenter
@@ -40,6 +41,8 @@ export const Topic = memo<TopicProps>(({
     const [isBackButtonLoading, setBackButtonLoading] = useState<boolean>(false)
 
     const previousBlockIndex = usePreviousDistinct<number>(currentBlockIndex)
+
+    useHtmlClassName(styles.html)
 
     useEffect(() => {
         if (previousBlockIndex !== undefined) {

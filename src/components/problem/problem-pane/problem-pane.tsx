@@ -93,18 +93,10 @@ export const ProblemPane = memo(forwardRef<HTMLDivElement, ProblemPaneProps>(({
         if (problemPresenter.isError) {
             return <div>Error</div>  // TODO: handle isError
         }
-        
-        const {
-            title,
-            statement
-        } = problemPresenter.data
 
         return (
             <div className={styles.statementContainer}>
-                <h1>{title}</h1>
-                <div className={styles.statement}>
-                    <ReactMarkdown plugins={[gfm]} children={statement} />
-                </div>
+                {renderProblemTitle()}
                 {renderTestCases()}
                 {renderConstraints()}
                 {renderHints()}
@@ -129,9 +121,25 @@ export const ProblemPane = memo(forwardRef<HTMLDivElement, ProblemPaneProps>(({
         )
     }
 
+    function renderProblemTitle(): JSX.Element {
+        const {
+            title,
+            statement
+        } = problemPresenter.data
+
+        return (
+            <div>
+                <h1>{title}</h1>
+                <div className={styles.statement}>
+                    <ReactMarkdown plugins={[gfm]} children={statement} />
+                </div>
+            </div>
+        )
+    }
+
     function renderTestCases(): JSX.Element {
         return (
-            <Fragment>
+            <div>
                 <h2>Example test cases</h2>
                 <div className={styles.testCases}>
                     {
@@ -142,24 +150,24 @@ export const ProblemPane = memo(forwardRef<HTMLDivElement, ProblemPaneProps>(({
                         ))
                     }
                 </div>
-            </Fragment>
+            </div>
         )
     }
 
     function renderConstraints(): JSX.Element {
         return (
-            <Fragment>
+            <div>
                 <h2>Constraints</h2>
                 <div className={styles.constraints}>
                     <ReactMarkdown plugins={[gfm]} children={problemPresenter.data.constraints} allowDangerousHtml={true} />
                 </div>
-            </Fragment>
+            </div>
         )
     }
 
     function renderHints(): JSX.Element {
         return (
-            <Fragment>
+            <div>
                 <h2>Hints</h2>
                 <div className={styles.hints}>
                     {
@@ -168,15 +176,15 @@ export const ProblemPane = memo(forwardRef<HTMLDivElement, ProblemPaneProps>(({
                         ))
                     }
                 </div>
-            </Fragment>
+            </div>
         )
     }
 
     function renderCompanies(): JSX.Element {
         return (
-            <Fragment>
+            <div>
                 <h2>Companies</h2>
-            </Fragment>
+            </div>
         )
     }
 }))

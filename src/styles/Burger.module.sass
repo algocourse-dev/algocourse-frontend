@@ -1,15 +1,5 @@
 @import 'common'
 
-$header-burger-width: 20px
-$header-burger-height: 20px
-$header-burger-bar-height: 2px
-$header-burger-bar-1-width: 80%
-$header-burger-bar-2-width: 100%
-$header-burger-bar-3-width: 60%
-$header-burger-bar-gap: 7px
-$header-burger-bar-color: $text-annotation-primary-color
-$header-burger-bar-hover-color: $text-primary-color
-
 .burgerContainer
     display: flex
     flex-direction: column
@@ -25,13 +15,13 @@ $header-burger-bar-hover-color: $text-primary-color
     z-index: $z-index-top-layer
 
     &:hover div
-        background: $header-burger-bar-hover-color
+        background: $text-primary-color
 
     div
         display: block
         position: absolute
         height: $header-burger-bar-height
-        background: $header-burger-bar-color
+        background: $text-annotation-primary-color
         border-radius: $header-burger-bar-height / 2
         transition: transform $animation-fast-time
         

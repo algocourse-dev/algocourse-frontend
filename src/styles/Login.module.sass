@@ -2,7 +2,8 @@
 @import 'utils'
 
 .loginButton
-    @include primary-button(68px, 34px, $primary-button-color, #242f3b)
+    @include primary-button(auto, $regular-button-height, $primary-button-color)
+    padding: $regular-button-padding
     font-size: $small-font-size
 
 .loginPanelContainer
@@ -15,7 +16,7 @@
     overflow: hidden
     position: absolute
     padding: 20px 0 25px 0
-    border-radius: $card-border-radius
+    border-radius: $border-radius
     margin-left: calc(50% - 150px)
 
     h2
@@ -30,7 +31,7 @@
         margin-top: 18px
         align-items: center
         padding: 6px 10px 6px 10px
-        border-radius: $card-border-radius
+        border-radius: $border-radius
 
         span
             font-size: $small-font-size

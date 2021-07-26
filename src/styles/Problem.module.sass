@@ -6,7 +6,6 @@
 .mainContainer
     display: flex
     width: 100%
-    // padding: 0 $edge-margin
     flex-direction: column
 
     .main
@@ -16,14 +15,14 @@
         height: calc(100vh - #{$header-height})
 
         .verticalHandler
-            width: 2px
+            width: $problem-handler-size
             cursor: ew-resize
             transition: background $animation-fast-time
             background-color: $separator-color
             z-index: $z-index-top-layer
 
             &:hover
-                background: #7380d7
+                background: $problem-handler-highlight-color
 
         .IDEAndConsolePaneContainer
             display: flex
@@ -32,10 +31,10 @@
             height: 100%
 
             .horizontalHandler
-                height: 2px
+                height: $problem-handler-size
                 cursor: ns-resize
                 transition: background $animation-fast-time
                 background-color: $separator-color
 
                 &:hover
-                    background: #7380d7
+                    background: $problem-handler-highlight-color

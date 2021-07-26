@@ -21,6 +21,7 @@ $slate-gray-color: #6F7D95
 $texas-rose-color: #FFB74D
 $turquoise-blue-color: #69F0AE
 $white-color: #ffffff
+$chetwode-blue-color: #7380D7
 
 // Primitive-alpha colors
 $black-65-color: rgba($black-color, 0.65)
@@ -28,6 +29,7 @@ $deep-blush-8-color: rgba($deep-blush-color, 0.08)
 $java-8-color: rgba($java-color, 0.08)
 $turquoise-blue-80-color: rgba($turquoise-blue-color, 0.8)
 $silver-tree-20-color: rgba($silver-tree-color, 0.2)
+$white-50-color: rgba($white-color, 0.5)
 
 // Text colors
 $text-primary-color: #FFFFFF
@@ -47,6 +49,7 @@ $module-highlighted-color: $turquoise-blue-color
 $module-hover-color: $foreground-color
 $module-title-color: $text-annotation-secondary-color
 $module-index-background-color: $header-background-color
+$module-index-background-highlight-color: #5ce19b
 $topic-background-color: $foreground-color
 $difficulty-easy-color: $silver-tree-color
 $difficulty-medium-color: $texas-rose-color
@@ -62,35 +65,80 @@ $github-icon-color: $shark-color
 $primary-button-color: $turquoise-blue-color
 $logo-text-color: $white-color
 $overlay-background-color: $black-65-color
-$base-card-background-color: $foreground-color
 $base-card-title-color: $text-primary-color
-$practice-table-header-color: #252436
+$practice-table-header-color: #29293A
 $practice-table-background-color: $foreground-color
 $topic-navigation-button-disable-color: #474858
 $separator-color: $header-background-color
+
+$dashboard-base-card-background-color: $foreground-color
+$dashboard-module-index-color: $white-50-color
+
+$problem-tabs-bar-background-color: $foreground-color
+$problem-panes-background-color: $background-color
+$problem-bottom-bar-background-color: $header-background-color
+$problem-custom-input-text-color: #90CAF9
+$problem-handler-highlight-color: $chetwode-blue-color
+$problem-hint-background-color: #29293A
+
+$problem-status-accepted-color: $silver-tree-color
+$problem-status-rejected-color: $brink-pink-color
 
 // =============================== SCREEN SIZES, COMPONENT SIZES ===============================
 
 $edge-margin: 20px
 $header-height: 50px
-$main-content-container-size: 1250px
+
+$regular-button-height: 34px
+$regular-button-padding: 1px 14px 1px 14px
+
+$dashboard-main-content-container-size: 1250px
 $dashboard-components-margin: 26px
-$left-panel-width: 290px
-$right-panel-width: $main-content-container-size - $left-panel-width - $dashboard-components-margin
-$card-border-radius: 2px
+$dashboard-left-panel-width: 290px
+$dashbboard-search-button-size: 46px
+$dashboard-right-panel-width: $dashboard-main-content-container-size - $dashboard-left-panel-width - $dashboard-components-margin
+$dashboard-base-card-padding: 15px
+$dashboard-module-height: 54px
+$dashboard-module-index-width: $dashboard-module-height
+$dashboard-module-info-width: 300px
+
+$header-burger-width: 20px
+$header-burger-height: 20px
+$header-burger-bar-height: 2px
+$header-burger-bar-1-width: 80%
+$header-burger-bar-2-width: 100%
+$header-burger-bar-3-width: 60%
+$header-burger-bar-gap: 7px
+
+$home-main-content-container-size: $dashboard-main-content-container-size
+$border-radius: 2px
 $module-padding: 30px
-$topic-card-width: ($right-panel-width - 4 * $module-padding) / 3
+$topic-card-width: ($dashboard-right-panel-width - 4 * $module-padding) / 3
 $topic-padding: 10px
 $practice-padding: $topic-padding
 $practice-header-height: 38px
 $practice-row-height: 42px
 $secondary-button-border-width: 2px
-$base-card-padding: 15px
-$problem-top-bar-height: 40px
 
+$problem-top-bar-height: 40px
+$problem-panes-tab-width: 130px
+$problem-bottom-bar-height: $header-height
+$problem-test-case-padding: 10px
+$problem-handler-size: 2px
+$problem-test-case-margin-top: 18px
+$problem-hint-margin-top: $problem-test-case-margin-top
+$problem-hint-height: 40px
+$problem-hint-padding: 0 10px 0 10px
+
+$icon-large-size: 18px
 $icon-medium-size: 16px
 $icon-small-size: 14px
 $icon-extra-small-size: 10px
+
+$h-margin: 10px
+
+$problem-difficulty-label-height: 18px
+$problem-difficulty-label-padding: 2px 8px 0 8px
 
 // =============================== FONT SIZES ===============================
 
@@ -117,7 +165,6 @@ $extra-small-breakpoint: 600px   // for 600px-and-down devices
 
 // =============================== EFFECT, ANIMATION ===============================
 
-$animation-blazingly-fast-time: 0.1s
 $animation-fast-time: 0.3s
 $animation-medium-time: 0.5s
 
@@ -130,5 +177,9 @@ $z-index-top-layer: 1000
 
 // =============================== BORDER ===============================
 
-$separator-border: 2px solid $separator-color
-$problem-top-bar-box-shadow: none // 0 6px 4px -5px $black-color
+$border-width: 2px
+$separator-border: $border-width solid $separator-color
+
+// =============================== OTHERS ===============================
+
+$backdrop-filter: blur(0.8px)

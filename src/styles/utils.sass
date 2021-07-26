@@ -32,7 +32,7 @@
 
 %button
     display: inline-block
-    border-radius: $card-border-radius
+    border-radius: $border-radius
     cursor: pointer
     font-weight: $semi-bold-font-weight
 
@@ -42,7 +42,13 @@
     padding: 0 $edge-margin
     background-color: $header-background-color
 
-@mixin primary-button($width, $height, $primary-color, $secondary-color)
+%h-style
+    margin-top: 0
+    margin-bottom: $h-margin
+    font-weight: $bold-font-weight
+    color: $text-primary-color
+
+@mixin primary-button($width, $height, $primary-color, $secondary-color: $background-color)
     @extend %button
     border: none
     width: $width

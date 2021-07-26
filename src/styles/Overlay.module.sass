@@ -11,10 +11,10 @@
 
 .containerShow
     opacity: 1
-    backdrop-filter: blur(0.8px)
-    transition: opacity $animation-fast-time
+    backdrop-filter: $backdrop-filter
+    transition: opacity $animation-fast-time ease
 
 .containerHide
     opacity: 0
-    transition: opacity $animation-fast-time
+    transition: opacity $animation-fast-time ease
     pointer-events: none

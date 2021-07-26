@@ -3,20 +3,18 @@
 
 .container
     flex: 1 1 auto
-    background-color: #1d1e32
-    border-radius: $card-border-radius
+    border-radius: $border-radius
 
     .controlBar
         display: flex
         flex-direction: row
         height: $problem-top-bar-height
         align-items: center
-        background-color: $foreground-color
-        border-top-left-radius: $card-border-radius
-        border-top-right-radius: $card-border-radius
-        box-shadow: $problem-top-bar-box-shadow
+        background-color: $problem-tabs-bar-background-color
+        border-top-left-radius: $border-radius
+        border-top-right-radius: $border-radius
         position: relative
-        z-index: 500
+        z-index: $z-index-middle-layer
         justify-content: space-between
 
         .language

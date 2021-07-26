@@ -2,18 +2,17 @@
 @import 'utils'
 
 .container
-    border-radius: $card-border-radius
+    border-radius: $border-radius
     flex: 1 1 auto
-    background-color: $background-color
+    background-color: $problem-panes-background-color
     display: flex
     flex-direction: column
 
     .tabsBar
         display: flex
         height: $problem-top-bar-height
-        background-color: $foreground-color
+        background-color: $problem-tabs-bar-background-color
         width: 100%
-        box-shadow: $problem-top-bar-box-shadow
         position: relative
         color: $text-annotation-primary-color
 
@@ -22,7 +21,7 @@
             background-color: $background-color
         
         > div
-            width: 130px
+            width: $problem-panes-tab-width
             display: flex
             height: 100%
             align-items: center
@@ -35,42 +34,42 @@
 
     .tabContent
         width: 100%
-        height: calc(100% - #{$header-height} - #{$problem-top-bar-height}) !important
-        padding: 20px
+        height: calc(100% - #{$problem-bottom-bar-height} - #{$problem-top-bar-height}) !important
+        padding: $edge-margin
 
         .inputBox
             background-color: transparent
             border: $separator-border
-            border-radius: $card-border-radius
+            border-radius: $border-radius
             width: 100%
             height: 100%
             vertical-align: top
             font-size: $medium-font-size
-            color: #90CAF9
+            color: $problem-custom-input-text-color
             resize: none
-            padding: 10px
+            padding: $problem-test-case-padding
 
     .controlBar
         display: flex
         flex-direction: row
         justify-content: space-between
-        height: $header-height
-        background-color: $header-background-color
+        height: $problem-bottom-bar-height
+        background-color: $problem-bottom-bar-background-color
         width: 100%
         align-items: center
         padding: 0 $edge-margin 0 $edge-margin
         font-size: $small-font-size
 
         button
-            height: 34px
-            padding: 1px 14px 1px 14px
+            height: $regular-button-height
+            padding: $regular-button-padding
 
         button:nth-child(1)
             margin-right: $edge-margin
-            @include secondary-button(auto, 34px, #7380d7, transparent)
+            @include secondary-button(auto, $regular-button-height, $chetwode-blue-color, transparent)
 
         button:nth-child(2)
-            @include primary-button(auto, 34px, $primary-button-color, #242f3b)
+            @include primary-button(auto, $regular-button-height, $primary-button-color)
 
         .minimizeButton
             display: flex

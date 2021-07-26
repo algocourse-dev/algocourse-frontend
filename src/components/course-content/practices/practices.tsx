@@ -32,9 +32,9 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
     function renderPractice(practice: TPracticePresenterData): JSX.Element {
         return (
             <div className={styles.tableContainer} key={practice.id}>
-                <div className={styles.tableName}>
+                <h3 className={styles.tableName}>
                     {practice.title}
-                </div>
+                </h3>
                 <table>
                     <thead>
                         <tr>
