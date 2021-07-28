@@ -23,4 +23,5 @@ export const Images = {
     FACEBOOK_ICON: '/images/facebook-icon.svg',
     GITHUB_ICON: '/images/github-icon.svg',
     DOWN_FILLED_ARROW: '/images/down-filled-arrow.svg',
+    LANDING_CURVE: '/images/landing-curve.svg',
 }
