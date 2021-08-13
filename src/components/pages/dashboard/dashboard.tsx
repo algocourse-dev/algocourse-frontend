@@ -21,7 +21,7 @@ export const Dashboard: FC = () => {
     return (
         <Layout pageTitle={Strings.DASHBOARD} className={styles.layout}>
             <Header enableHamburgerMenu={false}
-                    showLogoText={false}
+                    showLogoText={true}
                     leftButtonsLabel={[
                         Strings.DASHBOARD,
                         Strings.PRACTICE,
@@ -33,11 +33,10 @@ export const Dashboard: FC = () => {
                 <div className={styles.main}>
                     <div className={classnames(styles.courseContainer, {[styles.isSearching]: isSearching})}>
                         <div className={styles.courseHeader}>
+                            <Search onSearchIconClick={() => setSearching(!isSearching)} />
                             <div className={styles.courseIntro}>
                                 <h2>Welcome back, Lena!</h2>
-                                <p>{Strings.COURSE_NOTICE}</p>
                             </div>
-                            <Search onSearchIconClick={() => setSearching(!isSearching)} />
                         </div>
                         <div className={styles.courseContent}>
                             <CourseContent />

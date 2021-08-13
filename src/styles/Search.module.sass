@@ -3,15 +3,12 @@
 
 .container
     display: flex
-    flex-direction: row-reverse
     align-items: center
-    width: $dashbboard-search-button-size
-    height: $dashbboard-search-button-size
-    cursor: pointer
+    width: $dashboard-search-button-width
+    height: $dashboard-search-button-height
     border-radius: $border-radius
-    padding-left: 14px
     transition: width $animation-fast-time ease, background-color $animation-fast-time ease
-    background-color: $mirage-color
+    background-color: $foreground-color
     position: relative
 
     &:hover
@@ -23,15 +20,13 @@
 
     .searchIcon
         @include svg-icon($width: $icon-medium-size , $height: $icon-medium-size, $color: $text-annotation-secondary-color)
-        position: absolute
-        width: $dashbboard-search-button-size !important
-        height: $dashbboard-search-button-size !important
+        width: $dashboard-search-button-height !important
+        height: $dashboard-search-button-height !important
         padding: 14px 0 0 14px
         transition: background-color $animation-fast-time ease
 
     input
-        display: none
-        width: 100%
+        width: calc(100% - #{$dashboard-search-button-height})
         background: none
         border: none
         color: $text-secondary-color

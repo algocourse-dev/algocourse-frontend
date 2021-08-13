@@ -85,6 +85,7 @@ type TPracticeProblemFetcherData = {
 }
 type TPracticeFetcherData = {
     readonly id: string
+    readonly topicId: string
     readonly title: string
     readonly problems: ReadonlyArray<TPracticeProblemFetcherData>
 }
@@ -121,6 +122,7 @@ export const practicesFetcher: () => Promise<TPracticesFetcherData> = async () =
     function parsePractices(practices): ReadonlyArray<TPracticeFetcherData> {
         return practices && practices.map((practice): TPracticeFetcherData => ({
             id: practice['id'],
+            topicId: practice['topic_id'],
             title: practice['title'],
             problems: parseProblems(practice['problems']),
         }))

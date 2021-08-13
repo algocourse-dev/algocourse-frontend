@@ -31,7 +31,6 @@
                 flex-direction: row
                 width: 100%
                 margin-bottom: $dashboard-components-margin
-                justify-content: flex-end
 
                 h2
                     @extend %h-style
@@ -46,7 +45,7 @@
                     @include max-line($number-of-lines: 1, $line-height: 17px)
 
                 .courseIntro
-                    width: calc(100% - #{$dashbboard-search-button-size})
+                    width: calc(100% - #{$dashboard-search-button-width})
                     opacity: 1
                     transition: width $animation-fast-time ease, opacity $animation-fast-time ease
 

@@ -102,6 +102,7 @@ export const MockData = {
         'module_0': [
             {
                 id: 'introduction',
+                topic_id: 'course-intro',
                 title: 'Introduction',
                 problems: [
                     {
@@ -158,6 +159,7 @@ export const MockData = {
             },
             {
                 id: 'complexity',
+                topic_id: 'complexity',
                 title: 'Complexity',
                 problems: [
                     {
@@ -216,6 +218,7 @@ export const MockData = {
         'module_1': [
             {
                 id: 'basic-recursion',
+                topic_id: 'recursion',
                 title: 'Basic recursion',
                 problems: [
                     {

@@ -1,20 +1,19 @@
 import React, { memo } from 'react'
-import { TTopicsProgressPresenter, useTopicsProgressPresenter, TTopicPresenterData } from 'presenters'
+import { TTopicPresenterData, TTopicsProgressPresenter } from 'presenters'
 import styles from 'styles/Topics.module.sass'
-import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
 import classnames from 'classnames'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import { useRouter } from 'next/router'
-import { ReactSVG } from 'react-svg'
 
 type TopicsProps = {
     topics: ReadonlyArray<TTopicPresenterData>
+    selectedTopicId: string
     topicsProgress: TTopicsProgressPresenter
+    onTopicSelected?(topic: TTopicPresenterData): void
 }
 
-export const Topics = memo<TopicsProps>(({topics}) => {
-    const { data: progress, isLoading: isProgressLoading, isError: isProgressError } = useTopicsProgressPresenter()
+export const Topics = memo<TopicsProps>(({topics, selectedTopicId, topicsProgress, onTopicSelected}) => {
     const router = useRouter()
 
     if (topics.length === 0) {
@@ -31,22 +30,23 @@ export const Topics = memo<TopicsProps>(({topics}) => {
     )
 
     function renderTopic(topic: TTopicPresenterData): JSX.Element {
+        const topicClassName = classnames(styles.topic, {[styles.highlightedTopic]: topic.id === selectedTopicId})
         const difficultyClassName = classnames(styles.difficulty, styles[`difficulty${topic.difficulty}`])
         const progressComponent = getProgressComponentForTopic(topic.id)
         return (
-            <div className={styles.topic} key={topic.id} onClick={() => router.push(`/topic/${topic.id}`)}>
+            <div className={topicClassName} key={topic.id} onClick={() => onTopicClick(topic)}>
                 <span>{topic.title}</span>
                 <span>{topic.description}</span>
-                <div>
-                    <ReactSVG src={Images.LESSON} className={styles.metadataIcon} />
-                    <span>{`${topic.totalLessons} lessons`}</span>
-                </div>
-                <div>
-                    <ReactSVG src={Images.NECESSITY} className={styles.metadataIcon} />
-                    <span>{topic.necesssity}</span>
-                </div>
-                <div className={difficultyClassName}>
-                    {topic.difficulty}
+                <div className={styles.metadataContainer}>
+                    <div className={styles.numberOfLessons}>
+                        {`${topic.totalLessons} lessons`}
+                    </div>
+                    <div className={styles.metadata}>
+                        <div className={difficultyClassName}>
+                            {topic.difficulty}
+                        </div>
+                        <div className={styles.learn} onClick={() => router.push(`/topic/${topic.id}`)}>Learn</div>
+                    </div>
                 </div>
                 <div className={styles.progressComponent}>
                     {progressComponent}
@@ -55,17 +55,14 @@ export const Topics = memo<TopicsProps>(({topics}) => {
         )
     }
 
+    function onTopicClick(topic: TTopicPresenterData): void {
+        if (onTopicSelected) {
+            onTopicSelected(topic)
+        }
+    }
+
     function getProgressComponentForTopic(topicId: string) {
-        if (isProgressLoading || isProgressError) {
-            return null  // TODO: return loading component
-        }
-        if (!progress[topicId]) {
-            return null  // TODO: return lock component
-        }
-        if (progress[topicId].percentage >= 100) {
-            return null  // TODO: return complete component
-        }
-        return <CircularProgressbar value={progress[topicId].percentage}
+        return <CircularProgressbar value={topicsProgress[topicId]?.percentage || 0}
             strokeWidth={14} className='topicCircularProgressbar' />
     }
 })

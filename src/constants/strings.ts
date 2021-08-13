@@ -33,7 +33,6 @@ export const Strings = {
     LOGIN_WITH_GITHUB: 'Login with Github',
     LOGIN_WITH_GOOGLE: 'Login with Google',
     LOGIN_WITH_YOUR_SOCIAL_ACCOUNTS: 'Login with your social accounts',
-    COURSE_NOTICE: "We recommend you to learn from left to right, top to bottom for the best experience and result.",
     BACK_TO_ALL_TOPICS: 'Back to all topics',
     LESSONS: 'LESSONS',
     BACK: 'Back',

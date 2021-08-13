@@ -1,6 +1,5 @@
-import { TModulePresenterData, TModulesPresenter, TPracticesPresenter, TTopicsProgressPresenter } from 'presenters'
-import React, { Fragment, memo, useState } from 'react'
-import { Strings } from 'constants/strings'
+import { TModulePresenterData, TModulesPresenter, TPracticesPresenter, TLearningProgressStatePresenter } from 'presenters'
+import React, { Fragment, memo, useState, useRef, useEffect } from 'react'
 import styles from 'styles/CourseContent.module.sass'
 import classnames from 'classnames'
 import { Collapse } from 'react-collapse'
@@ -11,16 +10,21 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 type CourseContentProps = {
     modulesPresenter: TModulesPresenter
     practicesPresenter: TPracticesPresenter
-    topicsProgress: TTopicsProgressPresenter
+    learningProgressState: TLearningProgressStatePresenter
 }
 
-type SelectedModuleState = {
-    id: string
-    isPracticeExpanded: boolean
-}
+export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practicesPresenter, learningProgressState}) => {
+    const [selectedModuleId, setSelectedModuleId] = useState<string>(undefined)
+    const [selectedTopicId, setSelectedTopicId] = useState<string>(undefined)
+    const hasSetDefaultSelectedModuleId = useRef<Boolean>(false)
 
-export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practicesPresenter, topicsProgress}) => {
-    const [selectedModule, setSelectedModule] = useState<SelectedModuleState>({id: undefined, isPracticeExpanded: false})
+    useEffect(() => {
+        const modules = modulesPresenter.data?.modules
+        if (!!modules && modules.length > 0 && !hasSetDefaultSelectedModuleId.current) {
+            setSelectedModuleId(modules[0].id)
+            hasSetDefaultSelectedModuleId.current = true
+        }
+    }, [modulesPresenter.data])
 
     if (modulesPresenter.isLoading) {
         // TODO: handle isLoading
@@ -31,7 +35,17 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
         // TODO: handle isError
         return null
     }
-    
+
+    if (learningProgressState.isLoading) {
+        // TODO: handle isLoading
+        return null
+    }
+
+    if (learningProgressState.isError) {
+        // TODO: handle isError
+        return null
+    }
+
     return (
         <Fragment>
             <div className={styles.modulesContainer}>
@@ -41,9 +55,7 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
                         <div key={module.id} className={classnames(styles.moduleContainer, {[styles.highlightedContainer]: isSelected})}>
                             {renderModuleTitle(module)}
                             <div className={classnames(styles.collapseContainer, {[styles.selectedCollapseContainer]: isSelected, [styles.unselecteCollapseContainer]: !isSelected})}>
-                                {renderCollapsibleTopics(module)}
-                                {renderCollapsiblePractices(module)}
-                                {renderSeeMoreButton(module.id)}
+                                {renderCollapsibleTopicsAndPractices(module)}
                             </div>
                         </div>
                     )
@@ -52,58 +64,28 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
         </Fragment>
     )
 
-    function renderCollapsibleTopics(module: TModulePresenterData): JSX.Element {
+    function renderCollapsibleTopicsAndPractices(module: TModulePresenterData): JSX.Element {
         const isSelected = isModuleSelected(module.id)
         return (                        
             <Collapse isOpened={isSelected}
                 theme={{collapse: styles.topicCollapse, content:
                         classnames(styles.topicContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
-                <Topics topics={module.topics} topicsProgress={topicsProgress} />
-            </Collapse>
-        )
-    }
-
-    function renderCollapsiblePractices(module: TModulePresenterData): JSX.Element {
-        const isSelected = isModuleSelected(module.id)
-        const isPracticeExpanded = isSelected && selectedModule.isPracticeExpanded
-        return (
-            <Collapse isOpened={isPracticeExpanded}
-                theme={{collapse: styles.practiceCollapse, content:
-                    classnames(styles.practiceContent, {[styles.unselectedCollapseContent]: !isSelected, [styles.selectedCollapseContent]: isSelected})}}>
+                <Topics
+                    topics={module.topics}
+                    selectedTopicId={selectedTopicId}
+                    onTopicSelected={(topic) => setSelectedTopicId(topic.id)}
+                    topicsProgress={learningProgressState.data.topicsProgress} />
                 {
                     practicesPresenter.isLoading ?
                         null :  // TODO: handle isLoading
                     practicesPresenter.isError ?
                         null :
-                    <Practices practices={practicesPresenter.data[module.id]} />            
+                    <Practices
+                        practices={practicesPresenter.data[module.id]}
+                        selectedTopicId={selectedTopicId} />
                 }
             </Collapse>
         )
-    }
-
-    function renderSeeMoreButton(moduleId: string): JSX.Element {
-        if (!isModuleSelected(moduleId)) {
-            return null
-        }
-
-        if (selectedModule.isPracticeExpanded) {
-            return (
-                <div className={styles.seeMoreButton} onClick={() => onPracticeCollapsed()}>
-                    {Strings.SEE_LESS}
-                </div>
-            )
-        }
-
-        if (practicesPresenter.isLoading || practicesPresenter.isError ||
-            (practicesPresenter.data[moduleId] && practicesPresenter.data[moduleId].length > 0)) {
-            return (
-                <div className={styles.seeMoreButton} onClick={() => onPracticeExpanded()}>
-                    {Strings.SEE_MORE}
-                </div>
-            )
-        }
-
-        return null
     }
 
     function renderModuleTitle(module: TModulePresenterData): JSX.Element {
@@ -122,22 +104,12 @@ export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practi
     }
 
     function isModuleSelected(moduleId: string) {
-        return moduleId === selectedModule.id
+        return moduleId === selectedModuleId
     }
 
     function onModuleClick(moduleId: string) {
         if (!isModuleSelected(moduleId)) {
-            setSelectedModule({id: moduleId, isPracticeExpanded: false})
-        } else {
-            setSelectedModule({id: undefined, isPracticeExpanded: false})
+            setSelectedModuleId(moduleId)
         }
-    }
-
-    function onPracticeExpanded() {
-        setSelectedModule({...selectedModule, isPracticeExpanded: true})
-    }
-
-    function onPracticeCollapsed() {
-        setSelectedModule({...selectedModule, isPracticeExpanded: false})
     }
 })

@@ -11,12 +11,13 @@ import { ReactSVG } from 'react-svg'
 
 type PracticesProps = {
     practices: ReadonlyArray<TPracticePresenterData>
+    selectedTopicId: string
 }
 
-export const Practices = memo<PracticesProps>(({practices: practices}) => {
+export const Practices = memo<PracticesProps>(({practices: practices, selectedTopicId}) => {
     const router = useRouter()
 
-    if (!practices || practices.length === 0) {
+    if (!practices || practices.length === 0 || practices.filter(practice => practice.topicId === selectedTopicId).length === 0) {
         return null
     }
 
@@ -24,7 +25,7 @@ export const Practices = memo<PracticesProps>(({practices: practices}) => {
         <div className={styles.container}>
             <span>{Strings.PRACTICE}</span>
             <div className={styles.practices}>
-                {practices.map(practice => renderPractice(practice))}
+                {practices.filter(practice => practice.topicId === selectedTopicId).map(practice => renderPractice(practice))}
             </div>
         </div>
     )

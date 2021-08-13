@@ -5,12 +5,13 @@
     width: 100%
     display: flex
     flex-direction: column
+    margin-top: $module-padding
 
     > span:first-child
         margin-bottom: 10px
         font-weight: $bold-font-weight
         font-size: $medium-font-size
-        color: $text-annotation-secondary-color
+        color: #5765F1
 
     .practices
 
@@ -28,7 +29,7 @@
 
             table
                 background-color: $practice-table-background-color
-                color: $text-annotation-secondary-color
+                color: $text-annotation-primary-color
                 border-collapse: collapse
 
                 tr
@@ -48,7 +49,7 @@
 
                 thead tr
                     height: $practice-header-height
-                    color: $text-annotation-secondary-color
+                    color: $text-annotation-primary-color
 
                     th:nth-child(n+1):nth-child(-n+3)
                         text-align: left

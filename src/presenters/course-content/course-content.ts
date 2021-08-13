@@ -49,6 +49,7 @@ export type TPracticeProblemPresenterData = {
 }
 export type TPracticePresenterData = {
     readonly id: string
+    readonly topicId: string
     readonly title: string
     readonly problems: ReadonlyArray<TPracticeProblemPresenterData>
 }
@@ -61,9 +62,14 @@ export function usePracticesPresenter(): TPracticesPresenter {
     )()
 }
 
-type TTopicsProgressPresenterData = Record<string, { percentage: number }>
-export type TTopicsProgressPresenter = TPresenter<TTopicsProgressPresenterData>
-export function useTopicsProgressPresenter(): TTopicsProgressPresenter {
+export type TTopicsProgressPresenter = Record<string, { percentage: number }>
+type TLearningProgressStatePresenterData = {
+    topicsProgress: TTopicsProgressPresenter
+    firstUnfinishedLessonId: string
+    firstUnfinishedTopicId: string
+}
+export type TLearningProgressStatePresenter = TPresenter<TLearningProgressStatePresenterData>
+export function useLearningProgressState(): TLearningProgressStatePresenter {
     return usePresenterCreator(
         () => useModulesPresenter(),
         () => useQuery(TOPICS_PROGRESS_KEY, topicsProgressFetcher),
@@ -79,14 +85,19 @@ export function useTopicsProgressPresenter(): TTopicsProgressPresenter {
                 return topics
             }, {})
         
-            let presenterData = {}
+            let topicsProgress: TTopicsProgressPresenter = {}
             for(const topicId of Object.keys(progressData)) {
                 if (!!topics[topicId]) {
-                    presenterData[topicId] = { percentage: progressData[topicId].completedLessons / topics[topicId].totalLessons * 100 }
+                    const topicPercentage = progressData[topicId].completedLessons / topics[topicId].totalLessons * 100
+                    topicsProgress[topicId] = { percentage: topicPercentage }
                 }
             }
 
-            return presenterData
+            return {
+                topicsProgress,
+                firstUnfinishedLessonId: undefined,
+                firstUnfinishedTopicId: undefined
+            }
         }
     )()
 }

@@ -18,21 +18,6 @@ $dashboard-see-more-button-height: 20px
             border-bottom-right-radius: $border-radius
             border-top: unset !important
 
-            .seeMoreButton
-                position: absolute
-                background-color: $module-highlighted-color
-                width: $dashboard-see-more-button-width
-                height: $dashboard-see-more-button-height
-                border-radius: $dashboard-see-more-button-height / 2
-                left: calc(100%/2 - #{$dashboard-see-more-button-width}/2)
-                bottom: -$dashboard-see-more-button-height / 2
-                text-align: center
-                cursor: pointer
-                font-size: $small-font-size
-                color: $background-color
-                font-weight: $semi-bold-font-weight
-                padding: 3px
-
         .selectedCollapseContainer
             border: $border-width solid $module-highlighted-color
 
@@ -48,7 +33,8 @@ $dashboard-see-more-button-height: 20px
             border-radius: $border-radius
             cursor: pointer
             color: $text-primary-color
-            border: $separator-border
+            border: 2px solid $module-hover-color
+            background-color: $module-hover-color
 
             .moduleIndex
                 font-size: $extra-large-font-size
@@ -85,9 +71,7 @@ $dashboard-see-more-button-height: 20px
                     stroke: $topic-circular-progress-bar-path-color !important
 
             &:hover
-                background-color: $module-hover-color
                 color: $text-primary-color
-                border-color: $module-hover-color
 
                 .moduleIndex
                     color: $text-primary-color
@@ -101,22 +85,23 @@ $dashboard-see-more-button-height: 20px
                         stroke: $background-color
 
         .highlightedModule
-            color: $background-color !important
+            color: $text-primary-color !important
             background-color: $module-highlighted-color !important
             border-bottom-left-radius: 0px
             border-bottom-right-radius: 0px
             border-color: $module-highlighted-color !important
+            cursor: default !important
 
             .moduleIndex
                 background-color: $module-index-background-highlight-color !important
-                color: $background-color !important
+                color: $text-primary-color !important
                 opacity: 1 !important
                 border-top-right-radius: 0px
                 border-bottom-right-radius: 0px
                 border-bottom-left-radius: 0px
 
             .moduleInfo
-                color: $background-color !important
+                color: $text-primary-color !important
 
             .moduleProgress
 
@@ -126,7 +111,7 @@ $dashboard-see-more-button-height: 20px
                 > svg > path:nth-child(2)
                     stroke: $background-color !important
 
-        .topicCollapse, .practiceCollapse
+        .topicCollapse
             max-width: 100%
             transition: height $animation-fast-time ease
 
@@ -140,6 +125,3 @@ $dashboard-see-more-button-height: 20px
 
         .topicContent
             padding: $module-padding/2 $module-padding $module-padding $module-padding
-
-        .practiceContent
-            padding: 0px $module-padding $module-padding $module-padding
