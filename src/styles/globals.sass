@@ -1,17 +1,81 @@
-@import 'constants'
+@import 'common'
+
+html
+    overflow-x: hidden
+    overflow-y: hidden
 
 html, body
     max-width: 100%
-    overflow-x: hidden
     padding: 0
     margin: 0
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
+    font-family: AvertaStd, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
 
 body
-    background-color: $background-color
+    position: relative
 
 *
     box-sizing: border-box
 
-.boldText
-    color: $text-bold-color
+// h1, h2, h3, p
+//     margin: 0
+
+button
+    &:focus
+        outline: 0 !important
+
+@font-face
+    font-family: "Gilroy"
+    src: url("/fonts/Gilroy/Gilroy-Regular.ttf")
+    font-weight: $regular-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "Gilroy"
+    src: url("/fonts/Gilroy/Gilroy-Medium.ttf")
+    font-weight: $medium-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "Gilroy"
+    src: url("/fonts/Gilroy/Gilroy-SemiBold.ttf")
+    font-weight: $semi-bold-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "Gilroy"
+    src: url("/fonts/Gilroy/AvertaStd-Bold.ttf")
+    font-weight: $bold-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "AvertaStd"
+    src: url("/fonts/AvertaStd/AvertaStd-Regular.ttf")
+    font-weight: $regular-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "AvertaStd"
+    src: url("/fonts/AvertaStd/AvertaStd-SemiBold.ttf")
+    font-weight: $semi-bold-font-weight
+    font-display: swap
+
+@font-face
+    font-family: "AvertaStd"
+    src: url("/fonts/AvertaStd/AvertaStd-Bold.ttf")
+    font-weight: $bold-font-weight
+    font-display: swap
+
+.topicCircularProgressbar
+    .CircularProgressbar-path
+        stroke: $topic-circular-progress-bar-path-color
+
+    .CircularProgressbar-trail
+        stroke: $topic-circular-progress-bar-trail-color
+
+#aceEditor
+    width: 100% !important
+    height: calc(100% - #{$problem-top-bar-height}) !important
+    background-color: #181722 !important
+
+    .ace_gutter
+        background: unset !important

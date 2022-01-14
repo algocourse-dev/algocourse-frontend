@@ -1,0 +1,38 @@
+@import 'common'
+@import 'utils'
+
+.container
+    flex: 1 1 auto
+    border-radius: $border-radius
+
+    .controlBar
+        display: flex
+        flex-direction: row
+        height: $problem-top-bar-height
+        align-items: center
+        background-color: $problem-tabs-bar-background-color
+        border-top-left-radius: $border-radius
+        border-top-right-radius: $border-radius
+        position: relative
+        z-index: $z-index-middle-layer
+        justify-content: space-between
+
+        .language
+            display: flex
+            align-items: center
+            height: 100%
+            width: 110px
+            background-color: $background-color
+            padding-left: $edge-margin
+            font-weight: $bold-font-weight
+            color: $text-annotation-primary-color
+        
+        .extraButtons
+            padding-right: $edge-margin
+            display: flex
+            align-items: center
+            
+            .extraButton
+                @include svg-icon($icon-small-size, $icon-small-size, $text-secondary-color, $text-primary-color)
+                margin-left: $edge-margin / 1.2
+                cursor: pointer

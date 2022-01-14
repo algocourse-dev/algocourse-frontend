@@ -1,0 +1,119 @@
+@import 'common'
+@import 'utils'
+
+.container
+    width: 100%
+    display: flex
+    flex-direction: column
+    margin-top: $module-padding
+
+    > span:first-child
+        margin-bottom: 10px
+        font-weight: $bold-font-weight
+        font-size: $medium-font-size
+        color: #5765F1
+
+    .practices
+
+        .tableContainer
+            display: flex
+            flex-direction: column
+            background-color: $practice-table-background-color
+            padding: $practice-padding
+            border-radius: $border-radius
+            margin-top: $module-padding / 1.5
+
+            .tableName
+                @extend %h-style
+                font-size: $medium-font-size
+
+            table
+                background-color: $practice-table-background-color
+                color: $text-annotation-primary-color
+                border-collapse: collapse
+
+                tr
+                    > th:first-child, > td:first-child
+                        padding-left: 10px
+
+                    > th:last-child, > td:last-child
+                        padding-right: 10px
+                    
+                    > th:first-child
+                        border-top-left-radius: $border-radius
+                        border-bottom-left-radius: $border-radius
+                    
+                    > th:last-child
+                        border-top-right-radius: $border-radius
+                        border-bottom-right-radius: $border-radius
+
+                thead tr
+                    height: $practice-header-height
+                    color: $text-annotation-primary-color
+
+                    th:nth-child(n+1):nth-child(-n+3)
+                        text-align: left
+
+                    th:nth-child(n+4)
+                        text-align: right
+
+                th
+                    font-size: $small-font-size
+                    font-weight: $bold-font-weight
+                    background-color: $practice-table-header-color
+
+                tbody
+                    font-size: $small-font-size
+                    font-weight: $regular-font-weight
+
+                    tr
+                        cursor: pointer
+                        height: $practice-row-height
+
+                        td:nth-child(n+1):nth-child(-n+3)
+                            text-align: left
+
+                        td:nth-child(n+4)
+                            text-align: right
+
+                        td:last-child
+
+                            > div
+                                width: 100% !important
+
+                            .acceptedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, $problem-status-accepted-color)
+
+                            .rejectedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, $problem-status-rejected-color)
+
+                            .unsolvedIcon
+                                @include svg-icon($icon-small-size, $icon-small-size, unset)
+                                
+                                g
+                                    stroke: $text-annotation-secondary-color
+
+                .problemTitle
+                    color: $text-secondary-color
+
+                .problemDifficulty
+                    color: $text-primary-color
+                    text-align: center
+                    height: $problem-difficulty-label-height
+                    border-radius: $problem-difficulty-label-height / 2
+                    font-size: $extra-small-font-size
+                    font-weight: $semi-bold-font-weight
+                    display: inline-block
+                    padding: $problem-difficulty-label-padding
+
+                .difficultyEasy
+                    background-color: $difficulty-easy-color
+
+                .difficultyMedium
+                    background-color: $difficulty-medium-color
+
+                .difficultyHard                
+                    background-color: $difficulty-hard-color
+
+        > .tableContainer:first-child
+            margin-top: 0 !important

@@ -1,0 +1,92 @@
+@import 'common'
+@import 'utils'
+
+.container
+    border-radius: $border-radius
+    flex: 1 1 auto
+    background-color: $problem-panes-background-color
+    display: flex
+    flex-direction: column
+
+    .tabsBar
+        display: flex
+        height: $problem-top-bar-height
+        background-color: $problem-tabs-bar-background-color
+        width: 100%
+        position: relative
+        color: $text-annotation-primary-color
+
+        .selectedTab
+            color: $text-primary-color
+            background-color: $background-color
+        
+        > div
+            width: $problem-panes-tab-width
+            display: flex
+            height: 100%
+            align-items: center
+            justify-content: center
+            font-size: $small-font-size
+            cursor: pointer
+
+            &:hover
+                color: $text-primary-color
+
+    .tabContent
+        width: 100%
+        height: calc(100% - #{$problem-bottom-bar-height} - #{$problem-top-bar-height}) !important
+        padding: $edge-margin
+
+        .inputBox
+            background-color: transparent
+            border: $separator-border
+            border-radius: $border-radius
+            width: 100%
+            height: 100%
+            vertical-align: top
+            font-size: $medium-font-size
+            color: $problem-custom-input-text-color
+            resize: none
+            padding: $problem-test-case-padding
+
+    .controlBar
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        height: $problem-bottom-bar-height
+        background-color: $problem-bottom-bar-background-color
+        width: 100%
+        align-items: center
+        padding: 0 $edge-margin 0 $edge-margin
+        font-size: $small-font-size
+
+        button
+            height: $regular-button-height
+            padding: $regular-button-padding
+
+        button:nth-child(1)
+            margin-right: $edge-margin
+            @include secondary-button(auto, $regular-button-height, $chetwode-blue-color, transparent)
+
+        button:nth-child(2)
+            @include primary-button(auto, $regular-button-height, $primary-button-color)
+
+        .minimizeButton
+            display: flex
+            align-items: center
+            color: $text-annotation-primary-color
+            transition: color $animation-fast-time ease, border-color $animation-fast-time ease
+            cursor: pointer
+
+            .downFilledArrow
+                @include svg-icon(auto, $icon-extra-small-size, $text-annotation-primary-color)
+                margin-left: 8px
+                display: flex
+                align-items: center
+
+            &:hover
+                color: $text-primary-color
+                border-color: $text-primary-color
+
+                .downFilledArrow
+                    @include svg-icon(auto, $icon-extra-small-size, $text-primary-color)

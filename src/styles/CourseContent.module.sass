@@ -1,0 +1,127 @@
+@import 'common'
+
+$dashboard-see-more-button-width: 80px
+$dashboard-see-more-button-height: 20px
+
+.modulesContainer
+    width: 100%
+
+    .moduleContainer
+        display: flex
+        flex-direction: column
+        width: 100%
+        margin-bottom: $dashboard-components-margin
+
+        .collapseContainer
+            position: relative
+            border-bottom-left-radius: $border-radius
+            border-bottom-right-radius: $border-radius
+            border-top: unset !important
+
+        .selectedCollapseContainer
+            border: $border-width solid $module-highlighted-color
+
+        .unselecteCollapseContainer
+            border: $border-width solid transparent
+        
+        .moduleTitleContainer
+            display: flex
+            align-items: center
+            padding-right: 10px
+            width: 100%
+            height: $dashboard-module-height
+            border-radius: $border-radius
+            cursor: pointer
+            color: $text-primary-color
+            border: 2px solid $module-hover-color
+            background-color: $module-hover-color
+
+            .moduleIndex
+                font-size: $extra-large-font-size
+                font-weight: $bold-font-weight
+                margin-right: 20px
+                color: $dashboard-module-index-color
+                width: $dashboard-module-index-width !important
+                height: 100%
+                background-color: $module-index-background-color
+                display: flex
+                align-items: center
+                justify-content: center
+
+            .moduleTitle
+                font-size: $medium-font-size
+                font-weight: $semi-bold-font-weight
+                width: calc(100% - #{$dashboard-module-index-width} - 20px - #{$dashboard-module-info-width} - #{$icon-large-size} - 8px)
+            
+            .moduleInfo
+                font-size: $small-medium-font-size
+                color: $text-annotation-secondary-color
+                width: $dashboard-module-info-width
+                padding-right: 100px
+                text-align: right
+
+            .moduleProgress
+                width: $icon-large-size
+                height: $icon-large-size
+
+                path:nth-child(1)
+                    stroke: $header-background-color
+
+                path:nth-child(2)
+                    stroke: $topic-circular-progress-bar-path-color !important
+
+            &:hover
+                color: $text-primary-color
+
+                .moduleIndex
+                    color: $text-primary-color
+                    opacity: 1 !important
+                    border-top-right-radius: 0px
+                    border-bottom-right-radius: 0px
+
+                .moduleProgress
+
+                    path:nth-child(1)
+                        stroke: $background-color
+
+        .highlightedModule
+            color: $text-primary-color !important
+            background-color: $module-highlighted-color !important
+            border-bottom-left-radius: 0px
+            border-bottom-right-radius: 0px
+            border-color: $module-highlighted-color !important
+            cursor: default !important
+
+            .moduleIndex
+                background-color: $module-index-background-highlight-color !important
+                color: $text-primary-color !important
+                opacity: 1 !important
+                border-top-right-radius: 0px
+                border-bottom-right-radius: 0px
+                border-bottom-left-radius: 0px
+
+            .moduleInfo
+                color: $text-primary-color !important
+
+            .moduleProgress
+
+                > svg > path:nth-child(1)
+                    stroke: rgba($background-color, 0.2) !important
+
+                > svg > path:nth-child(2)
+                    stroke: $background-color !important
+
+        .topicCollapse
+            max-width: 100%
+            transition: height $animation-fast-time ease
+
+        .unselectedCollapseContent
+            opacity: 0
+            transition: opacity $animation-medium-time ease
+
+        .selectedCollapseContent
+            opacity: 1
+            transition: opacity $animation-medium-time ease
+
+        .topicContent
+            padding: $module-padding/2 $module-padding $module-padding $module-padding

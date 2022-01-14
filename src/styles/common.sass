@@ -1,0 +1,186 @@
+// =============================== COLORS ===============================
+
+// Primitive colors
+// https://chir.ag/projects/name-that-color
+// https://colornames.org/
+$mirage-color: #171A23
+$black-color: #000000
+$brink-pink-color: #F96878
+$cadet-blue-color: #A6AFBE
+$can-you-hear-me-major-tom-color: #192841
+$cloud-burst-color: #203354
+$deep-blush-color: #E36BAE
+$edge-of-darkness-color: #152238
+$fiord-color: #455A64
+$java-color: #15CDD8
+$genesys-blue-color: #23395D
+$sanmarino-color: #4267B2
+$shark-color: #24292F
+$silver-tree-color: #6ABE8E
+$slate-gray-color: #6F7D95
+$texas-rose-color: #FFB74D
+$turquoise-blue-color: #69F0AE
+$white-color: #ffffff
+$chetwode-blue-color: #7380D7
+
+// Primitive-alpha colors
+$black-65-color: rgba($black-color, 0.65)
+$deep-blush-8-color: rgba($deep-blush-color, 0.08)
+$java-8-color: rgba($java-color, 0.08)
+$turquoise-blue-80-color: rgba($turquoise-blue-color, 0.8)
+$silver-tree-20-color: rgba($silver-tree-color, 0.2)
+$white-50-color: rgba($white-color, 0.5)
+
+// Text colors
+$text-primary-color: #FFFFFF
+$text-secondary-color: #737fa4
+$text-annotation-primary-color: #586487
+$text-annotation-secondary-color: #46506C
+
+// Component colors
+$background-color: $mirage-color
+$foreground-color: #242937
+$header-background-color: $mirage-color
+$lessons-progress-primary-color: $java-color
+$lessons-progress-inner-circle-color: $java-8-color
+$practice-problems-progress-primary-color: $deep-blush-color
+$practice-problems-inner-cirle-color: $deep-blush-8-color
+$module-highlighted-color: #5765F1
+$module-hover-color: $foreground-color
+$module-title-color: $text-annotation-secondary-color
+$module-index-background-color: $header-background-color
+$module-index-background-highlight-color: #4d5ee9
+$topic-background-color: $foreground-color
+$difficulty-easy-color: $silver-tree-color
+$difficulty-medium-color: $texas-rose-color
+$difficulty-hard-color: $brink-pink-color
+$login-panel-background-color: $cloud-burst-color
+$login-panel-title-color: $white-color
+$login-button-background-color: $header-background-color
+$topic-circular-progress-bar-path-color: $silver-tree-color
+$topic-circular-progress-bar-trail-color: $silver-tree-20-color
+$google-icon-color: $brink-pink-color
+$facebook-icon-color: $sanmarino-color
+$github-icon-color: $shark-color
+$primary-button-color: #5765F1
+$logo-text-color: $white-color
+$overlay-background-color: $black-65-color
+$base-card-title-color: $text-primary-color
+$practice-table-header-color: #212633
+$practice-table-background-color: $foreground-color
+$topic-navigation-button-disable-color: #474858
+$separator-color: $header-background-color
+
+$dashboard-base-card-background-color: $foreground-color
+$dashboard-module-index-color: $white-50-color
+
+$problem-tabs-bar-background-color: $foreground-color
+$problem-panes-background-color: $background-color
+$problem-bottom-bar-background-color: $header-background-color
+$problem-custom-input-text-color: #90CAF9
+$problem-handler-highlight-color: $chetwode-blue-color
+$problem-hint-background-color: #29293A
+
+$problem-status-accepted-color: $silver-tree-color
+$problem-status-rejected-color: $brink-pink-color
+
+// =============================== SCREEN SIZES, COMPONENT SIZES ===============================
+
+$edge-margin: 20px
+$header-height: 50px
+
+$regular-button-height: 34px
+$regular-button-padding: 1px 14px 1px 14px
+
+$dashboard-main-content-container-size: 1250px
+$dashboard-components-margin: 26px
+$dashboard-left-panel-width: 290px
+$dashboard-search-button-width: 100%
+$dashboard-search-button-height: 46px
+$dashboard-right-panel-width: $dashboard-main-content-container-size - $dashboard-left-panel-width - $dashboard-components-margin
+$dashboard-base-card-padding: 15px
+$dashboard-module-height: 54px
+$dashboard-module-index-width: $dashboard-module-height
+$dashboard-module-info-width: 300px
+
+$header-burger-width: 20px
+$header-burger-height: 20px
+$header-burger-bar-height: 2px
+$header-burger-bar-1-width: 80%
+$header-burger-bar-2-width: 100%
+$header-burger-bar-3-width: 60%
+$header-burger-bar-gap: 7px
+
+$home-main-content-container-size: $dashboard-main-content-container-size
+$border-radius: 2px
+$module-padding: 30px
+$topic-card-width: ($dashboard-right-panel-width - 4 * $module-padding) / 3
+$topic-padding: 10px
+$practice-padding: $topic-padding
+$practice-header-height: 38px
+$practice-row-height: 42px
+$secondary-button-border-width: 2px
+
+$problem-top-bar-height: 40px
+$problem-panes-tab-width: 130px
+$problem-bottom-bar-height: $header-height
+$problem-test-case-padding: 10px
+$problem-handler-size: 2px
+$problem-test-case-margin-top: 18px
+$problem-hint-margin-top: $problem-test-case-margin-top
+$problem-hint-height: 40px
+$problem-hint-padding: 0 10px 0 10px
+
+$icon-large-size: 18px
+$icon-medium-size: 16px
+$icon-small-size: 14px
+$icon-extra-small-size: 10px
+
+$h-margin: 10px
+
+$problem-difficulty-label-height: 18px
+$problem-difficulty-label-padding: 2px 8px 0 8px
+
+// =============================== FONT SIZES ===============================
+
+$extra-small-font-size: 13px
+$small-font-size: 14px
+$small-medium-font-size: 15px
+$medium-font-size: 16px
+$large-font-size: 17px
+$extra-large-font-size: 26px
+
+$regular-font-weight: 400
+$medium-font-weight: 500
+$semi-bold-font-weight: 600
+$bold-font-weight: 700
+
+// =============================== BREAKPOINTS ===============================
+
+// Refer to styles/utils.sass
+$extra-large-breakpoint: 1200px  // for 1200px-and-up devices
+$large-breakpoint: 992px         // for 992px-and-up devices
+$medium-breakpoint: 768px        // for 768px-and-up devices
+$small-breakpoint: 600px         // for 600px-and-up devices
+$extra-small-breakpoint: 600px   // for 600px-and-down devices
+
+// =============================== EFFECT, ANIMATION ===============================
+
+$animation-fast-time: 0.3s
+$animation-medium-time: 0.5s
+
+// =============================== Z-INDEX LEVELS ===============================
+
+$no-z-index: -1
+$z-index-bottom-layer: 1
+$z-index-middle-layer: 500
+$z-index-top-layer: 1000
+
+// =============================== BORDER ===============================
+
+$border-width: 2px
+$separator-border: $border-width solid $separator-color
+
+// =============================== OTHERS ===============================
+
+$backdrop-filter: blur(0.8px)

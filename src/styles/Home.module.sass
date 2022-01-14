@@ -1,25 +1,34 @@
-@import 'constants'
+@import 'common'
 @import 'utils'
+
+.html
+    overflow-x: scroll
+    overflow-y: scroll
 
 .mainContainer
     display: flex
     width: 100%
-    padding: 0 $edge-margin
     flex-direction: column
+
+    > div
+        padding: 0 $edge-margin
+
+    .landingCurve
+        width: 100%
 
     .main
         display: flex
         flex-direction: column
         align-self: center
-        width: $main-content-container-size
+        width: $home-main-content-container-size
 
-        @media (max-width: $main-content-container-size)
+        @media (max-width: $home-main-content-container-size)
             width: 100%
 
         .landingBlockContainer
             display: flex
             flex-direction: row
-            padding-top: 100px
+            padding-top: 90px
             justify-content: space-between
             align-items: center
 
@@ -34,6 +43,7 @@
 
             .landingDescription
                 width: 488px  // $medium-breakpoint - $landing-logo-width - 2*$landing-logo-margin = 268 - 250 - 2*15
+                margin-bottom: 100px
 
                 @include screen-respond($breakpoint: extra-small)
                     width: 100%
@@ -45,30 +55,33 @@
                     @include screen-respond($breakpoint: medium)
                         display: inherit
 
-                .siteTitle, h1
-                    color: $text-emphasis-color
-
                 h1
-                    font-size: $extra-large-font-size
+                    color: $text-primary-color
+                    font-size: 38px
+                    margin: 0
 
                 p
-                    margin-top: 25px
-                    color: $text-color
+                    margin-top: 15px
+                    color: $text-annotation-secondary-color
+                    font-size: 22px
 
                 .landingButtons
-                    margin-top: 30px
+                    margin-top: 42px
 
                 .getStartedButton
-                    @extend %primary-button
-                    height: 42px
+                    @include primary-button(150px, 50px, $primary-button-color, $text-primary-color)
                     font-size: $large-font-size
                     padding: 0 22px
                     margin-right: 28px
 
                 .readMissionButton
-                    @extend %secondary-button
-                    height: 42px
+                    @include secondary-button(150px, 50px, $primary-button-color, unset)
                     font-size: $large-font-size
-                    border: 1px solid 
                     padding: 0 22px
                     margin-top: 15px
+
+    .dummyDiv
+        width: 100%
+        height: 100px
+        background-color: #202531
+        margin-top: -1px

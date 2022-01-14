@@ -1,0 +1,304 @@
+@import 'common'
+@import 'utils'
+
+$header-burger-height: 18px
+$header-burger-bar-height: 1px
+$navigation-bar-height: $header-height
+
+.html
+    overflow-x: scroll
+    overflow-y: scroll
+
+.header
+    z-index: $no-z-index !important
+
+.menuBar
+    width: 100% !important
+
+.mainContainer
+    display: flex
+    width: 100%
+    padding: 0 $edge-margin
+    flex-direction: row
+    margin-top: $dashboard-components-margin
+    margin-bottom: $header-height
+    color: $text-secondary-color
+
+    .lessonsListOverlay
+
+        .lessonsListContainer
+            width: 450px
+            height: 100%
+            background-color: $background-color
+            transform: translateX(-450px) !important
+            transition: transform $animation-medium-time ease
+
+            .lessonsListBack
+                color: $text-annotation-primary-color
+                display: flex
+                align-items: center
+                width: 100%
+                height: $header-height
+                background-color: $header-background-color
+                cursor: pointer
+                font-size: $medium-font-size
+                padding: 0 $edge-margin 0 $edge-margin
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15)
+
+                &:hover
+                    color: $text-primary-color
+
+            .lessonsListTopicInfo
+                padding: 0 $edge-margin 0 $edge-margin
+                padding-top: 20px
+                padding-bottom: 5px
+                border-bottom: $separator-border
+
+                h1
+                    margin: 0
+                    font-size: $extra-large-font-size
+                    color: $text-primary-color
+
+                p
+                    color: $text-secondary-color
+
+            .lessonsList
+                padding-top: 15px
+
+                > div:first-child
+                    color: $primary-button-color
+                    font-size: $extra-small-font-size
+                    padding: 0 $edge-margin 0 $edge-margin
+
+                > ul
+                    list-style-type: none
+                    padding-left: 0
+                    margin: 10px 0 0 0
+
+                    > li
+                        width: 100%
+                        height: 50px
+                        display: flex
+                        align-items: center
+                        justify-content: space-between
+                        padding: 0 $edge-margin 0 $edge-margin
+
+                        .lessonsProgress
+                            width: 16px
+                            height: 16px
+
+                    .lessonSelected
+                        color: $text-primary-color !important
+                        background-color: $genesys-blue-color !important
+                        cursor: pointer
+                    
+                    .lessonCompleted, .lessonNextToLearn
+                        color: $text-annotation-primary-color
+                        cursor: pointer
+
+                        &:hover
+                            background-color: #1F3353
+                            color: $text-primary-color
+
+                    .lessonCompleted .doneCheckMark
+                        @include svg-icon($width: $icon-medium-size, $height: $icon-medium-size, $color: #69f0ae,)
+
+                    .lessonNotStarted
+                        color: $text-annotation-secondary-color
+                        cursor: not-allowed
+
+        .isLessonsListShow
+            transform: translateX(0) !important
+
+    .navigationBar
+        position: fixed
+        left: 0
+        bottom: 0
+        height: $header-height
+        width: 100%
+        display: flex
+        flex-direction: row
+        align-items: center
+        background-color: $header-background-color
+        padding: 0 $edge-margin 0 $edge-margin
+        z-index: $z-index-top-layer
+        border-top: 1px solid rgba(255, 255, 255, 0.15)
+            
+        .navigationLeft
+            display: flex
+            align-items: center
+            flex: 1 1
+
+            .lessonTitle
+                @include max-line($number-of-lines: 1, $line-height: 17px)
+
+            .burgerContainer
+                transform: scaleX(-1)
+                margin-right: $edge-margin
+                height: $header-burger-height
+
+                .burgerBarsClassName
+                    height: $header-burger-bar-height
+                    border-radius: $header-burger-bar-height / 2
+
+            .burgerBar1
+                width: 100%
+
+            .burgerBar3
+                width: 100%
+
+        .navigationMiddle
+            flex: 2 1
+            display: flex
+            align-items: center
+            text-align: center
+            justify-content: center
+
+            .navigationMiddleContent
+                display: flex
+                align-items: center
+                max-width: 500px
+                width: 100%
+
+                > div
+                    flex: 1
+
+            button
+                display: flex !important
+                align-items: center
+                justify-content: center
+                font-size: 15px
+
+                .nextLoadingSpinner, .backLoadingSpinner
+                    width: 18px
+                    height: 18px
+
+                .nextLoadingSpinner
+                    background: $text-annotation-primary-color
+                    background: linear-gradient(to right, $text-annotation-primary-color 10%, rgba(255, 255, 255, 0) 42%)
+
+                .backLoadingSpinner
+                    background: $text-annotation-secondary-color
+                    background: linear-gradient(to right, $text-annotation-secondary-color 10%, rgba(255, 255, 255, 0) 42%)
+
+                .nextLoadingSpinner:after, .backLoadingSpinner:after
+                    width: 65%
+                    height: 65%
+
+                .nextLoadingSpinner:before
+                    background: $text-annotation-primary-color
+                
+                .nextLoadingSpinner:after
+                    background: $topic-navigation-button-disable-color
+
+                .backLoadingSpinner:before
+                    background: $text-annotation-secondary-color
+
+                .backLoadingSpinner:after
+                    background: $header-background-color
+
+            .backActiveButton
+                @include secondary-button(90px, 35px, $primary-button-color, $header-background-color)
+
+                &:hover
+                    background-color: rgba(255, 255, 255, 0.05)
+
+            .backDisabledButton
+                @include secondary-button(90px, 35px, $topic-navigation-button-disable-color, $header-background-color)
+                cursor: not-allowed
+            
+            .nextActiveButton
+                @include primary-button(90px, 35px, $primary-button-color, $header-background-color)
+
+                &:hover
+                    background-color: $turquoise-blue-80-color
+            
+            .nextDisabledButton
+                @include primary-button(90px, 35px, $topic-navigation-button-disable-color, $text-annotation-primary-color)
+                cursor: not-allowed
+
+        .navigationRight
+            flex: 1 1
+            display: flex
+            flex-direction: row-reverse
+
+    .lessonContent
+        line-height: 1.5
+        font-size: $large-font-size
+        font-weight: normal
+        padding-left: 0
+        padding-right: 0
+        padding-bottom: calc(100vh - 116px)
+        margin-left: auto
+        margin-right: auto
+        max-width: 1000px
+
+        @media (min-width: 750px)
+            padding-left: 1.5rem
+            padding-right: 1.5rem
+
+        @media (min-width: 1300px)
+            padding-left: 3rem
+            padding-right: 3rem
+
+        .lessonHeader
+            display: flex
+            max-width: calc(42rem + 18rem + 3rem)
+
+            h1
+                margin: 0
+
+        .lessonContentContainer
+
+            .blocksContainer
+                color: rgb(132, 139, 151)
+                width: 100%
+
+                .block
+                    transition: opacity $animation-medium-time ease, height $animation-medium-time ease
+                    opacity: 1
+                    height: auto
+
+                .hideBlock
+                    opacity: 0
+                    height: 0
+
+                h2
+                    color: rgb(238, 238, 238)
+                    border-bottom: 0.4px solid rgba(255, 255, 255, 0.1)
+
+                h3
+                    color: rgb(238, 238, 238)
+
+                pre
+                    background-color: #1d1e32 !important
+
+                code
+                    background-color: #1d1e32 !important
+                    border-radius: 6px
+                    line-height: 2
+                    white-space: nowrap
+                    color: rgb(238, 238, 238)
+                    font-family: AvertaStd
+
+                strong
+                    color: $text-primary-color
+
+                a
+                    color: $primary-button-color
+                    border-bottom: 1px solid
+                    border-color: rgba($primary-button-color, 0.5)
+                    text-decoration: none
+                    transition: all $animation-fast-time
+
+                    &:hover
+                        border-color: $primary-button-color
+
+                .syntaxHighlighterContainer
+
+                    > pre
+                        border-radius: $border-radius !important
+                        display: flex
+
+                        // > code
+                        //     font-size: 85% !important

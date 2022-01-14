@@ -3,26 +3,28 @@ import Image from 'next/image'
 import { Footer } from 'components/footer'
 import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
-import { SEO } from 'components/seo'
 import { Layout } from 'components/layout'
+import { useRouter } from 'next/router'
+import { Strings } from 'constants/strings'
+import { Images } from 'constants/images'
+import { useHtmlClassName } from 'utils/hooks/hooks'
 
 export const Home: FC = () => {
-    return (
-        <Layout>
-            <SEO title="Home page" />
+    useHtmlClassName(styles.html)
 
-            <Header leftButtonsLabel={['Home', 'Features', 'Pricing', 'FAQs', 'Contact us']} />
-                    {/* <button className={styles.navigationHeaderButton}>Home</button>,
-                    <button className={styles.navigationHeaderButton}>Features</button>,
-                    <button className={styles.navigationHeaderButton}>Pricing</button>,
-                    <button className={styles.navigationHeaderButton}>FAQs</button>,
-                    <button className={styles.navigationHeaderButton}>Contact us</button>
-            ]}/> */}
+    return (
+        <Layout pageTitle={Strings.HOME_PAGE}>
+            <Header leftButtonsLabel={[
+                Strings.HOME,
+                Strings.FEATURES,
+                Strings.PRICING,
+                Strings.FAQs,
+                Strings.CONTACT_US]} />
 
             <main className={styles.mainContainer}>
-                <div className={styles.main}>
-                    <LandingBlock />
-                </div>
+                <LandingBlock />
+                <img className={styles.landingCurve} src={Images.LANDING_CURVE} />
+                <div className={styles.dummyDiv}></div>
             </main>
 
             <Footer />
@@ -31,29 +33,29 @@ export const Home: FC = () => {
 }
 
 const LandingBlock: FC = () => {
+    const router = useRouter()
+
     return (
-        <div className={styles.landingBlockContainer}>
-            <div className={styles.landingDescription}>
-                <h1>
-                    <span className='boldText'>The Ultimate Course</span> <br className={styles.newline}/>
-                    for your coding interview<br className={styles.newline}/>
-                </h1>
-                <p>
-                    <span className={styles.siteTitle}>algocourse</span> is specifically designed to get you fully prepared <br className={styles.newline}/>
-                    through instructive and interactive lessons
-                </p>
-                <div className={styles.landingButtons}>
-                    <button className={styles.getStartedButton}>Go to course</button>
-                    <button className={styles.readMissionButton}>Read our mission letter</button>
+        <div className={styles.main}>
+            <div className={styles.landingBlockContainer}>
+                <div className={styles.landingDescription}>
+                    <h1>Get you fully prepared for coding interviews</h1>
+                    <p>through easy explained and interactive lessons</p>
+                    <div className={styles.landingButtons}>
+                        <button className={styles.getStartedButton}
+                                onClick={() => router.push('/dashboard')}>
+                            Go to course
+                        </button>
+                        <button className={styles.readMissionButton}>Why us?</button>
+                    </div>
                 </div>
-            </div>
-            <div className={styles.landingLogo}>
-                <Image
-                    src='/landing-logo.svg'
-                    alt='Landing Logo'
-                    width='250'
-                    height='235.9'
-                    layout='intrinsic' />
+                <div className={styles.landingLogo}>
+                    <Image
+                        src={Images.LANDING_LOGO}
+                        width='600'
+                        height='480'
+                        layout='intrinsic' />
+                </div>
             </div>
         </div>
     )
