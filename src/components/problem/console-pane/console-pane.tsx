@@ -5,8 +5,6 @@ import classnames from 'classnames'
 import { Images } from 'constants/images'
 import { ReactSVG } from 'react-svg'
 
-type ConsolePaneProps = {}
-
 enum ConsolePaneTab {
     CustomInput = 'Custom input',
     Output = 'Output',
@@ -17,7 +15,7 @@ const ConsolePaneTabString = {
     [ConsolePaneTab.Output]: Strings.OUTPUT,
 }
 
-export const ConsolePane = memo(forwardRef<HTMLDivElement, ConsolePaneProps>((props, ref) => {
+export const ConsolePane = memo(forwardRef<HTMLDivElement>((props, ref) => {
     const [tab, setTab] = useState<ConsolePaneTab>(ConsolePaneTab.Output)
 
     return (

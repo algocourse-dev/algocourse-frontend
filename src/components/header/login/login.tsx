@@ -5,9 +5,7 @@ import { Strings } from 'constants/strings'
 import { Overlay, OverlayRefProps } from 'components/overlay'
 import Image from 'next/image'
 
-type LoginProps = {}
-
-export const Login: FC<LoginProps> = () => {
+export const Login: FC = () => {
     const overlayRef = useRef<OverlayRefProps>(null)
 
     function onLoginButtonClick() {

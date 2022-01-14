@@ -2,9 +2,7 @@ import React, { FC } from 'react'
 import { ProgressCard as UnconnectedProgressCard } from 'components'
 import { useProgressCardPresenter } from 'presenters'
 
-type ProgressCardProps = {}
-
-export const ProgressCard: FC<ProgressCardProps> = () => {
+export const ProgressCard: FC = () => {
     const progressCardPresenter = useProgressCardPresenter()
 
     return (

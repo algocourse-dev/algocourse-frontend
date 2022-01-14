@@ -111,10 +111,12 @@ export const Topic = memo<TopicProps>(({
         }
 
         const renderers = {
-            code: ({language, value}) => {
+            code: function SyntaxHighlighterContainer({language, value}) {
                return (
                     <div className={styles.syntaxHighlighterContainer}>
-                        <SyntaxHighlighter wrapLongLines style={duotoneSea} language={language} children={value}/>
+                        <SyntaxHighlighter wrapLongLines style={duotoneSea} language={language}>
+                            {value}
+                        </SyntaxHighlighter>
                     </div>
                )
             }
@@ -141,7 +143,9 @@ export const Topic = memo<TopicProps>(({
 
                                 return (
                                     <Element key={index} name={getBlockAnchorId(index)} className={blockClassName}>
-                                        <ReactMarkdown plugins={[gfm]} children={block.content} renderers={renderers}/>
+                                        <ReactMarkdown plugins={[gfm]} renderers={renderers}>
+                                            {block.content}
+                                        </ReactMarkdown>
                                     </Element>
                                 )
                             })

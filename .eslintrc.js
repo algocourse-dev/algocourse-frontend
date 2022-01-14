@@ -37,7 +37,9 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         // allow jsx syntax in js files (for next.js project)
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }], //should add ".ts" if typescript project
-        "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-        "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+        "react-hooks/rules-of-hooks": "warn",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/display-name": "warn",
+        "react/no-children-prop": "off",
     }
 };

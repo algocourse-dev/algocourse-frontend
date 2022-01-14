@@ -85,7 +85,7 @@ export function useLearningProgressState(): TLearningProgressStatePresenter {
                 return topics
             }, {})
         
-            let topicsProgress: TTopicsProgressPresenter = {}
+            const topicsProgress: TTopicsProgressPresenter = {}
             for(const topicId of Object.keys(progressData)) {
                 if (!!topics[topicId]) {
                     const topicPercentage = progressData[topicId].completedLessons / topics[topicId].totalLessons * 100

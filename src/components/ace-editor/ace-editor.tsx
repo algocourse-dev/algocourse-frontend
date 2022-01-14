@@ -14,7 +14,7 @@ export const AceEditor = dynamic(
 
         // You can paste these files into your /public folder.
         // You will have to set basePath and setModuleUrl accordingly.
-        let ace = require('ace-builds/src-min-noconflict/ace')
+        const ace = await import('ace-builds/src-min-noconflict/ace')
         ace.config.set(
             'basePath',
             'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/'

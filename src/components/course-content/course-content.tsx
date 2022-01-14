@@ -16,7 +16,7 @@ type CourseContentProps = {
 export const CourseContent = memo<CourseContentProps>(({modulesPresenter, practicesPresenter, learningProgressState}) => {
     const [selectedModuleId, setSelectedModuleId] = useState<string>(undefined)
     const [selectedTopicId, setSelectedTopicId] = useState<string>(undefined)
-    const hasSetDefaultSelectedModuleId = useRef<Boolean>(false)
+    const hasSetDefaultSelectedModuleId = useRef<boolean>(false)
 
     useEffect(() => {
         const modules = modulesPresenter.data?.modules

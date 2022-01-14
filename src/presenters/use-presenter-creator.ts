@@ -27,7 +27,7 @@ export function usePresenterCreator(...funcs) {
     const compiledFunc = funcs.pop()
     const sourceFuncs: Array<() => TPresenter<any>> = getDependencies(funcs)
 
-    const presenterFunc = function() {
+    const usePresenter = function() {
         const dataResults: Array<any> = []
         const errorResults: Array<any> = []
         const isErrorResults: Array<boolean> = []
@@ -41,7 +41,7 @@ export function usePresenterCreator(...funcs) {
             isLoadingResults.push(results.isLoading)
         }
 
-        const presenterData = useMemo(() => compiledFunc.apply(undefined, dataResults), dataResults)
+        const presenterData = useMemo(() => compiledFunc(...dataResults), dataResults)
 
         const data = presenterData
         const isLoading = isLoadingResults.some(Boolean)
@@ -61,7 +61,7 @@ export function usePresenterCreator(...funcs) {
         }
     }
 
-    return presenterFunc
+    return usePresenter
 }
 
 function getDependencies(funcs) {

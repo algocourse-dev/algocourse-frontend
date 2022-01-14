@@ -4,9 +4,7 @@ import { useRouter } from 'next/router'
 import { useTopicPresenter, useTopicLessonPresenter } from 'presenters'
 import { handleRedirectionOnPageLoad, isValidTopicPath } from 'use-cases/topic'
 
-type TopicProps = {}
-
-export const Topic: FC<TopicProps> = () => {
+export const Topic: FC = () => {
     const router = useRouter()
     const path = router.query.params as string[]
 
