@@ -45,7 +45,7 @@ type TModuleFetcherData = {
 type TModulesFetcherData = {
     readonly modules: ReadonlyArray<TModuleFetcherData>
 }
-export const MODULES_QUERY_KEY = 'course'
+export const MODULES_QUERY_KEY = 'course' // TODO: rename to topics
 export const modulesFetcher: () => Promise<TModulesFetcherData> = async () => {
     const serverModules = MockData.courseContent
 
@@ -69,7 +69,7 @@ export const modulesFetcher: () => Promise<TModulesFetcherData> = async () => {
 }
 
 export type TTopicsProgressFetcherData = Record<string, { readonly completedLessons: number }>
-export const TOPICS_PROGRESS_KEY = 'topics-progress'
+export const TOPICS_PROGRESS_KEY = 'topics-progress' 
 export const topicsProgressFetcher: () => Promise<TTopicsProgressFetcherData> = async () => {
     const response = MockData.topicsProgress
     return response
