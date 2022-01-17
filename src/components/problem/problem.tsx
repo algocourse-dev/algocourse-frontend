@@ -102,6 +102,7 @@ export const Problem = memo<ProblemProps>(({problemPresenter}) => {
         handleHorizontalHandlerDragging(event)
     }
 
+    // TODO: reference these constants to counterparts in CSS
     function handleVerticalHandlerDragging(event: MouseEvent) {
         if (!isVerticalHandlerDragging.current || !mainRef.current || !problemPaneRef.current) {
             return
@@ -123,6 +124,7 @@ export const Problem = memo<ProblemProps>(({problemPresenter}) => {
         }
     }
 
+    // TODO: reference these constants to counterparts in CSS
     function handleHorizontalHandlerDragging(event: MouseEvent) {
         if (!isHorizontalHandlerDragging.current
             || !mainRef.current
@@ -131,7 +133,7 @@ export const Problem = memo<ProblemProps>(({problemPresenter}) => {
             return
         }
 
-        const idePaneHeightCandidate = event.clientY - mainRef.current.offsetTop
+        const idePaneHeightCandidate = event.clientY - mainRef.current.offsetTop - 50
 
         const idePaneMinHeight = 40
         const idePaneMaxHeight = mainRef.current.offsetHeight - 40 - 14
