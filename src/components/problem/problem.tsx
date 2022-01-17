@@ -136,7 +136,7 @@ export const Problem = memo<ProblemProps>(({problemPresenter}) => {
         const idePaneHeightCandidate = event.clientY - mainRef.current.offsetTop - 50
 
         const idePaneMinHeight = 40
-        const idePaneMaxHeight = mainRef.current.offsetHeight - 40 - 50
+        const idePaneMaxHeight = mainRef.current.offsetHeight - 40 - 14
 
         if (idePaneMinHeight <= idePaneHeightCandidate && idePaneHeightCandidate <= idePaneMaxHeight) {
             idePaneRef.current.style.height = idePaneHeightCandidate + 'px'
