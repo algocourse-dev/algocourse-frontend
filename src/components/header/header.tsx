@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react'
-import Image from 'next/image'
 import styles from 'styles/Header.module.sass'
 import { Login } from './login'
 import classnames from 'classnames'
@@ -30,10 +29,9 @@ export const Header: FC<HeaderProps> = ({
         return (
             <div className={styles.leftNavigationBar}>
                 <div className={styles.logoContainer}>
-                    <Image src={Images.LOGO}
+                    <img src={Images.LOGO}
                         width={22}
-                        height={22}
-                        layout='fixed'/>
+                        height={22} />
                     {showLogoText && <div className={styles.logoText}>algocourse</div>}
                 </div>
                 <div className={classnames(

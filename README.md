@@ -1,21 +1,18 @@
 ## Table of contents
 
 - [Development](#development)
-- [Production](#production-wip)
 
 ## Development
 
-- Install `npm`.
-- Run `npm install` to install dependencies.
-- Run `npm run dev` to start the development server at `http://localhost:3001`.
-
-## Production (WIP)
-
-From root directory of this repo, run:
-
+To build image with current code base and run in minikube:
 ```bash
-docker-compose -f docker-compose.prod.yml up -d --build
+npm run minikube
 ```
-* `-d`, `--detach`: Detached mode: Run containers in the background, print new container names. Incompatible with `--abort-on-container-exit`.
-* `--build`: Build images before starting containers.
-* `-f`: Build from file.
+
+To run without minikube:
+```bash
+npm install
+npm run dev
+```
+
+In both case, the server is at `http://localhost:3000`.

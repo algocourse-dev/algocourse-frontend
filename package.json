@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint '*/**/*.{js,ts,tsx}' src/",
-    "test": "jest --config jestconfig.json --passWithNoTests"
+    "test": "jest --config jestconfig.json --passWithNoTests",
+    "minikube": "bin/run-in-minikube.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -19,7 +20,7 @@
     "@types/react-scroll": "^1.8.2",
     "ace-builds": "^1.4.12",
     "classnames": "^2.2.6",
-    "next": "10.0.5",
+    "next": "10.0.8",
     "react": "17.0.1",
     "react-ace": "^9.4.0",
     "react-circular-progressbar": "^2.0.3",
