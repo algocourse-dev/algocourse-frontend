@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Image from 'next/image'
 import { Footer } from 'components/footer'
 import { Header } from 'components/header'
 import styles from 'styles/Home.module.sass'
@@ -50,11 +49,10 @@ const LandingBlock: FC = () => {
                     </div>
                 </div>
                 <div className={styles.landingLogo}>
-                    <Image
+                    <img
                         src={Images.LANDING_LOGO}
                         width='600'
-                        height='480'
-                        layout='intrinsic' />
+                        height='480' />
                 </div>
             </div>
         </div>

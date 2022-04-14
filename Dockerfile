@@ -1,21 +1,23 @@
-# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:14.15.0-alpine as build-stage
+FROM node:14.15.0-alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY ./ /app/
+# Copy "package.json" and "package-lock.json" before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY package.json package-lock.json ./
 
-RUN npm install \
-    && npm run build
+# Install dependencies
+RUN npm install
 
-# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx:1.19.0-alpine
+# Copy all files
+COPY . .
 
-COPY --from=build-stage /app/.next/ /usr/share/nginx/html
+# Build the app
+RUN npm run build
 
-# Copy the default nginx.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# Expose the listening port
+EXPOSE 3000
 
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Run the server at the default port 3000
+CMD [ "npm", "run", "start" ]

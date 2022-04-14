@@ -3,7 +3,6 @@ import styles from 'styles/Login.module.sass'
 import { Images } from 'constants/images'
 import { Strings } from 'constants/strings'
 import { Overlay, OverlayRefProps } from 'components/overlay'
-import Image from 'next/image'
 
 export const Login: FC = () => {
     const overlayRef = useRef<OverlayRefProps>(null)
@@ -15,7 +14,7 @@ export const Login: FC = () => {
     function renderSocialLogin(text: string, iconSrc: string, className: string): JSX.Element {
         return (
             <div className={className}>
-                <Image src={iconSrc} width={23} height={23} layout='fixed' />
+                <img src={iconSrc} width={23} height={23} />
                 <span>{text}</span>
             </div>
         )
