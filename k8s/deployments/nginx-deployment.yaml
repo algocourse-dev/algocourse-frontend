@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: algocourse-beta
+data:
+  nginx.conf: |
+    upstream nextjs_upstream {
+      server nextjs-cluster-ip-service:3000;
+    }
+
+    server {
+        listen 80 default_server;
+        
+        server_name _;
+
+        server_tokens off;
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+        location / {
+            proxy_pass http://nextjs_upstream;
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: algocourse-beta
+  labels:
+    app: algocourse-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: algocourse-nginx
+  template:
+    metadata:
+      labels:
+        app: algocourse-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+          readOnly: true
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config

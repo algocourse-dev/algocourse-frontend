@@ -2,3 +2,10 @@
 .idea/
 .vscode/
 .git/
+.next/
+.dockerignore
+.gitignore
+Dockerfile
+nginx/
+out/
+k8s/
