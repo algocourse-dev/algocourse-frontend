@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-deployment
+  namespace: algocourse-beta
+  labels:
+    app: algocourse-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: algocourse-frontend
+  template:
+    metadata:
+      labels:
+        app: algocourse-frontend
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+      containers:
+      - name: nextjs
+        image: algocourse/frontend-development:${IMAGE_TAG}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - protocol: TCP
+          containerPort: 3000
+      nodeSelector:
+        kubernetes.io/os: linux

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs-cluster-ip-service
+  namespace: algocourse-beta
+spec:
+  type: ClusterIP
+  selector:
+    app: algocourse-frontend
+  ports:
+    - port: 3000
+      targetPort: 3000

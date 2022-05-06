@@ -19,5 +19,10 @@ RUN npm run build
 # Expose the listening port
 EXPOSE 3000
 
+# Run container as non-root (unprivileged) user
+# (run as root can lead to security issues)
+# The node user is provided in the Node.js Alpine base image
+USER node
+
 # Run the server at the default port 3000
 CMD [ "npm", "run", "start" ]
